@@ -1,6 +1,9 @@
 package dominio;
 
+import common.Obervador;
 import common.Observable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Puesto extends Observable {
 
@@ -8,11 +11,17 @@ public class Puesto extends Observable {
 
 	private String direccion;
 
-	private Tarifa[] tarifa;
+	private ArrayList<Tarifa> tarifa;
 
 	public int getTarifas() {
 		return 0;
 	}
+
+    public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifa) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.tarifa = tarifa;
+    }
 
 	/**
 	 * for(Tarifa t : this.tarifas){
@@ -73,5 +82,15 @@ public class Puesto extends Observable {
 	public Transito emularTransito(Vehiculo vehiculo) {
 		return null;
 	}
+
+    @Override
+    public void agregar(Obervador o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean quitar(Obervador o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

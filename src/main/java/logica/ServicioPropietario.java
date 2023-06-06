@@ -1,6 +1,7 @@
 package logica;
 
 import dominio.Propietario;
+import java.math.BigDecimal;
 
 public class ServicioPropietario extends ServicioUsuario {
 

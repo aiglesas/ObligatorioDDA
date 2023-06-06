@@ -1,8 +1,10 @@
 package dominio;
 
+import java.util.Date;
+
 public class Notificacion {
 
-	private DateTime fecha;
+	private Date fecha;
 
 	private String mensaje;
 

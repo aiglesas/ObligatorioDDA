@@ -2,8 +2,10 @@ package dominio;
 
 import common.Observable;
 import dominio.exceptions.ExcepcionPropietario;
+import java.math.BigDecimal;
+import java.util.Date;
 
-public class Propietario extends Usuario, Observable implements Observable {
+public class Propietario extends Usuario {
 
 	private BigDecimal saldo;
 
@@ -14,6 +16,12 @@ public class Propietario extends Usuario, Observable implements Observable {
 	public int getVehiculos() {
 		return 0;
 	}
+
+    public Propietario(String ci, String contraseña, String nombreCompleto, BigDecimal saldo, BigDecimal saldoMinimo) {
+        super(ci, contraseña, nombreCompleto);
+        this.saldo = saldo;
+        this.saldoMinimo = saldoMinimo;
+    }
 
 	public int getAsignaciones() {
 		return 0;
@@ -45,7 +53,7 @@ public class Propietario extends Usuario, Observable implements Observable {
 		return false;
 	}
 
-	public boolean ingresarNotificacion(DateTime fecha, String mensaje) {
+	public boolean ingresarNotificacion(Date fecha, String mensaje) {
 		return false;
 	}
 

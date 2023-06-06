@@ -1,12 +1,14 @@
 package dominio;
 
 import common.Observable;
+import java.math.BigDecimal;
+import java.util.Date;
 
-public class RecargaSaldo extends Observable implements Observable {
+public class RecargaSaldo  {
 
-	private DateTime fechaInicio;
+	private Date fechaInicio;
 
-	private DateTime fechaFin;
+	private Date fechaFin;
 
 	private BigDecimal monto;
 

@@ -1,5 +1,7 @@
 package ui;
 
+import java.math.BigDecimal;
+
 public interface IRecargaSaldo {
 
 	public abstract void mostrarRecargaSaldo();

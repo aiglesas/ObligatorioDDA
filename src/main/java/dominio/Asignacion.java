@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.Date;
+
 public class Asignacion {
 
 	private Date fecha;

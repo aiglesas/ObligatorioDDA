@@ -1,5 +1,7 @@
 package dominio;
 
+import java.math.BigDecimal;
+
 public abstract class Bonificacion {
 
 	private String nombre;

@@ -1,6 +1,6 @@
 package common;
 
-public class Observable {
+public abstract class Observable {
 
 	private Obervador[] obervador;
 

@@ -1,5 +1,6 @@
 package ui;
 
+import java.math.BigDecimal;
 import ui.controladores.RecargaSaldoControlador;
 
 public class DialogoRecargaSaldo implements IRecargaSaldo {
