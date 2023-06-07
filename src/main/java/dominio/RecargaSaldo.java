@@ -1,41 +1,95 @@
 package dominio;
 
-import common.Observable;
-import java.math.BigDecimal;
 import java.util.Date;
+import dominio.Administrador;
+import dominio.exceptions.ExcepcionPropietario;
+import java.util.Calendar;
 
-public class RecargaSaldo  {
+public class RecargaSaldo {
 
-	private Date fechaInicio;
+    private Administrador administrador;
+    
+    private Propietario propietario;
+    
+    private Date fechaInicio;
 
-	private Date fechaFin;
+    private Date fechaFin;
 
-	private BigDecimal monto;
+    private float monto;
 
-	private boolean estado;
+    private boolean estado;
+    
+    public RecargaSaldo(float monto, Propietario propietario){
+        this.propietario = propietario;
+        this.fechaInicio = Calendar.getInstance().getTime();
+        this.monto = monto;
+        this.estado = false;
+    }
+    
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
 
-	public Administrador getAdministrador() {
-		return null;
-	}
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
 
-	/**
-	 * if(this.monto >= 1){
-	 *   return true;
-	 * }else{
-	 *   return false;
-	 * }
-	 */
-	public boolean validar() {
-		return false;
-	}
+    public Date getFechaFin() {
+        return fechaFin;
+    }
 
-	/**
-	 * Lanza un ingreso de notificacion al propietario con el mensaje 
-	 * [Fecha y hora de la notificación] + “Tu recarga de $ ” + valor de la recarga + “fue aprobada”
-	 * Y le asigna el administrador.
-	 */
-	public void emularAprobacion(Administrador administrador) {
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
 
-	}
+    public float getMonto() {
+        return monto;
+    }
 
+    public void setMonto(float monto) {
+        this.monto = monto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    public Administrador getAdministrador() {
+        return this.administrador;
+    }
+
+    public void setAdministrador(Administrador a) {
+        this.administrador = a;
+    }
+
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
+    
+    public void validar() throws ExcepcionPropietario{
+        if(!(getMonto() >= 1))
+        throw new ExcepcionPropietario("Monto inválido");
+    }
+
+    /**
+     * Lanza un ingreso de notificacion al propietario con el mensaje [Fecha y
+     * hora de la notificación] + “Tu recarga de $ ” + valor de la recarga +
+     * “fue aprobada” Y le asigna el administrador.
+     */
+    public void emularAprobacion(Administrador administrador) {
+        setEstado(true);
+        getPropietario().incrementarSaldo(getMonto());
+        setAdministrador(administrador);
+        Date fechaActual = Calendar.getInstance().getTime();
+        setFechaFin(fechaActual);
+        getPropietario().ingresarNotificacion(fechaActual, fechaActual + " Tu recarga de $" + getMonto() + " fue aprobada");
+    }
 }

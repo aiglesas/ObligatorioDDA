@@ -4,103 +4,130 @@ import common.Observable;
 import dominio.exceptions.ExcepcionPropietario;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Propietario extends Usuario {
 
-	private BigDecimal saldo;
+    private float saldo;
 
-	private BigDecimal saldoMinimo;
+    private float saldoMinimo;
 
-	private ExcepcionPropietario excepcionPropietario;
+    private ArrayList<Vehiculo> vehiculos;
 
-	public int getVehiculos() {
-		return 0;
-	}
+    private ArrayList<Asignacion> asignaciones;
 
-    public Propietario(String ci, String contraseña, String nombreCompleto, BigDecimal saldo, BigDecimal saldoMinimo) {
+    private ArrayList<RecargaSaldo> recargasSaldo;
+
+    private ArrayList<Notificacion> notificaciones;
+
+    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
         super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
     }
 
-	public int getAsignaciones() {
-		return 0;
-	}
+    public float getSaldo() {
+        return this.saldo;
+    }
 
-	public int getTransitos() {
-		return 0;
-	}
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
 
-	public int getNotificaciones() {
-		return 0;
-	}
+    public float getSaldoMinimo() {
+        return saldoMinimo;
+    }
 
-	public int getRecargasSaldo() {
-		return 0;
-	}
+    public void setSaldoMinimo(float saldoMinimo) {
+        this.saldoMinimo = saldoMinimo;
+    }
 
-	/**
-	 * RecargaSaldo rs = new RecargaSaldo(recarga);
-	 * 
-	 * if(rs.Validar()){
-	 *   recargasSaldo.Add(rs);
-	 *   reutrn true;
-	 * }else{
-	 *   return false;
-	 * }
-	 */
-	public boolean recargarSaldo(BigDecimal recarga) {
-		return false;
-	}
+    public ArrayList<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
 
-	public boolean ingresarNotificacion(Date fecha, String mensaje) {
-		return false;
-	}
+    public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
 
-	public BigDecimal getSaldo() {
-		return null;
-	}
+    public ArrayList<Asignacion> getAsignaciones() {
+        return asignaciones;
+    }
 
-	/**
-	 * return saldo<saldoMinimo
-	 */
-	public boolean validarSaldoMinimo() {
-		return false;
-	}
+    public void setAsignaciones(ArrayList<Asignacion> asignaciones) {
+        this.asignaciones = asignaciones;
+    }
 
-	/**
-	 * if(this.saldo >= montoTotal){
-	 * this.cobrarSaldo(montoTotal);
-	 * return true
-	 * }else{
-	 * return false
-	 * }
-	 */
-	public boolean validarSaldo(BigDecimal montoTotal) {
-		return false;
-	}
+    public ArrayList<RecargaSaldo> getRecargasSaldo() {
+        return recargasSaldo;
+    }
 
-	/**
-	 * if(this.validarSaldo(montoTotal){
-	 * saldo = saldo - montoTotal
-	 * if(this.validarSaldoMinimo){
-	 * this.ingresarNotificacion(DateTime.Now(), “Tu saldo actual es
-	 * de $ “ + this.saldo + “ Te recomendamos hacer una recarga”)
-	 * }
-	 * return saldo
-	 * }
-	 * return null
-	 */
-	public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
-		return null;
-	}
+    public void setRecargasSaldo(ArrayList<RecargaSaldo> recargasSaldo) {
+        this.recargasSaldo = recargasSaldo;
+    }
 
-	public Asignacion asignarBonificacion(Bonificacion bonificacion, Puesto puesto) {
-		return null;
-	}
+    public ArrayList<Notificacion> getNotificaciones() {
+        return notificaciones;
+    }
 
-	public Asignacion buscarAsignacion(Puesto puesto) {
-		return null;
-	}
+    public void setNotificaciones(ArrayList<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+
+    public ArrayList<Transito> getTransitos() {
+        ArrayList<Transito> transitos = new ArrayList<Transito>();
+        for (Vehiculo v : this.vehiculos) {
+            transitos.addAll(v.getTransitos());
+        }
+        return transitos;
+    }
+
+    public void recargarSaldo(float recarga) throws ExcepcionPropietario {
+        RecargaSaldo rs = new RecargaSaldo(recarga, this);
+        rs.validar();
+        this.recargasSaldo.add(rs);
+    }
+
+    public void incrementarSaldo(float monto){
+        this.saldo += monto;
+    }
+    
+    public void ingresarNotificacion(Date fecha, String mensaje) {
+        Notificacion n = new Notificacion(fecha, mensaje);
+        notificaciones.add(n);
+    }
+
+    /**
+     * return saldo<saldoMinimo
+     */
+    public boolean validarSaldoMinimo() {
+        return false;
+    }
+
+    /**
+     * if(this.saldo >= montoTotal){ this.cobrarSaldo(montoTotal); return true
+     * }else{ return false }
+     */
+    public boolean validarSaldo(BigDecimal montoTotal) {
+        return false;
+    }
+
+    /**
+     * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
+     * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
+     * “Tu saldo actual es de $ “ + this.saldo + “ Te recomendamos hacer una
+     * recarga”) } return saldo } return null
+     */
+    public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
+        return null;
+    }
+
+    public Asignacion asignarBonificacion(Bonificacion bonificacion, Puesto puesto) {
+        return null;
+    }
+
+    public Asignacion buscarAsignacion(Puesto puesto) {
+        return null;
+    }
 
 }
