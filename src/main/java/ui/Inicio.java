@@ -27,15 +27,15 @@ public class Inicio {
     
     public void crearDatosDePrueba(){
     //propietarios 
-        Propietario propietario1 = new Propietario("123456789", "contraseña1", "Andres Iglesias", new BigDecimal("1000.00"), new BigDecimal("500.00"));
-        Propietario propietario2 = new Propietario("987654321", "contraseña2", "Lucas Gonzales", new BigDecimal("500.00"), new BigDecimal("200.00"));
-    //administradores    
+        Propietario propietario1 = new Propietario("123456789", "contraseña1", "Andres Iglesias", 1000, 500);
+        Propietario propietario2 = new Propietario("987654321", "contraseña2", "Lucas Gonzales", 500, 200);
+    //administradores
         Administrador administrador1 = new Administrador("57554654", "contraseña2", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
     //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
         CategoriaVehiculo categoria2 = new CategoriaVehiculo("SUV");
-    //vehiculos    
+    //vehiculos
         Vehiculo vehiculo1 = new Vehiculo("ABC123", "Toyota Corolla", "Rojo", propietario1, categoria1);
         Vehiculo vehiculo2 = new Vehiculo("DEF456", "Honda CR-V", "Azul", propietario2, categoria2);
         Vehiculo vehiculo3 = new Vehiculo("GHI789", "Ford Mustang", "Negro", propietario1, categoria1);
@@ -44,7 +44,7 @@ public class Inicio {
         Tarifa tarifa2 = new Tarifa(new BigDecimal("250.00"));
         Tarifa tarifa3 = new Tarifa(new BigDecimal("100.00"));
         Tarifa tarifa4 = new Tarifa(new BigDecimal("50.00"));
-    ArrayList<Tarifa> tarifas;
+    ArrayList<Tarifa> tarifas = new ArrayList<Tarifa>();
     tarifas.add(tarifa1);    
     tarifas.add(tarifa2);
     tarifas.add(tarifa3);
