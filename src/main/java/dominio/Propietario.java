@@ -122,11 +122,22 @@ public class Propietario extends Usuario {
         return null;
     }
 
-    public Asignacion asignarBonificacion(Bonificacion bonificacion, Puesto puesto) {
-        return null;
+    public void asignarBonificacion(Bonificacion bonificacion, Puesto puesto) throws ExcepcionPropietario{
+        Asignacion asignacion = new Asignacion(bonificacion, this, puesto);
+        if(buscarAsignacionPorPuesto(puesto) != null){
+            throw new ExcepcionPropietario("Ya tiene una bonificación asignada para ese puesto");
+        }else{
+            this.asignaciones.add(asignacion);
+        }
     }
 
-    public Asignacion buscarAsignacion(Puesto puesto) {
+    public Asignacion buscarAsignacionPorPuesto(Puesto puesto) {
+        Asignacion asignacion = null;
+        for (Asignacion a : this.asignaciones) {
+            if(a.getPuesto().equals(puesto)){
+               asignacion = a;
+            }
+        }
         return null;
     }
 

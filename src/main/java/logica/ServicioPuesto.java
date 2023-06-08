@@ -5,24 +5,26 @@ import dominio.Transito;
 import dominio.Vehiculo;
 import dominio.Asignacion;
 import dominio.Propietario;
+import java.util.ArrayList;
 
 public class ServicioPuesto {
 
-	private Puesto[] puesto;
+    private ArrayList<Puesto> puestos;
 
-	/**
-	 * return listaPestos;
-	 */
-	public int getPuestos() {
-		return 0;
-	}
+    public ArrayList<Puesto> getPuestos() {
+        return puestos;
+    }
 
-	public Transito emularTransito(Vehiculo vehiculo) {
-		return null;
-	}
+    public void setPuestos(ArrayList<Puesto> puestos) {
+        this.puestos = puestos;
+    }
 
-	public Asignacion obtenerAsignacion(Propietario propietario) {
-		return null;
-	}
+    public Transito emularTransito(Vehiculo vehiculo) {
+        return null;
+    }
+
+    public Asignacion obtenerAsignacion(Propietario propietario) {
+        return null;
+    }
 
 }

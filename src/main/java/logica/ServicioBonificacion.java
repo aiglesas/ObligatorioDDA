@@ -8,7 +8,7 @@ public class ServicioBonificacion {
     private ArrayList<Bonificacion> bonificaciones;
 
     public ArrayList<Bonificacion> getBonificaciones() {
-        return bonificaciones;
+        return this.bonificaciones;
     }
 
     public void setBonificaciones(ArrayList<Bonificacion> bonificaciones) {
