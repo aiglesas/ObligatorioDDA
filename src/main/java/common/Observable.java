@@ -1,15 +1,8 @@
 package common;
 
-public abstract class Observable {
+public interface Observable {
 
-	private Obervador[] obervador;
+    void agregar(Observador o);
 
-	public abstract void agregar(Obervador o);
-
-	public abstract boolean quitar(Obervador o);
-
-	protected void avisar(Evento evento) {
-
-	}
-
+    boolean quitar(Observador o);
 }

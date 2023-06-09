@@ -2,10 +2,10 @@ package dominio;
 
 public class Administrador extends Usuario {
 
-	private Sesion sesion;
+    private Sesion sesion;
 
-    public Administrador(String ci, String contraseÃ±a, String nombreCompleto) {
-        super(ci, contraseÃ±a, nombreCompleto);
+    public Administrador(String ci, String contraseña, String nombreCompleto) {
+        super(ci, contraseña, nombreCompleto);
     }
 
 }

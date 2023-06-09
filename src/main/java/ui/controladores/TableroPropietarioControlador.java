@@ -1,13 +1,12 @@
 package ui.controladores;
 
-import common.Obervador;
 import dominio.Propietario;
 import ui.TableroPropietario;
 import logica.Fachada;
 import common.Observable;
 import common.Evento;
 
-public class TableroPropietarioControlador implements Obervador {
+public class TableroPropietarioControlador  {
 
 	private Propietario propietario;
 

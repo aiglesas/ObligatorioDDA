@@ -4,7 +4,7 @@ public abstract class Usuario {
 
     private String ci;
 
-    private String contraseÃ±a;
+    private String contraseña;
 
     private String nombreCompleto;
 
@@ -16,12 +16,12 @@ public abstract class Usuario {
         this.ci = ci;
     }
 
-    public String getContraseÃ±a() {
-        return contraseÃ±a;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setContraseÃ±a(String contraseÃ±a) {
-        this.contraseÃ±a = contraseÃ±a;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getNombreCompleto() {
@@ -32,9 +32,9 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Usuario(String ci, String contraseÃ±a, String nombreCompleto) {
+    public Usuario(String ci, String contraseña, String nombreCompleto) {
         this.ci = ci;
-        this.contraseÃ±a = contraseÃ±a;
+        this.contraseña = contraseña;
         this.nombreCompleto = nombreCompleto;
     }
 

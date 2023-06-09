@@ -1,12 +1,11 @@
 package ui.controladores;
 
-import common.Obervador;
 import ui.EmularAprobacion;
 import logica.Fachada;
 import common.Observable;
 import common.Evento;
 
-public class EmularAprobacionControlador implements Obervador {
+public class EmularAprobacionControlador{
 
 	private EmularAprobacion emularAprobacion;
 

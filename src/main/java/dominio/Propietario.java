@@ -20,8 +20,8 @@ public class Propietario extends Usuario {
 
     private ArrayList<Notificacion> notificaciones;
 
-    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contraseña, nombreCompleto);
+    public Propietario(String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contrase�a, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
     }
@@ -116,7 +116,7 @@ public class Propietario extends Usuario {
      * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
      * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
      * “Tu saldo actual es de $ “ + this.saldo + “ Te recomendamos hacer una
-     * recarga”) } return saldo } return null
+     * recarga�?) } return saldo } return null
      */
     public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
         return null;

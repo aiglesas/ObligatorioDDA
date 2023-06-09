@@ -8,4 +8,7 @@ public class Exonerados extends Bonificacion {
 		return null;
 	}
 
+    public Exonerados() {
+    }
+
 }
