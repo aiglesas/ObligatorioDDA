@@ -5,6 +5,7 @@ import dominio.Propietario;
 
 public class DialogoTableroPropietario implements TableroPropietario {
 
+
 	public void recargarSaldo() {
 
 	}

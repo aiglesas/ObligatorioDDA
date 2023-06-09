@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package ui;
+package logica;
 
 import dominio.Administrador;
 import dominio.CategoriaVehiculo;
+import dominio.Exonerados;
 import dominio.Propietario;
 import dominio.Puesto;
 import dominio.Tarifa;
@@ -14,6 +15,7 @@ import dominio.Vehiculo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import ui.VentanaInicio;
 
 /**
  *
@@ -44,27 +46,27 @@ public class Inicio {
         Tarifa tarifa2 = new Tarifa(new BigDecimal("250.00"));
         Tarifa tarifa3 = new Tarifa(new BigDecimal("100.00"));
         Tarifa tarifa4 = new Tarifa(new BigDecimal("50.00"));
-    ArrayList<Tarifa> tarifas;
-    tarifas.add(tarifa1);    
-    tarifas.add(tarifa2);
-    tarifas.add(tarifa3);
-    tarifas.add(tarifa4);
+        ArrayList<Tarifa> tarifas = new ArrayList<Tarifa>();
+        tarifas.add(tarifa1);    
+        tarifas.add(tarifa2);
+        tarifas.add(tarifa3);
+        tarifas.add(tarifa4);
     //puestos
-
-
-
-    Puesto puesto1 = new Puesto("peaje pando", "pando",tarifas);    
-    Puesto puesto2 = new Puesto("peaje solis", "solis",tarifas);   
-    Puesto puesto3 = new Puesto("peaje rocha", "rocha",tarifas);
-
-
+        Puesto puesto1 = new Puesto("peaje pando", "pando",tarifas);    
+        Puesto puesto2 = new Puesto("peaje solis", "solis",tarifas);   
+        Puesto puesto3 = new Puesto("peaje rocha", "rocha",tarifas);
     //transitos    
         Transito transito1 = new Transito(50, new Date(), vehiculo1, puesto1);
         Transito transito2 = new Transito(30, new Date(), vehiculo2, puesto2);
         Transito transito3 = new Transito(30, new Date(), vehiculo2, puesto2);   
-        Transito transito4 = new Transito(30, new Date(), vehiculo2, puesto3);    
-    
-    
+        Transito transito4 = new Transito(30, new Date(), vehiculo2, puesto3);
+        ArrayList<Transito> transitosVehiculo2 = new ArrayList<Transito>();
+        transitosVehiculo2.add(transito2);           
+        transitosVehiculo2.add(transito3);        
+        transitosVehiculo2.add(transito4);   
+    //bonificaciones    
+        
+
     }
 }
 

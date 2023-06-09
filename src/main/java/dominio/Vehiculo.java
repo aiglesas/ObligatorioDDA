@@ -36,6 +36,15 @@ public class Vehiculo {
         this.propietario = propietario;
         this.categoriaVehiculo = categoriaVehiculo;
     }
+    
+        public Vehiculo(String matricula, String modelo, String color, Propietario propietario, CategoriaVehiculo categoriaVehiculo, ArrayList<Transito> transitos) {
+        this.matricula = matricula;
+        this.modelo = modelo;
+        this.color = color;
+        this.propietario = propietario;
+        this.categoriaVehiculo = categoriaVehiculo;
+        this.transitos = transitos;
+    }
 
 
 

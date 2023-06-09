@@ -4,6 +4,7 @@ import dominio.Usuario;
 
 public class LoginAdministradorControlador extends LoginControlador {
 
+
     @Override
     protected Usuario loginGenerico(String ci, String password) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

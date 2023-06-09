@@ -1,12 +1,11 @@
 package ui.controladores;
 
 import ui.AsignarBonificaciones;
-import common.Obervador;
 import logica.Fachada;
 import common.Observable;
 import common.Evento;
 
-public class AsignarBonificacionControlador implements AsignarBonificaciones, Obervador {
+public class AsignarBonificacionControlador implements AsignarBonificaciones {
 
 	private AsignarBonificacionControlador asignarBonificacionControlador;
 
