@@ -29,15 +29,15 @@ public class Inicio {
     
     public void crearDatosDePrueba(){
     //propietarios 
-        Propietario propietario1 = new Propietario("123456789", "contraseña1", "Andres Iglesias", new BigDecimal("1000.00"), new BigDecimal("500.00"));
-        Propietario propietario2 = new Propietario("987654321", "contraseña2", "Lucas Gonzales", new BigDecimal("500.00"), new BigDecimal("200.00"));
-    //administradores    
+        Propietario propietario1 = new Propietario("123456789", "contraseña1", "Andres Iglesias", 1000, 500);
+        Propietario propietario2 = new Propietario("987654321", "contraseña2", "Lucas Gonzales", 500, 200);
+    //administradores
         Administrador administrador1 = new Administrador("57554654", "contraseña2", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
     //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
         CategoriaVehiculo categoria2 = new CategoriaVehiculo("SUV");
-    //vehiculos    
+    //vehiculos
         Vehiculo vehiculo1 = new Vehiculo("ABC123", "Toyota Corolla", "Rojo", propietario1, categoria1);
         Vehiculo vehiculo2 = new Vehiculo("DEF456", "Honda CR-V", "Azul", propietario2, categoria2);
         Vehiculo vehiculo3 = new Vehiculo("GHI789", "Ford Mustang", "Negro", propietario1, categoria1);
@@ -51,6 +51,8 @@ public class Inicio {
         tarifas.add(tarifa2);
         tarifas.add(tarifa3);
         tarifas.add(tarifa4);
+
+
     //puestos
         Puesto puesto1 = new Puesto("peaje pando", "pando",tarifas);    
         Puesto puesto2 = new Puesto("peaje solis", "solis",tarifas);   

@@ -17,13 +17,43 @@ public class Vehiculo {
         
         private ArrayList<Transito> transitos;
 
-	public int getTransitos() {
-		return 0;
-	}
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+    public String getModelo() {
+        return modelo;
+    }
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public Propietario getPropietario() {
+        return propietario;
+    }
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
+    public CategoriaVehiculo getCategoriaVehiculo() {
+        return categoriaVehiculo;
+    }
+    public void setCategoriaVehiculo(CategoriaVehiculo categoriaVehiculo) {
+        this.categoriaVehiculo = categoriaVehiculo;
+    }
+    public ArrayList<Transito> getTransitos() {
+        return transitos;
+    }
+    public void setTransitos(ArrayList<Transito> transitos) {
+        this.transitos = transitos;
+    }
 
-	public CategoriaVehiculo getCategoria() {
-		return null;
-	}
 
 	public BigDecimal calcularMontoTotalEnTransitos() {
 		return null;
