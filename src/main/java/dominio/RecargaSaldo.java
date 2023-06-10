@@ -79,11 +79,7 @@ public class RecargaSaldo {
         throw new ExcepcionPropietario("Monto inválido");
     }
 
-    /**
-     * Lanza un ingreso de notificacion al propietario con el mensaje [Fecha y
-     * hora de la notificación] + “Tu recarga de $ ” + valor de la recarga +
-     * “fue aprobada” Y le asigna el administrador.
-     */
+
     public void emularAprobacion(Administrador administrador) {
         setEstado(true);
         getPropietario().incrementarSaldo(getMonto());

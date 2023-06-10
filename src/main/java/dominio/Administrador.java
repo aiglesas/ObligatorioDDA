@@ -8,4 +8,9 @@ public class Administrador extends Usuario {
         super(ci, contraseña, nombreCompleto);
     }
 
+    @Override
+    public boolean validarLogin(String ci, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

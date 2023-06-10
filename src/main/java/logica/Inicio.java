@@ -24,14 +24,19 @@ import ui.VentanaInicio;
 public class Inicio {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+     crearDatosDePrueba();
+     new VentanaInicio().setVisible(true);
     }
     
-    public void crearDatosDePrueba(){
+    public static void crearDatosDePrueba(){
     //propietarios 
-        Propietario propietario1 = new Propietario("123456789", "contraseña1", "Andres Iglesias", 1000, 500);
-        Propietario propietario2 = new Propietario("987654321", "contraseña2", "Lucas Gonzales", 500, 200);
-    //administradores
+        Propietario propietario1 = new Propietario("51980285", "1234", "Andres Iglesias", 1000, 500);
+        Propietario propietario2 = new Propietario("987654321", "1234", "Lucas Gonzales", 500, 200);
+        Fachada.getInstance().agregarPropietario(propietario1);  
+        Fachada.getInstance().agregarPropietario(propietario2);
+
+    
+//administradores
         Administrador administrador1 = new Administrador("57554654", "contraseña2", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
     //categoria vehiculo
