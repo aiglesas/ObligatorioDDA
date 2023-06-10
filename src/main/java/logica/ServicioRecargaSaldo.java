@@ -1,18 +1,19 @@
 package logica;
 
 import dominio.RecargaSaldo;
-import dominio.Administrador;
+import java.util.ArrayList;
 
 public class ServicioRecargaSaldo {
 
-	private RecargaSaldo[] recargaSaldo;
+    private ArrayList<RecargaSaldo> recargasSaldo;
 
-	public int getRecargasPendientes() {
-		return 0;
-	}
-
-	public void emularAprobacion(Administrador administrador) {
-
-	}
-
+    public ArrayList<RecargaSaldo> getRecargasPendientes() {
+        ArrayList<RecargaSaldo> rs = new ArrayList<>();
+        for(RecargaSaldo reSal : this.recargasSaldo){
+            if(!reSal.isEstado()){
+                rs.add(reSal);
+            }
+        }
+        return rs;
+    }
 }

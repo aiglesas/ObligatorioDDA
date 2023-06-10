@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.Date;
-import dominio.Administrador;
 import dominio.exceptions.ExcepcionPropietario;
 import java.util.Calendar;
 
@@ -25,7 +24,7 @@ public class RecargaSaldo {
         this.monto = monto;
         this.estado = false;
     }
-    
+
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -78,7 +77,6 @@ public class RecargaSaldo {
         if(!(getMonto() >= 1))
         throw new ExcepcionPropietario("Monto inválido");
     }
-
 
     public void emularAprobacion(Administrador administrador) {
         setEstado(true);

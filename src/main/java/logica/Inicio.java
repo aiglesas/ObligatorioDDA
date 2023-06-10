@@ -14,6 +14,7 @@ import dominio.Transito;
 import dominio.Vehiculo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import ui.VentanaInicio;
 
@@ -37,6 +38,7 @@ public class Inicio {
 
     
 //administradores
+
         Administrador administrador1 = new Administrador("57554654", "contraseña2", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
     //categoria vehiculo
