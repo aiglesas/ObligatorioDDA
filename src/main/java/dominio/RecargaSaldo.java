@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.Date;
-import dominio.Administrador;
 import dominio.exceptions.ExcepcionPropietario;
 import java.util.Calendar;
 
@@ -25,7 +24,7 @@ public class RecargaSaldo {
         this.monto = monto;
         this.estado = false;
     }
-    
+
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -81,8 +80,8 @@ public class RecargaSaldo {
 
     /**
      * Lanza un ingreso de notificacion al propietario con el mensaje [Fecha y
-     * hora de la notificación] + “Tu recarga de $ ” + valor de la recarga +
-     * “fue aprobada” Y le asigna el administrador.
+     * hora de la notificación] + “Tu recarga de $ �? + valor de la recarga +
+     * “fue aprobada�? Y le asigna el administrador.
      */
     public void emularAprobacion(Administrador administrador) {
         setEstado(true);
