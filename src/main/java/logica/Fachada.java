@@ -1,10 +1,13 @@
 package logica;
 
+import dominio.Administrador;
 import dominio.Asignacion;
 import dominio.Propietario;
 import dominio.RecargaSaldo;
 import dominio.Transito;
+import dominio.Usuario;
 import dominio.Vehiculo;
+import dominio.exceptions.ExcepcionPropietario;
 import java.util.ArrayList;
 
 public class Fachada {
@@ -32,7 +35,6 @@ public class Fachada {
         this.servicioVehiculo = new ServicioVehiculo();
         this.servicioRecargaSaldo = new ServicioRecargaSaldo();
         this.servicioBonificacion = new ServicioBonificacion();
-        this.servicioUsuario = new ServicioPropietario();
     }
 
     public synchronized static Fachada getInstance() {
@@ -41,13 +43,12 @@ public class Fachada {
         }
         return instacia;
     }
-
-    public boolean validarLoginAdministrador(String ci, String password) {
-        return false;
+    public Usuario LoginAdministrador(String ci, String password) {
+        return servicioAdministrador.login(ci, password);
     }
 
-    public boolean validarLoginPropietario(String ci, String password) {
-        return false;
+    public Usuario loginPropietario(String ci, String password) {
+        return servicioPropietario.login(ci, password);
     }
 
     public Asignacion obtenerAsignacion(Propietario propietario) {
@@ -68,6 +69,14 @@ public class Fachada {
 
     public ArrayList<RecargaSaldo> getRecargasPendientes() {
         return servicioRecargaSaldo.getRecargasPendientes();
+    }
+  
+    public Propietario buscarPropietario(String cedula) {
+        return servicioPropietario.buscarPropietario(cedula);
+    }
+
+    public void agregarPropietario(Propietario propietario) {
+        servicioPropietario.agregarPropietario(propietario);
     }
 
 }

@@ -38,8 +38,6 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public boolean Validar() {
-        return false;
-    }
+    public abstract boolean validarLogin(String ci, String password);
 
 }

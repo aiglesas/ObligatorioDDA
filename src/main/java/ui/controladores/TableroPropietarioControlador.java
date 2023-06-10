@@ -5,33 +5,33 @@ import ui.TableroPropietario;
 import logica.Fachada;
 import common.Observable;
 import common.Evento;
+import dominio.Usuario;
+import ui.TableroPropietarioVista;
 
-public class TableroPropietarioControlador  {
+public class TableroPropietarioControlador {
 
-	private Propietario propietario;
+    private Propietario propietario;
 
-	private TableroPropietario tableroPropietario;
+    private TableroPropietarioVista vista;
 
-	private Fachada fachada;
+    public void borrarNotificacion() {
 
-	public void borrarNotificacion() {
+    }
 
-	}
+    public void recargaSaldo() {
 
-	public void recargaSaldo() {
+    }
 
-	}
+    public void mostrarTablero(Usuario usuario) {
+        vista.mostrarTablero(Fachada.getInstance().buscarPropietario(usuario.getCi()));
 
-	public void mostrarTablero(Propietario propietario) {
+    }
 
-	}
+    /**
+     * @see common.Obervador#actualizar(common.Observable, common.Evento)
+     */
+    public void actualizar(Observable origen, Evento evento) {
 
-
-	/**
-	 * @see common.Obervador#actualizar(common.Observable, common.Evento)
-	 */
-	public void actualizar(Observable origen, Evento evento) {
-
-	}
+    }
 
 }

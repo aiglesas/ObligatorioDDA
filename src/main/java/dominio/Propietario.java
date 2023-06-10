@@ -141,4 +141,9 @@ public class Propietario extends Usuario {
         return null;
     }
 
+    @Override
+    public boolean validarLogin(String ci, String password) {
+        return false;
+    }
+    
 }

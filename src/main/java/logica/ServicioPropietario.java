@@ -1,21 +1,25 @@
 package logica;
 
 import dominio.Propietario;
+import dominio.Usuario;
 import dominio.exceptions.ExcepcionPropietario;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class ServicioPropietario extends ServicioUsuario {
 
-    private static BigDecimal saldoMinimoDefault;
+    private static float saldoMinimoDefault;
+
+    public ServicioPropietario() {
+        propietarios = new ArrayList();
+    }
 
     private ArrayList<Propietario> propietarios;
 
-    public static BigDecimal getSaldoMinimoDefault() {
+    public static float getSaldoMinimoDefault() {
         return saldoMinimoDefault;
     }
 
-    public static void setSaldoMinimoDefault(BigDecimal saldoMinimoDefault) {
+    public static void setSaldoMinimoDefault(float saldoMinimoDefault) {
         ServicioPropietario.saldoMinimoDefault = saldoMinimoDefault;
     }
 
@@ -27,7 +31,7 @@ public class ServicioPropietario extends ServicioUsuario {
         this.propietarios = propietarios;
     }
 
-    public Propietario buscarPropietario(String cedula) throws ExcepcionPropietario{
+    public Propietario buscarPropietario(String cedula){
         Propietario propietario = null;
         for (Propietario p : this.propietarios) {
             if(p.getCi().equals(cedula)){
@@ -35,9 +39,23 @@ public class ServicioPropietario extends ServicioUsuario {
             }
         }
         if(propietario == null){
-            throw new ExcepcionPropietario("No existe el propietario");
         }
         return propietario;
     }
+    
+        public Usuario login(String cedula, String password) {
+        for (Usuario p : propietarios) {
+           if(p.getCi().equals(cedula) && p.getContraseña().equals(password)){
+               return p;
+            }
+        }
+        return null;
+    }
+        
+        public void agregarPropietario(Propietario propietario){
+            
+            propietarios.add(propietario);
+        }
+        
 
 }
