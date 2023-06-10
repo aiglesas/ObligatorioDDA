@@ -6,8 +6,8 @@ public interface Observador {
         ContactoAgregado, UsuarioDeAgendaAutenticado, LogOutUsuarioDeAgenda, AgendaAsignada
     };
 
-    void actualizar(ObservableAbstracto origen, Eventos evento);
-
     public void actualizar(Observable origen, Evento evento);
+    
+    void actualizar(ObservableAbstracto origen, Eventos evento);
 
 }

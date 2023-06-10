@@ -43,7 +43,6 @@ public class Fachada {
         }
         return instacia;
     }
-
     public Usuario LoginAdministrador(String ci, String password) {
         return servicioAdministrador.login(ci, password);
     }
@@ -68,6 +67,10 @@ public class Fachada {
         return null;
     }
 
+    public ArrayList<RecargaSaldo> getRecargasPendientes() {
+        return servicioRecargaSaldo.getRecargasPendientes();
+    }
+  
     public Propietario buscarPropietario(String cedula) {
         return servicioPropietario.buscarPropietario(cedula);
     }
