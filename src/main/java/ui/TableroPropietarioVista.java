@@ -5,6 +5,7 @@
 package ui;
 
 import dominio.Propietario;
+import dominio.Usuario;
 
 /**
  *
@@ -24,6 +25,6 @@ public interface TableroPropietarioVista {
 
     void mostrarNombreCompletoYSaldoActual(Propietario propietario);
     
-    void mostrarTablero(Propietario propietario);
+    void mostrarTablero(Usuario propietario);
 
 }
