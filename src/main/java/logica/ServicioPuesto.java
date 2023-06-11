@@ -12,7 +12,7 @@ public class ServicioPuesto {
     private ArrayList<Puesto> puestos;
 
     public ArrayList<Puesto> getPuestos() {
-        return puestos;
+        return this.puestos;
     }
 
     public void setPuestos(ArrayList<Puesto> puestos) {

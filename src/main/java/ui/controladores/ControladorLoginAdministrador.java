@@ -7,16 +7,16 @@ import dominio.exceptions.ExcepcionPropietario;
 import logica.Fachada;
 import ui.LoginVista;
 
-public class LoginAdministradorControlador extends LoginControlador {
+public class ControladorLoginAdministrador extends LoginControlador {
 
-    public LoginAdministradorControlador(LoginVista vista)  {
+    public ControladorLoginAdministrador(LoginVista vista)  {
         super(vista);
     }
 
 
     @Override
     protected Usuario loginGenerico(String ci, String password) {
-    return Fachada.getInstance().LoginAdministrador(ci, password);    
+        return Fachada.getInstance().LoginAdministrador(ci, password);    
     }
 
 

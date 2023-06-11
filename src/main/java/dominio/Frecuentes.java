@@ -1,11 +1,13 @@
 package dominio;
 
-import java.math.BigDecimal;
-
 public class Frecuentes extends Bonificacion {
 
-	public float calcularMonto() {
-		return 0;
-	}
-
+    public Frecuentes(String nombre, int descuento) {
+        super(nombre, descuento);
+    }
+    
+    @Override
+    public Float calcularMonto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

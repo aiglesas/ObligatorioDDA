@@ -30,7 +30,9 @@ public class TableroPropietarioControlador {
     
 
     public void mostrarTablero(Usuario usuario) {
+
         vista.mostrarTablero(Fachada.getInstance().buscarPropietario(usuario.getCi()));
+
     }
 
     public void mostrarVehiculos() {

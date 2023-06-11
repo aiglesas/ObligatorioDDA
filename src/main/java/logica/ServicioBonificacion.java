@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ServicioBonificacion {
 
     private ArrayList<Bonificacion> bonificaciones;
-
+    
     public ArrayList<Bonificacion> getBonificaciones() {
         return this.bonificaciones;
     }

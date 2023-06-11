@@ -36,7 +36,7 @@ public class ControladorEmularAprobacionRecarga implements Observador{
     }
 
     public void aprobarRecarga(int seleccionado) {
-        RecargaSaldo recarga = this.recargasSaldo.get(seleccionado-1);
+        RecargaSaldo recarga = this.recargasSaldo.get(seleccionado);
         recarga.emularAprobacion(administrador);
     }
 

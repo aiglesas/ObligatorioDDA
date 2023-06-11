@@ -1,14 +1,13 @@
 package dominio;
 
-import java.math.BigDecimal;
-
 public class Exonerados extends Bonificacion {
 
-	public float calcularMonto() {
-		return 0;
-	}
+    public Exonerados(String nombre, int descuento) {
+        super(nombre, descuento);
 
-    public Exonerados() {
+    @Override
+    public Float calcularMonto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

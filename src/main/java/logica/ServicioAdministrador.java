@@ -4,29 +4,37 @@ import dominio.Administrador;
 import dominio.Propietario;
 import dominio.Sesion;
 import dominio.Usuario;
+import java.util.ArrayList;
 
 public class ServicioAdministrador extends ServicioUsuario {
 
-	private Administrador[] administrador;
+    private ArrayList<Administrador> administradores;
 
-	private Sesion[] sesion;
+    private ArrayList<Sesion> sesiones;
 
-	public void logout(Administrador administrador) {
+    public ServicioAdministrador() {
+        this.administradores = new ArrayList<Administrador>();
+    }
 
-	}
+    public void logout(Administrador administrador) {
 
-	public Administrador buscarAdministrador(String cedula) {
-		return null;
-	}
-        
-        public Usuario login(String cedula, String password) {
-        for (Administrador a : administrador) {
-           if(a.getCi().equals(cedula) && a.getContraseña().equals(password)){
-               return a;
+    }
+
+    public void agregarAdministrador(Administrador administrador) {
+        administradores.add(administrador);
+    }
+
+    public Administrador buscarAdministrador(String cedula) {
+        return null;
+    }
+
+    public Usuario login(String cedula, String password) {
+        for (Administrador a : administradores) {
+            if (a.getCi().equals(cedula) && a.getContraseña().equals(password)) {
+                return a;
             }
         }
         return null;
     }
-        
 
 }

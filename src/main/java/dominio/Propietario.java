@@ -21,8 +21,8 @@ public class Propietario extends Usuario {
     private ArrayList<Notificacion> notificaciones;
 
 
-    public Propietario( String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contrase�a, nombreCompleto);
+    public Propietario( String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.vehiculos = new ArrayList<Vehiculo>();
@@ -87,11 +87,9 @@ public class Propietario extends Usuario {
         }
         return transitos;
     }
-
-    public void recargarSaldo(float recarga) throws ExcepcionPropietario {
-        RecargaSaldo rs = new RecargaSaldo(recarga, this);
-        rs.validar();
-        this.recargasSaldo.add(rs);
+    
+    public void asignarRecarga(RecargaSaldo recargaSaldo){
+        this.recargasSaldo.add(recargaSaldo);
     }
 
     public void incrementarSaldo(float monto){
@@ -121,8 +119,8 @@ public class Propietario extends Usuario {
     /**
      * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
      * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
-     * “Tu saldo actual es de $ “ + this.saldo + “ Te recomendamos hacer una
-     * recarga�?) } return saldo } return null
+     * â€œTu saldo actual es de $ â€œ + this.saldo + â€œ Te recomendamos hacer una
+     * recargaâ€?) } return saldo } return null
      */
     public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
         return null;
@@ -130,10 +128,10 @@ public class Propietario extends Usuario {
 
     public void asignarBonificacion(Bonificacion bonificacion, Puesto puesto) throws ExcepcionPropietario{
         Asignacion asignacion = new Asignacion(bonificacion, this, puesto);
-        if(buscarAsignacionPorPuesto(puesto) != null){
-            throw new ExcepcionPropietario("Ya tiene una bonificación asignada para ese puesto");
-        }else{
+        if(buscarAsignacionPorPuesto(puesto) == null){
             this.asignaciones.add(asignacion);
+        }else{
+            throw new ExcepcionPropietario("Ya tiene una bonificaciÃ³n asignada para ese puesto");
         }
     }
 

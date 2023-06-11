@@ -2,7 +2,9 @@ package logica;
 
 import dominio.Administrador;
 import dominio.Asignacion;
+import dominio.Bonificacion;
 import dominio.Propietario;
+import dominio.Puesto;
 import dominio.RecargaSaldo;
 import dominio.Transito;
 import dominio.Usuario;
@@ -43,6 +45,7 @@ public class Fachada {
         }
         return instacia;
     }
+
     public Usuario LoginAdministrador(String ci, String password) {
         return servicioAdministrador.login(ci, password);
     }
@@ -59,8 +62,12 @@ public class Fachada {
         return null;
     }
 
-    public int getPuestos() {
-        return 0;
+    public ArrayList<Puesto> getPuestos() {
+        return servicioPuesto.getPuestos();
+    }
+
+    public ArrayList<Bonificacion> getBonificaciones() {
+        return servicioBonificacion.getBonificaciones();
     }
 
     public Vehiculo obtenerVehiculo(String matricula) {
@@ -70,19 +77,34 @@ public class Fachada {
     public ArrayList<RecargaSaldo> getRecargasPendientes() {
         return servicioRecargaSaldo.getRecargasPendientes();
     }
-  
-    public Propietario buscarPropietario(String cedula) {
+
+    public Propietario buscarPropietario(String cedula) throws ExcepcionPropietario {
         return servicioPropietario.buscarPropietario(cedula);
     }
 
     public void agregarPropietario(Propietario propietario) {
         servicioPropietario.agregarPropietario(propietario);
     }
+
+    public void agregarAdministrador(Administrador administrador) {
+        servicioAdministrador.agregarAdministrador(administrador);
+    }
+    
+    public void agregarRecargaSaldo(RecargaSaldo rs){
+        servicioRecargaSaldo.agregarRecarga(rs);
+    }
+
+    public void setBonificaciones(ArrayList<Bonificacion> bonificaciones) {
+        servicioBonificacion.setBonificaciones(bonificaciones);
+    }
+
     
         public void agregarVehiculo(Vehiculo vehiculo) {
         servicioVehiculo.agregarVehiculo(vehiculo);
         
     }
-    
 
+    public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionPropietario {
+        servicioRecargaSaldo.recargarSaldo(recarga, propietario);
+    }
 }

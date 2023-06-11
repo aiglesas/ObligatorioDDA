@@ -95,7 +95,7 @@ public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSa
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        TFMontoRecargar.getText();
+        recargarSaldo(TFMontoRecargar.getText());
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
