@@ -22,7 +22,7 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     /**
      * Creates new form DialogoRecargaSaldo
      */
-    public DialogoEmularAprobacionRecarga( Administrador administrador) {
+    public DialogoEmularAprobacionRecarga(Administrador administrador) {
         initComponents();
         this.controlador = new ControladorEmularAprobacionRecarga(this, administrador);
     }
@@ -122,7 +122,7 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         cerrar();
     }//GEN-LAST:event_btnCerrarActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAprobar;
     private javax.swing.JButton btnCerrar;
@@ -132,18 +132,21 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     private javax.swing.JTable tRecargaSaldo;
     // End of variables declaration//GEN-END:variables
 
-    public DefaultTableModel obtenerTablaPorDefecto(){
+    public DefaultTableModel obtenerTablaPorDefecto() {
         return new DefaultTableModel(
-            new String [] {
-                "Fecha", "Propietario", "Monto"
-            },0
+                new String[]{
+                    "Fecha", "Propietario", "Monto"
+                }, 0
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                 java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         };
     }
@@ -164,7 +167,7 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
         DefaultTableModel model = obtenerTablaPorDefecto();
         tRecargaSaldo.setModel(model);
         for (RecargaSaldo rs : recargasSaldo) {
-            model.addRow(new Object [][] {{rs.getFechaInicio().toString(), rs.getPropietario().getNombreCompleto(), rs.getMonto()}});
+            model.addRow(new Object[]{rs.getFechaInicio().toString(), rs.getPropietario().getNombreCompleto(), rs.getMonto()});
         }
     }
 }

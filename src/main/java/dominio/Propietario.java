@@ -24,6 +24,10 @@ public class Propietario extends Usuario {
         super(ci, contrase�a, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
+        this.recargasSaldo = new ArrayList<RecargaSaldo>();
+        this.notificaciones = new ArrayList<Notificacion>();
+        this.asignaciones = new ArrayList<Asignacion>();
+        this.vehiculos = new ArrayList<Vehiculo>();
     }
 
     public float getSaldo() {
@@ -81,11 +85,9 @@ public class Propietario extends Usuario {
         }
         return transitos;
     }
-
-    public void recargarSaldo(float recarga) throws ExcepcionPropietario {
-        RecargaSaldo rs = new RecargaSaldo(recarga, this);
-        rs.validar();
-        this.recargasSaldo.add(rs);
+    
+    public void asignarRecarga(RecargaSaldo recargaSaldo){
+        this.recargasSaldo.add(recargaSaldo);
     }
 
     public void incrementarSaldo(float monto){
@@ -124,10 +126,10 @@ public class Propietario extends Usuario {
 
     public void asignarBonificacion(Bonificacion bonificacion, Puesto puesto) throws ExcepcionPropietario{
         Asignacion asignacion = new Asignacion(bonificacion, this, puesto);
-        if(buscarAsignacionPorPuesto(puesto) != null){
-            throw new ExcepcionPropietario("Ya tiene una bonificación asignada para ese puesto");
-        }else{
+        if(buscarAsignacionPorPuesto(puesto) == null){
             this.asignaciones.add(asignacion);
+        }else{
+            throw new ExcepcionPropietario("Ya tiene una bonificación asignada para ese puesto");
         }
     }
 

@@ -97,8 +97,6 @@ public abstract class DialogoLogin extends javax.swing.JDialog implements LoginV
         this.login();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel lblPassword;

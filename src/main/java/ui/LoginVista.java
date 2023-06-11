@@ -18,7 +18,7 @@ public interface LoginVista {
 
     void cerrarVista();
 
-    void ejecutarCasoDeUsoInicial(Usuario usuario);    
+    public void ejecutarCasoDeUsoInicial(Usuario usuario);    
     
 
 }

@@ -9,7 +9,7 @@ package ui;
  * @author usuario
  */
 public class VentanaInicio extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form VentanaInicio
      */
@@ -79,7 +79,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void mPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mPropietarioActionPerformed
-       this.loginPropietario();
+        this.loginPropietario();
     }//GEN-LAST:event_mPropietarioActionPerformed
 
     private void mAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAdministradorActionPerformed
@@ -89,16 +89,13 @@ public class VentanaInicio extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
-    
-        private void loginPropietario() {
+    private void loginPropietario() {
         new DialogoLoginPropietario(this, false).setVisible(true);
     }
 
     private void loginAdministrador() {
         new DialogoLoginAdministrador(this, false).setVisible(true);
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,17 +10,15 @@ import java.awt.Frame;
 import ui.controladores.LoginControlador;
 import ui.controladores.LoginPropietarioControlador;
 
-
-
 public class DialogoLoginPropietario extends DialogoLogin {
 
     public DialogoLoginPropietario(Frame parent, boolean modal) {
-       super(parent,modal);
+        super(parent, modal);
     }
 
     @Override
     protected LoginControlador crearControlador() {
- return new LoginPropietarioControlador(this);
+        return new LoginPropietarioControlador(this);
     }
 
     public void ejecutarCasoDeUsoInicial(Propietario propietario) {
@@ -39,7 +37,7 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     @Override
     public void ejecutarCasoDeUsoInicial(Usuario usuario) {
-        new DialogoTableroPropietario( (Usuario) usuario).setVisible(true);
+        new DialogoTableroPropietario((Usuario) usuario).setVisible(true);
     }
 
 }

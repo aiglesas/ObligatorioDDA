@@ -19,7 +19,7 @@ public abstract class LoginControlador {
             vista.mostrarMensajeDeError("Nombre/Password erroneo.");
         } else {           
             vista.ejecutarCasoDeUsoInicial(usuario);
-            vista.cerrarVista();
+            //vista.cerrarVista();
         }
     }
 
