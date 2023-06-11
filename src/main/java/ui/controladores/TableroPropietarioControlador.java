@@ -18,20 +18,37 @@ public class TableroPropietarioControlador {
 
     }
 
+    public TableroPropietarioControlador(TableroPropietarioVista vista, Usuario usuario) {
+        this.propietario =   Fachada.getInstance().buscarPropietario(usuario.getCi());
+        this.vista = vista;
+        this.inicializador();
+    }
+    
+    public void inicializador(){
+      this.vista.mostrarTablero(propietario);
+    }
+    
+
     public void recargaSaldo() {
 
     }
 
     public void mostrarTablero(Usuario usuario) {
         vista.mostrarTablero(Fachada.getInstance().buscarPropietario(usuario.getCi()));
-
     }
 
+    public void mostrarVehiculos() {
+        vista.mostarVehiculos(propietario.getVehiculos());
+    }
     /**
      * @see common.Obervador#actualizar(common.Observable, common.Evento)
      */
     public void actualizar(Observable origen, Evento evento) {
 
+    }
+
+    public Propietario getPropietario() {
+        return propietario;
     }
 
 }

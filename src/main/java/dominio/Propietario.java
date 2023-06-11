@@ -20,11 +20,17 @@ public class Propietario extends Usuario {
 
     private ArrayList<Notificacion> notificaciones;
 
-    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
+
+    public Propietario( String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
         super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
+        this.vehiculos = new ArrayList<Vehiculo>();
+        this.asignaciones = new ArrayList<Asignacion>();
+        this.recargasSaldo = new ArrayList<RecargaSaldo>();
+        this.notificaciones = new ArrayList<Notificacion>();
     }
+    
 
     public float getSaldo() {
         return this.saldo;
@@ -144,6 +150,10 @@ public class Propietario extends Usuario {
     @Override
     public boolean validarLogin(String ci, String password) {
         return false;
+    }
+    
+    public void agregarVehiculo(Vehiculo vehiculo){
+        vehiculos.add(vehiculo);
     }
     
 }

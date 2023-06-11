@@ -4,8 +4,14 @@
  */
 package ui;
 
+import dominio.Bonificacion;
+import dominio.Notificacion;
 import dominio.Propietario;
+import dominio.RecargaSaldo;
+import dominio.Transito;
 import dominio.Usuario;
+import dominio.Vehiculo;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,18 +19,16 @@ import dominio.Usuario;
  */
 public interface TableroPropietarioVista {
 
-    void mostarVehiculos();
+    void mostarVehiculos(ArrayList<Vehiculo> vehiculos);
 
-    void mostrarBonificaciones(Propietario propietario);
+    void mostrarBonificaciones(ArrayList<Bonificacion> vehiculos);
 
-    void mostrarTransitos(Propietario propietario);
+    void mostrarTransitos(ArrayList<Transito> vehiculos);
 
-    void mostrarRecargas(Propietario propietario);
+    void mostrarRecargas(ArrayList<RecargaSaldo> vehiculos);
 
-    void mostrarNotificacion(Propietario propietario);
-
-    void mostrarNombreCompletoYSaldoActual(Propietario propietario);
+    void mostrarNotificacion(ArrayList<Notificacion> vehiculos);
     
-    void mostrarTablero(Usuario propietario);
+    void mostrarTablero(Propietario propietario);
 
 }

@@ -4,8 +4,15 @@
  */
 package ui;
 
+import dominio.Bonificacion;
+import dominio.Notificacion;
 import dominio.Propietario;
+import dominio.RecargaSaldo;
+import dominio.Transito;
 import dominio.Usuario;
+import dominio.Vehiculo;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import ui.controladores.TableroPropietarioControlador;
 
 /**
@@ -21,8 +28,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
      */
     public DialogoTableroPropietario(Usuario usuario) {
         initComponents();
-        this.mostrarTablero(usuario);
-   
+        this.controlador = new TableroPropietarioControlador(this, usuario);
     }
 
     /**
@@ -36,9 +42,10 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         lblPropietario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblVehiculosCantidad = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVehiculos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,9 +53,9 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         jLabel1.setText("Saldo");
 
-        jLabel2.setText("CantidadVehiculos");
+        lblVehiculosCantidad.setText("CantidadVehiculos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +66,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVehiculos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,15 +75,20 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 734, Short.MAX_VALUE)
                 .addComponent(lblPropietario)
                 .addGap(83, 83, 83))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(lblVehiculosCantidad)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,61 +99,86 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                     .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel2))
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                        .addGap(114, 114, 114)
+                        .addComponent(lblVehiculosCantidad)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    @Override
-    public void mostarVehiculos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarBonificaciones(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarTransitos(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarRecargas(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarNotificacion(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarNombreCompletoYSaldoActual(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPropietario;
+    private javax.swing.JLabel lblVehiculosCantidad;
+    private javax.swing.JTable tablaVehiculos;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void mostrarTablero(Usuario propietario) {
-    lblPropietario.setText(String.format(propietario.getNombreCompleto()));    
+    public void mostrarTablero(Propietario propietario) {
+        lblPropietario.setText(String.format(propietario.getNombreCompleto()));
+        this.mostarVehiculos(propietario.getVehiculos());
+       
+//        this.mostarVehiculos(propietario);
+//        this.mostrarBonificaciones(propietario);
+//        this.mostrarTransitos(propietario);
+//        this.mostrarRecargas(propietario);
+//        this.mostrarNotificacion(propietario);
+//        this.mostarVehiculos(propietario);
+    }
+
+    public DefaultTableModel tablaVehiculos() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Matricula", "Modelo", "Color", "#Transitos", "Monto total"
+                }, 0
+        ) {
+            Class[] types = new Class[]{
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+    }
+
+    @Override
+    public void mostarVehiculos(ArrayList<Vehiculo> vehiculos) {
+        lblVehiculosCantidad.setText(String.valueOf(vehiculos.size()));
+        DefaultTableModel model = tablaVehiculos();
+        tablaVehiculos.setModel(model);
+        for (Vehiculo v : vehiculos) {
+            model.addRow(new Object[][]{{v.getMatricula(), v.getModelo(), v.getColor(), v.getTransitos().size(), v.getMontoTotal()}});
+        }
+    }
+
+    @Override
+    public void mostrarBonificaciones(ArrayList<Bonificacion> vehiculos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarTransitos(ArrayList<Transito> vehiculos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarRecargas(ArrayList<RecargaSaldo> vehiculos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mostrarNotificacion(ArrayList<Notificacion> vehiculos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

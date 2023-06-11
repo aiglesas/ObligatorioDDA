@@ -78,5 +78,11 @@ public class Fachada {
     public void agregarPropietario(Propietario propietario) {
         servicioPropietario.agregarPropietario(propietario);
     }
+    
+        public void agregarVehiculo(Vehiculo vehiculo) {
+        servicioVehiculo.agregarVehiculo(vehiculo);
+        
+    }
+    
 
 }

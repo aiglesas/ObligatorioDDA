@@ -48,6 +48,7 @@ public class Vehiculo {
         this.categoriaVehiculo = categoriaVehiculo;
     }
     public ArrayList<Transito> getTransitos() {
+
         return transitos;
     }
     public void setTransitos(ArrayList<Transito> transitos) {
@@ -59,23 +60,25 @@ public class Vehiculo {
 		return null;
 	}
 
-    public Vehiculo(String matricula, String modelo, String color, Propietario propietario, CategoriaVehiculo categoriaVehiculo) {
-        this.matricula = matricula;
-        this.modelo = modelo;
-        this.color = color;
-        this.propietario = propietario;
-        this.categoriaVehiculo = categoriaVehiculo;
-    }
-    
-        public Vehiculo(String matricula, String modelo, String color, Propietario propietario, CategoriaVehiculo categoriaVehiculo, ArrayList<Transito> transitos) {
-        this.matricula = matricula;
-        this.modelo = modelo;
-        this.color = color;
-        this.propietario = propietario;
-        this.categoriaVehiculo = categoriaVehiculo;
-        this.transitos = transitos;
-    }
 
+    
+        public Vehiculo(String matricula, String modelo, String color, Propietario propietario, CategoriaVehiculo categoriaVehiculo) {
+        this.matricula = matricula;
+        this.modelo = modelo;
+        this.color = color;
+        this.propietario = propietario;
+        this.categoriaVehiculo = categoriaVehiculo;
+        this.transitos = new ArrayList<Transito>();
+        }
+
+        
+        public float getMontoTotal(){
+            long montoTotal = 0;        
+            for (Transito t : transitos) {
+                montoTotal += t.calcularMontoTotal();
+            }
+            return montoTotal;
+        }
 
 
 }

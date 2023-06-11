@@ -26,8 +26,8 @@ public class Transito {
 	/**
 	 * return this.puesto.calcularMontoTotal(this.vehiculo);
 	 */
-	public BigDecimal calcularMontoTotal() {
-		return null;
+	public long calcularMontoTotal() {
+		return 0;
 	}
 
     public Transito(float total, Date fecha, Vehiculo vehiculo, Puesto puesto) {
