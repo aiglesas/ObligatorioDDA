@@ -5,6 +5,7 @@
  */
 package ui;
 
+import ui.interfaces.MenuAdministradorVista;
 import dominio.Administrador;
 import dominio.Usuario;
 import ui.controladores.ControladorMenuAdministrador;

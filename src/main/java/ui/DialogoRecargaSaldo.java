@@ -8,13 +8,17 @@ package ui;
 import dominio.Propietario;
 import javax.swing.JOptionPane;
 import ui.controladores.ControladorRecargaSaldo;
+import ui.interfaces.RecargaSaldoVista;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSaldoVista {
+public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaSaldoVista{
 
+    /**
+     * Creates new form DialogoRecargaSaldo
+     */
     private final ControladorRecargaSaldo controlador;
     /**
      * Creates new form DialogoRecargaSaldo
@@ -39,6 +43,8 @@ public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSa
         TFMontoRecargar = new java.awt.TextField();
         btnAceptar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jMonto.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas\\OneDrive - Facultad de Ingenieria - Universidad ORT Uruguay\\Escritorio\\DDA\\OBLIGATORIO\\Dinero.jpg")); // NOI18N
         jMonto.setText("monto");
 
@@ -56,8 +62,8 @@ public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSa
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -92,6 +98,8 @@ public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSa
                 .addComponent(btnAceptar)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -105,12 +113,10 @@ public class DialogoRecargaSaldo extends javax.swing.JPanel implements RecargaSa
     private javax.swing.JLabel jMonto;
     private javax.swing.JLabel jNombreCompleto;
     // End of variables declaration//GEN-END:variables
-
-    @Override
+        @Override
     public void recargarSaldo(String saldo) {
         controlador.recargarSaldo(saldo);
     }
-
     @Override
     public void mostrarMensajeDeError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error de datos", JOptionPane.ERROR_MESSAGE);

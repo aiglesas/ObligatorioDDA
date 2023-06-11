@@ -24,7 +24,7 @@ public abstract class ObservableAbstracto implements Observable {
         return observadores.remove(o);
     }
 
-    protected void avisar(Observador.Eventos evento) {
+    protected void avisar(Evento evento) {
         for (Observador o : observadores) {
             o.actualizar(this, evento);
         }

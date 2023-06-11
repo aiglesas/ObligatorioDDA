@@ -4,6 +4,7 @@
  */
 package ui;
 
+import ui.interfaces.LoginVista;
 import javax.swing.JOptionPane;
 import ui.controladores.LoginControlador;
 

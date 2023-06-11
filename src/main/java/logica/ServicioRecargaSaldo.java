@@ -1,21 +1,20 @@
 package logica;
 
+import common.Evento;
+import common.ObservableAbstracto;
+import dominio.Administrador;
 import dominio.Propietario;
 import dominio.RecargaSaldo;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.ArrayList;
 
-public class ServicioRecargaSaldo {
+public class ServicioRecargaSaldo extends ObservableAbstracto {
 
     private ArrayList<RecargaSaldo> recargasSaldo;
 
     public ServicioRecargaSaldo() {
         this.recargasSaldo = new ArrayList<RecargaSaldo>();
-    }
-
-    public void agregarRecarga(RecargaSaldo rs){
-        recargasSaldo.add(rs);
-        rs.getPropietario().asignarRecarga(rs);
     }
     
     public ArrayList<RecargaSaldo> getRecargasPendientes() {
@@ -28,11 +27,17 @@ public class ServicioRecargaSaldo {
         return rs;
     }
 
-    public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionPropietario {
+    public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionRecargaSaldo {
         RecargaSaldo rs = new RecargaSaldo(recarga, propietario);
         rs.validar();
         propietario.asignarRecarga(rs);
         this.recargasSaldo.add(rs);
-        //Avisar(Evento.RecargaSaldo);
+        avisar(Evento.RecargaSaldo);
     }
+    
+    public void emularAprobacion(Administrador administrador, RecargaSaldo recargaAprobada) {
+        recargaAprobada.emularAprobacion(administrador);
+        avisar(Evento.AprobarRecargaSaldo);
+    }
+
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package common;
 
 /**
@@ -10,7 +6,7 @@ package common;
  */
 public class ObservableConcreto extends ObservableAbstracto {
     @Override
-    public void avisar(Observador.Eventos evento) {
+    public void avisar(Evento evento) {
         super.avisar(evento);
     }
 }

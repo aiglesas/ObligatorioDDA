@@ -5,6 +5,7 @@
  */
 package ui;
 
+import ui.interfaces.AsignarBonificacionesVista;
 import dominio.Asignacion;
 import dominio.Bonificacion;
 import dominio.Propietario;

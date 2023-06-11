@@ -21,8 +21,8 @@ public class Propietario extends Usuario {
     private ArrayList<Notificacion> notificaciones;
 
 
-    public Propietario( String ci, String contraseÃ±a, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contraseÃ±a, nombreCompleto);
+    public Propietario( String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.vehiculos = new ArrayList<Vehiculo>();
@@ -31,7 +31,6 @@ public class Propietario extends Usuario {
         this.notificaciones = new ArrayList<Notificacion>();
     }
     
-
     public float getSaldo() {
         return this.saldo;
     }
@@ -65,7 +64,7 @@ public class Propietario extends Usuario {
     }
 
     public ArrayList<RecargaSaldo> getRecargasSaldo() {
-        return recargasSaldo;
+        return this.recargasSaldo;
     }
 
     public void setRecargasSaldo(ArrayList<RecargaSaldo> recargasSaldo) {

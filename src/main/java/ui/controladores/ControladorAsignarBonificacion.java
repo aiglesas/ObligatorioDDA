@@ -8,7 +8,7 @@ import dominio.Propietario;
 import dominio.Puesto;
 import dominio.exceptions.ExcepcionPropietario;
 import java.util.ArrayList;
-import ui.AsignarBonificacionesVista;
+import ui.interfaces.AsignarBonificacionesVista;
 
 public class ControladorAsignarBonificacion {
 

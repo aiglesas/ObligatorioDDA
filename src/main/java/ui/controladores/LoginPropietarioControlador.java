@@ -4,7 +4,7 @@ import dominio.Propietario;
 import dominio.Usuario;
 import dominio.exceptions.ExcepcionPropietario;
 import logica.Fachada;
-import ui.LoginVista;
+import ui.interfaces.LoginVista;
 
 public class LoginPropietarioControlador extends LoginControlador {
 
@@ -16,13 +16,15 @@ public class LoginPropietarioControlador extends LoginControlador {
     protected Usuario loginGenerico(String userName, String password) {
         Usuario usuario = Fachada.getInstance().loginPropietario(userName, password);
         if (usuario != null) {
-            //return Fachada.getInstance().buscarPropietario(usuario.getCi());
+            try{
+                return Fachada.getInstance().buscarPropietario(usuario.getCi());
+            }catch(ExcepcionPropietario exP){
+                
+            }
+            
         } else {
         }
-            return null;
+        return null;
     }
 
-
 }
-
-

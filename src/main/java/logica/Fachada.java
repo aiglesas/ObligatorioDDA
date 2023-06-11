@@ -1,5 +1,9 @@
 package logica;
 
+import common.Evento;
+import common.Observable;
+import common.ObservableAbstracto;
+import common.Observador;
 import dominio.Administrador;
 import dominio.Asignacion;
 import dominio.Bonificacion;
@@ -10,9 +14,10 @@ import dominio.Transito;
 import dominio.Usuario;
 import dominio.Vehiculo;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.ArrayList;
 
-public class Fachada {
+public class Fachada extends ObservableAbstracto implements Observador {
 
     private static Fachada instacia;
 
@@ -36,6 +41,7 @@ public class Fachada {
         this.servicioPuesto = new ServicioPuesto();
         this.servicioVehiculo = new ServicioVehiculo();
         this.servicioRecargaSaldo = new ServicioRecargaSaldo();
+        this.servicioRecargaSaldo.agregar(this);
         this.servicioBonificacion = new ServicioBonificacion();
     }
 
@@ -89,22 +95,32 @@ public class Fachada {
     public void agregarAdministrador(Administrador administrador) {
         servicioAdministrador.agregarAdministrador(administrador);
     }
-    
-    public void agregarRecargaSaldo(RecargaSaldo rs){
-        servicioRecargaSaldo.agregarRecarga(rs);
-    }
 
     public void setBonificaciones(ArrayList<Bonificacion> bonificaciones) {
         servicioBonificacion.setBonificaciones(bonificaciones);
     }
 
-    
-        public void agregarVehiculo(Vehiculo vehiculo) {
+    public void agregarVehiculo(Vehiculo vehiculo) {
         servicioVehiculo.agregarVehiculo(vehiculo);
-        
     }
 
-    public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionPropietario {
+    public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionRecargaSaldo {
         servicioRecargaSaldo.recargarSaldo(recarga, propietario);
+    }
+
+    public void emularAprobacion(Administrador administrador, RecargaSaldo recargaAprobada){
+        servicioRecargaSaldo.emularAprobacion(administrador, recargaAprobada);
+    }
+    
+    @Override
+    public void actualizar(Observable origen, Evento evento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void actualizar(ObservableAbstracto origen, Evento evento) {
+        if (origen instanceof ServicioRecargaSaldo) {
+            avisar(evento);
+        }
     }
 }

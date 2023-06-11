@@ -15,6 +15,7 @@ import dominio.Tarifa;
 import dominio.Trabajadores;
 import dominio.Transito;
 import dominio.Vehiculo;
+import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,9 +27,9 @@ import ui.VentanaInicio;
  * @author aigle
  */
 public class Inicio {
-    
+
     private Fachada fachada;
-    
+
     public static void main(String[] args) {
         crearDatosDePrueba();
         new VentanaInicio().setVisible(true);
@@ -46,9 +47,9 @@ public class Inicio {
         //administradores
         Administrador administrador1 = new Administrador("52401979", "admin", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
-      
+
         Fachada.getInstance().agregarAdministrador(administrador1);
-      
+
         //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
         CategoriaVehiculo categoria2 = new CategoriaVehiculo("SUV");
@@ -79,7 +80,7 @@ public class Inicio {
         Puesto puesto1 = new Puesto("peaje pando", "pando", tarifas);
         Puesto puesto2 = new Puesto("peaje solis", "solis", tarifas);
         Puesto puesto3 = new Puesto("peaje rocha", "rocha", tarifas);
-      
+
         //transitos    
         Transito transito1 = new Transito(50, new Date(), vehiculo1, puesto1);
         Transito transito2 = new Transito(30, new Date(), vehiculo2, puesto2);
@@ -89,7 +90,7 @@ public class Inicio {
         transitosVehiculo2.add(transito2);
         transitosVehiculo2.add(transito3);
         transitosVehiculo2.add(transito4);
-      
+
         //bonificaciones    
         ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
         Frecuentes bonificacionFrecuente = new Frecuentes("Frecuente", 20);
@@ -100,11 +101,14 @@ public class Inicio {
         bonificaciones.add(bonificacionExonerado);
         bonificaciones.add(bonificacionTrabajador);
         Fachada.getInstance().setBonificaciones(bonificaciones);
-        
+
         //RecargasSaldo
-        RecargaSaldo recarga1 = new RecargaSaldo(200, propietario1);
-        RecargaSaldo recarga2 = new RecargaSaldo(350, propietario2);
-        Fachada.getInstance().agregarRecargaSaldo(recarga1);
-        Fachada.getInstance().agregarRecargaSaldo(recarga2);
+        try {
+            Fachada.getInstance().recargarSaldo(200, propietario1);
+            Fachada.getInstance().recargarSaldo(350, propietario2);
+        } catch (ExcepcionRecargaSaldo exRS) {
+
+        }
+
     }
 }

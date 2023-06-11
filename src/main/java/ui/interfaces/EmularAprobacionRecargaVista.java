@@ -1,4 +1,4 @@
-package ui;
+package ui.interfaces;
 
 import dominio.RecargaSaldo;
 import java.util.ArrayList;

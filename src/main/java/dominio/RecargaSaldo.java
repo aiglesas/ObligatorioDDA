@@ -1,10 +1,13 @@
 package dominio;
 
+import static common.Evento.RecargaSaldo;
+import common.ObservableAbstracto;
 import java.util.Date;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.Calendar;
 
-public class RecargaSaldo {
+public class RecargaSaldo{
 
     private Administrador administrador;
     
@@ -76,9 +79,9 @@ public class RecargaSaldo {
         this.propietario = propietario;
     }
     
-    public void validar() throws ExcepcionPropietario{
+    public void validar() throws ExcepcionRecargaSaldo{
         if(!(getMonto() >= 1))
-        throw new ExcepcionPropietario("Monto inválido");
+        throw new ExcepcionRecargaSaldo("Monto invalido");
     }
 
     public void emularAprobacion(Administrador administrador) {

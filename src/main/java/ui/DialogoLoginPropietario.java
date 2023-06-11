@@ -7,6 +7,7 @@ package ui;
 import dominio.Propietario;
 import dominio.Usuario;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 import ui.controladores.LoginControlador;
 import ui.controladores.LoginPropietarioControlador;
 
@@ -25,11 +26,6 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     public void ejecutarCasoDeUsoInicial(Propietario propietario) {
         new DialogoTableroPropietario(propietario).setVisible(true);
-    }
-
-    @Override
-    public void mostrarMensajeDeError(String mensaje) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package ui;
 
+import ui.interfaces.EmularAprobacionRecargaVista;
 import dominio.Administrador;
 import dominio.RecargaSaldo;
 import java.util.ArrayList;

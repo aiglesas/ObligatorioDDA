@@ -5,20 +5,20 @@ import logica.Fachada;
 
 public class EmularTransitoControlador {
 
-	private EmularTransito emularTransito;
+    private EmularTransito emularTransito;
 
-	private Fachada fachada;
+    private Fachada fachada;
 
-	public void mostrarEmuladorTransito() {
+    public void mostrarEmuladorTransito() {
 
-	}
+    }
 
-	public void registrarTransito() {
+    public void registrarTransito() {
 
-	}
+    }
 
-	public void cerrar() {
+    public void cerrar() {
 
-	}
+    }
 
 }

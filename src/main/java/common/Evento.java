@@ -1,5 +1,5 @@
 package common;
 
-public class Evento {
-
+public enum Evento {
+    RecargaSaldo, AprobarRecargaSaldo
 }

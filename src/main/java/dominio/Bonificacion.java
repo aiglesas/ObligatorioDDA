@@ -32,14 +32,4 @@ public abstract class Bonificacion {
 
     public abstract Float calcularMonto();
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getDescuento() {
-        return descuento;
-    }
-        
-        
-
 }

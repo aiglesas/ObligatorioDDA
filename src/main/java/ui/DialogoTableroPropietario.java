@@ -4,6 +4,7 @@
  */
 package ui;
 
+import ui.interfaces.TableroPropietarioVista;
 import dominio.Asignacion;
 import dominio.Bonificacion;
 import dominio.Notificacion;
@@ -412,8 +413,11 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
             lblRecargasCantidad.setText(String.valueOf(recargas.size()));
             DefaultTableModel model = tablaRecargas();
             tRecargas.setModel(model);
+
             for (RecargaSaldo rs : recargas) {
-                model.addRow(new Object[]{rs.getFechaInicio(), rs.getMonto(), rs.getEstado(), rs.getAdministrador().getNombre()});
+                String nombreAdmin = rs.getAdministrador() != null ? rs.getAdministrador().getNombreCompleto() : "No tiene administrador";
+                String aprobado = rs.getEstado() ? "Aprobado" : "Pendiente";
+                model.addRow(new Object[]{rs.getFechaInicio(), rs.getMonto(), aprobado, nombreAdmin});
             }
 
         }
