@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class Exonerados extends Bonificacion {
 
-	public BigDecimal calcularMonto() {
-		return null;
+	public float calcularMonto() {
+		return 0;
 	}
 
     public Exonerados() {

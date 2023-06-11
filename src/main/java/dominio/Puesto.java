@@ -6,45 +6,44 @@ import java.util.ArrayList;
 
 public class Puesto {
 
-	private String nombre;
+    private String nombre;
 
-	private String direccion;
+    private String direccion;
 
-	private ArrayList<Tarifa> tarifas;
+    private ArrayList<Tarifa> tarifas;
 
-	public int getTarifas() {
-		return 0;
-	}
+    public int getTarifas() {
+        return 0;
+    }
 
-        public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifas) {
-            this.nombre = nombre;
-            this.direccion = direccion;
-            this.tarifas = tarifas;
-        }
+    public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifas) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.tarifas = new ArrayList<Tarifa>();
+    }
 
-	public Tarifa getTarifa(CategoriaVehiculo categoria) {
-		return null;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Asignacion getAsignacion(Propietario propietario) {
-		return null;
-	}
+    public Tarifa getTarifa(CategoriaVehiculo categoria) {
+        return null;
+    }
 
+    public Asignacion getAsignacion(Propietario propietario) {
+        return null;
+    }
 
-	public BigDecimal calcularMontoBonificacion(Vehiculo vehiculo) {
-		return null;
-	}
+    public BigDecimal calcularMontoBonificacion(Vehiculo vehiculo) {
+        return null;
+    }
 
+    public BigDecimal calcularMontoTotal(Vehiculo vehiculo) {
+        return null;
+    }
 
-	public BigDecimal calcularMontoTotal(Vehiculo vehiculo) {
-		return null;
-	}
-
-
-	public Transito emularTransito(Vehiculo vehiculo) {
-		return null;
-	}
-
-
+    public Transito emularTransito(Vehiculo vehiculo) {
+        return null;
+    }
 
 }

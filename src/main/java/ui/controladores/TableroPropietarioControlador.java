@@ -15,7 +15,7 @@ public class TableroPropietarioControlador {
     private TableroPropietarioVista vista;
 
     public void borrarNotificacion() {
-
+        
     }
 
     public TableroPropietarioControlador(TableroPropietarioVista vista, Usuario usuario) {
@@ -28,10 +28,6 @@ public class TableroPropietarioControlador {
       this.vista.mostrarTablero(propietario);
     }
     
-
-    public void recargaSaldo() {
-
-    }
 
     public void mostrarTablero(Usuario usuario) {
         vista.mostrarTablero(Fachada.getInstance().buscarPropietario(usuario.getCi()));
@@ -49,6 +45,14 @@ public class TableroPropietarioControlador {
 
     public Propietario getPropietario() {
         return propietario;
+    }
+    
+    public void recargaSaldo(){
+        vista.recargaSaldo(propietario);
+    }
+    
+        public void borrarNotificaiones(){
+        vista.borrarNotificaciones(propietario);
     }
 
 }

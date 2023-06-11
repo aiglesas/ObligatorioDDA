@@ -6,13 +6,23 @@ public abstract class Bonificacion {
 
 	private String nombre;
 
-	private int descuento;
+	private int descuento;  
 
 	/**
 	 * Cada uno va a implementar lo que necesite
 	 */
-	public BigDecimal calcularMonto() {
-		return null;
+	public float calcularMonto() {
+		return 0;
 	}
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getDescuento() {
+        return descuento;
+    }
+        
+        
 
 }

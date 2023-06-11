@@ -13,4 +13,13 @@ public class Administrador extends Usuario {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public Sesion getSesion() {
+        return sesion;
+    }
+    
+        public String getNombre() {
+        return super.getNombreCompleto();
+    }
+    
+
 }

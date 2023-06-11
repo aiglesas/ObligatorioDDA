@@ -37,5 +37,22 @@ public class Transito {
         this.puesto = puesto;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public Puesto getPuesto() {
+        return puesto;
+    }
+
+    
 
 }

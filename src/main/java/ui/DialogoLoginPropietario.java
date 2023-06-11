@@ -20,7 +20,7 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     @Override
     protected LoginControlador crearControlador() {
- return new LoginPropietarioControlador(this);
+    return new LoginPropietarioControlador(this);
     }
 
     public void ejecutarCasoDeUsoInicial(Propietario propietario) {
@@ -34,8 +34,7 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     @Override
     public void cerrarVista() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+     }
 
     @Override
     public void ejecutarCasoDeUsoInicial(Usuario usuario) {

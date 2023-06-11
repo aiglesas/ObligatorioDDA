@@ -4,6 +4,7 @@
  */
 package ui;
 
+import dominio.Asignacion;
 import dominio.Bonificacion;
 import dominio.Notificacion;
 import dominio.Propietario;
@@ -21,7 +22,7 @@ public interface TableroPropietarioVista {
 
     void mostarVehiculos(ArrayList<Vehiculo> vehiculos);
 
-    void mostrarBonificaciones(ArrayList<Bonificacion> vehiculos);
+    void mostrarBonificaciones(ArrayList<Asignacion> asignaciones);
 
     void mostrarTransitos(ArrayList<Transito> vehiculos);
 
@@ -30,5 +31,9 @@ public interface TableroPropietarioVista {
     void mostrarNotificacion(ArrayList<Notificacion> vehiculos);
     
     void mostrarTablero(Propietario propietario);
+    
+    void borrarNotificaciones(Propietario propietario);
+    
+    void recargaSaldo(Propietario propietario);
 
 }
