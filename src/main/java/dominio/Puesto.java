@@ -15,7 +15,7 @@ public class Puesto {
     public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifas) {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.tarifas = tarifas;
+        this.tarifas = new ArrayList<Tarifa>();
     }
 
     public String getNombre() {

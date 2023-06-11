@@ -44,6 +44,9 @@ public class RecargaSaldo {
     public float getMonto() {
         return monto;
     }
+        public boolean getEstado() {
+        return estado;
+    }
 
     public void setMonto(float monto) {
         this.monto = monto;

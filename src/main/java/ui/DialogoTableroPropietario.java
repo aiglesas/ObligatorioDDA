@@ -4,8 +4,16 @@
  */
 package ui;
 
+import dominio.Asignacion;
+import dominio.Bonificacion;
+import dominio.Notificacion;
 import dominio.Propietario;
+import dominio.RecargaSaldo;
+import dominio.Transito;
 import dominio.Usuario;
+import dominio.Vehiculo;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import ui.controladores.TableroPropietarioControlador;
 
 /**
@@ -21,6 +29,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
      */
     public DialogoTableroPropietario(Usuario usuario) {
         initComponents();
+        this.controlador = new TableroPropietarioControlador(this, usuario);
     }
 
     /**
@@ -32,84 +41,446 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPropietario = new java.awt.Label();
         lblPropietario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblVehiculosCantidad = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaVehiculos = new javax.swing.JTable();
+        lblBonificacionesCantidad = new javax.swing.JLabel();
+        lblTransitosCantidad = new javax.swing.JLabel();
+        lblNotificacionesCantidad = new javax.swing.JLabel();
+        lblRecargasCantidad = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tTransitos = new javax.swing.JTable();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tBonificaciones = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tRecargas = new javax.swing.JTable();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tNotificaciones = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnRecargar = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtPropietario.setText("label1");
+        lblPropietario.setText("varPropietario");
 
-        lblPropietario.setText("jLabel1");
+        jLabel1.setText("varSaldo");
+
+        lblVehiculosCantidad.setText("CantidadVehiculos");
+
+        tablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaVehiculos);
+
+        jScrollPane2.setViewportView(jScrollPane1);
+
+        lblBonificacionesCantidad.setText("CantidadBonificaciones");
+
+        lblTransitosCantidad.setText("CantidadTransitos");
+
+        lblNotificacionesCantidad.setText("CantidadNotificaciones");
+
+        lblRecargasCantidad.setText("CantidadRecargas");
+
+        tTransitos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tTransitos);
+
+        jScrollPane8.setViewportView(jScrollPane4);
+
+        tBonificaciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tBonificaciones);
+
+        jScrollPane11.setViewportView(jScrollPane6);
+
+        tRecargas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(tRecargas);
+
+        jScrollPane3.setViewportView(jScrollPane7);
+
+        tNotificaciones.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(tNotificaciones);
+
+        jScrollPane12.setViewportView(jScrollPane5);
+
+        jLabel2.setText("Bonificaciones");
+
+        jLabel3.setText("Transitos");
+
+        jLabel4.setText("Recargas");
+
+        jLabel5.setText("Notificaciones");
+
+        jLabel6.setText("Vehiculos");
+
+        jLabel7.setText("Propietario");
+
+        jLabel8.setText("Saldo");
+
+        btnRecargar.setText("Recargar");
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecargarActionPerformed(evt);
+            }
+        });
+
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 228, Short.MAX_VALUE)
-                .addComponent(txtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblPropietario)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(34, 34, 34)
+                        .addComponent(lblPropietario)
+                        .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(71, 71, 71)
+                                    .addComponent(lblTransitosCantidad))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRecargasCantidad))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnRecargar)
+                                        .addGap(137, 137, 137))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblVehiculosCantidad)
+                                    .addComponent(lblBonificacionesCantidad)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(btnBorrar))
+                                .addGap(42, 42, 42)
+                                .addComponent(lblNotificacionesCantidad)))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane8)
+                            .addComponent(jScrollPane11)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE))
+                        .addContainerGap(41, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(txtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 241, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPropietario)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblVehiculosCantidad)
+                            .addComponent(jLabel6))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBonificacionesCantidad)
+                            .addComponent(jLabel2))
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTransitosCantidad)
+                            .addComponent(jLabel3))
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRecargasCantidad)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRecargar)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNotificacionesCantidad)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBorrar)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    @Override
-    public void mostarVehiculos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        controlador.borrarNotificacion();
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
-    @Override
-    public void mostrarBonificaciones(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarTransitos(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarRecargas(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarNotificacion(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mostrarNombreCompletoYSaldoActual(Propietario propietario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
+        controlador.recargaSaldo();
+    }//GEN-LAST:event_btnRecargarActionPerformed
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnRecargar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JLabel lblBonificacionesCantidad;
+    private javax.swing.JLabel lblNotificacionesCantidad;
     private javax.swing.JLabel lblPropietario;
-    private java.awt.Label txtPropietario;
+    private javax.swing.JLabel lblRecargasCantidad;
+    private javax.swing.JLabel lblTransitosCantidad;
+    private javax.swing.JLabel lblVehiculosCantidad;
+    private javax.swing.JTable tBonificaciones;
+    private javax.swing.JTable tNotificaciones;
+    private javax.swing.JTable tRecargas;
+    private javax.swing.JTable tTransitos;
+    private javax.swing.JTable tablaVehiculos;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void mostrarTablero(Propietario propietario) {
- lblPropietario.setText(String.format(propietario.getNombreCompleto()));    
+        lblPropietario.setText(String.format(propietario.getNombreCompleto()));
+        this.mostarVehiculos(propietario.getVehiculos());
+        this.mostrarBonificaciones(propietario.getAsignaciones());
+        this.mostrarRecargas(propietario.getRecargasSaldo());
+        this.mostrarNotificacion(propietario.getNotificaciones());
+        this.mostarVehiculos(propietario.getVehiculos());
+        this.mostrarTransitos(propietario.getTransitos());
+
+    }
+
+    @Override
+    public void mostarVehiculos(ArrayList<Vehiculo> vehiculos) {
+        if (vehiculos == null) {
+            lblVehiculosCantidad.setText("0");
+
+        } else {
+            lblVehiculosCantidad.setText(String.valueOf(vehiculos.size()));
+            DefaultTableModel model = tablaVehiculos();
+            tablaVehiculos.setModel(model);
+            for (Vehiculo v : vehiculos) {
+                model.addRow(new Object[]{v.getMatricula(), v.getModelo(), v.getColor(), v.getTransitos().size(), v.getMontoTotal()});
+            }
+        }
+
+    }
+
+    @Override
+    public void mostrarBonificaciones(ArrayList<Asignacion> asignaciones) {
+        if (asignaciones == null) {
+            lblBonificacionesCantidad.setText("0");
+        } else {
+            lblBonificacionesCantidad.setText(String.valueOf(asignaciones.size()));
+            lblBonificacionesCantidad.setText(String.valueOf(asignaciones.size()));
+            DefaultTableModel model = tablaBonificaciones();
+            tBonificaciones.setModel(model);
+            for (Asignacion a : asignaciones) {
+                model.addRow(new Object[]{a.getBonificacion().getNombre(), a.getPuesto().getNombre(), a.getFecha()});
+            }
+        }
+
+    }
+
+    @Override
+    public void mostrarTransitos(ArrayList<Transito> transitos) {
+        if (transitos == null) {
+            lblTransitosCantidad.setText("0");
+        } else {
+            lblTransitosCantidad.setText(String.valueOf(transitos.size()));
+            DefaultTableModel model = tablaTransitos();
+            tTransitos.setModel(model);
+            for (Transito t : transitos) {
+                model.addRow(new Object[]{t.getPuesto().getNombre(), t.getVehiculo().getMatricula(), t.getTarifa().getNombre(), t.getTarifa().getMonto(), t.getTotal(), t.getFecha()});
+            }
+        }
+
+    }
+
+    @Override
+    public void mostrarRecargas(ArrayList<RecargaSaldo> recargas) {
+        if (recargas == null) {
+            lblRecargasCantidad.setText("0");
+        } else {
+            lblRecargasCantidad.setText(String.valueOf(recargas.size()));
+            DefaultTableModel model = tablaRecargas();
+            tRecargas.setModel(model);
+            for (RecargaSaldo rs : recargas) {
+                model.addRow(new Object[]{rs.getFechaInicio(), rs.getMonto(), rs.getEstado(), rs.getAdministrador().getNombre()});
+            }
+
+        }
+
+    }
+
+    @Override
+    public void mostrarNotificacion(ArrayList<Notificacion> notificaciones) {
+        if (notificaciones == null) {
+            lblNotificacionesCantidad.setText("0");
+        } else {
+            lblNotificacionesCantidad.setText(String.valueOf(notificaciones.size()));
+            DefaultTableModel model = tablaNotificaciones();
+            tNotificaciones.setModel(model);
+            for (Notificacion n : notificaciones) {
+                model.addRow(new Object[]{n.getFecha(), n.getMensaje()});
+            }
+        }
+
+    }
+
+    public DefaultTableModel tablaVehiculos() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Matricula", "Modelo", "Color", "#Transitos", "Monto total"
+                }, 0
+        );
+    }
+
+    public DefaultTableModel tablaBonificaciones() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Nombre bonificación", "Puesto", "Fecha asignada"
+                }, 0
+        );
+    }
+
+    public DefaultTableModel tablaTransitos() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Puesto", "Matricula", "Tarifa", "Tarifa(monto)", "Bonific,", "Bonific.(monto)", "Monto pagado", "Fecha"
+                }, 0
+        );
+    }
+
+    public DefaultTableModel tablaRecargas() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Matricula", "Modelo", "Color", "#Transitos", "Monto total"
+                }, 0
+        );
+    }
+
+    public DefaultTableModel tablaNotificaciones() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Fecha", "Mensaje"
+                }, 0
+        );
+    }
+
+    @Override
+    public void borrarNotificaciones(Propietario propietario) {
+    }
+
+    @Override
+    public void recargaSaldo(Propietario propietario) {
+        new DialogoRecargaSaldo(propietario).setVisible(true);
     }
 }

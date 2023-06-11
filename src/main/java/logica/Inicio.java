@@ -35,27 +35,36 @@ public class Inicio {
     }
 
     public static void crearDatosDePrueba() {
+
+        Fachada fachada = Fachada.getInstance();
         //propietarios 
         Propietario propietario1 = new Propietario("51980285", "1234", "Andres Iglesias", 1000, 500);
         Propietario propietario2 = new Propietario("987654321", "1234", "Lucas Gonzales", 500, 200);
-        Fachada.getInstance().agregarPropietario(propietario1);
-        Fachada.getInstance().agregarPropietario(propietario2);
+        fachada.agregarPropietario(propietario1);
+        fachada.agregarPropietario(propietario2);
 
-//administradores
+        //administradores
         Administrador administrador1 = new Administrador("52401979", "admin", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
+      
         Fachada.getInstance().agregarAdministrador(administrador1);
-        
+      
         //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
         CategoriaVehiculo categoria2 = new CategoriaVehiculo("SUV");
-        
+
         //vehiculos
         Vehiculo vehiculo1 = new Vehiculo("ABC123", "Toyota Corolla", "Rojo", propietario1, categoria1);
         Vehiculo vehiculo2 = new Vehiculo("DEF456", "Honda CR-V", "Azul", propietario2, categoria2);
         Vehiculo vehiculo3 = new Vehiculo("GHI789", "Ford Mustang", "Negro", propietario1, categoria1);
-        
-        //tarifas
+
+        fachada.agregarVehiculo(vehiculo1);
+        fachada.agregarVehiculo(vehiculo2);
+
+        propietario1.agregarVehiculo(vehiculo1);
+        propietario1.agregarVehiculo(vehiculo2);
+
+//tarifas
         Tarifa tarifa1 = new Tarifa(new BigDecimal("500.00"));
         Tarifa tarifa2 = new Tarifa(new BigDecimal("250.00"));
         Tarifa tarifa3 = new Tarifa(new BigDecimal("100.00"));
@@ -70,6 +79,7 @@ public class Inicio {
         Puesto puesto1 = new Puesto("peaje pando", "pando", tarifas);
         Puesto puesto2 = new Puesto("peaje solis", "solis", tarifas);
         Puesto puesto3 = new Puesto("peaje rocha", "rocha", tarifas);
+      
         //transitos    
         Transito transito1 = new Transito(50, new Date(), vehiculo1, puesto1);
         Transito transito2 = new Transito(30, new Date(), vehiculo2, puesto2);
@@ -79,12 +89,13 @@ public class Inicio {
         transitosVehiculo2.add(transito2);
         transitosVehiculo2.add(transito3);
         transitosVehiculo2.add(transito4);
+      
         //bonificaciones    
+        ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
         Frecuentes bonificacionFrecuente = new Frecuentes("Frecuente", 20);
         Exonerados bonificacionExonerado = new Exonerados("Exonerado", 20);
         Trabajadores bonificacionTrabajador = new Trabajadores("Trabajador", 20);
 
-        ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
         bonificaciones.add(bonificacionFrecuente);
         bonificaciones.add(bonificacionExonerado);
         bonificaciones.add(bonificacionTrabajador);

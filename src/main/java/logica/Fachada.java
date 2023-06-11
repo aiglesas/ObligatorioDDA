@@ -85,6 +85,7 @@ public class Fachada {
     public void agregarPropietario(Propietario propietario) {
         servicioPropietario.agregarPropietario(propietario);
     }
+
     public void agregarAdministrador(Administrador administrador) {
         servicioAdministrador.agregarAdministrador(administrador);
     }
@@ -95,6 +96,12 @@ public class Fachada {
 
     public void setBonificaciones(ArrayList<Bonificacion> bonificaciones) {
         servicioBonificacion.setBonificaciones(bonificaciones);
+    }
+
+    
+        public void agregarVehiculo(Vehiculo vehiculo) {
+        servicioVehiculo.agregarVehiculo(vehiculo);
+        
     }
 
     public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionPropietario {

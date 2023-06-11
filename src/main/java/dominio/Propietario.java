@@ -20,15 +20,17 @@ public class Propietario extends Usuario {
 
     private ArrayList<Notificacion> notificaciones;
 
-    public Propietario(String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contrase�a, nombreCompleto);
+
+    public Propietario( String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
+        this.vehiculos = new ArrayList<Vehiculo>();
+        this.asignaciones = new ArrayList<Asignacion>();
         this.recargasSaldo = new ArrayList<RecargaSaldo>();
         this.notificaciones = new ArrayList<Notificacion>();
-        this.asignaciones = new ArrayList<Asignacion>();
-        this.vehiculos = new ArrayList<Vehiculo>();
     }
+    
 
     public float getSaldo() {
         return this.saldo;
@@ -117,8 +119,8 @@ public class Propietario extends Usuario {
     /**
      * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
      * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
-     * “Tu saldo actual es de $ “ + this.saldo + “ Te recomendamos hacer una
-     * recarga�?) } return saldo } return null
+     * â€œTu saldo actual es de $ â€œ + this.saldo + â€œ Te recomendamos hacer una
+     * recargaâ€?) } return saldo } return null
      */
     public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
         return null;
@@ -129,7 +131,7 @@ public class Propietario extends Usuario {
         if(buscarAsignacionPorPuesto(puesto) == null){
             this.asignaciones.add(asignacion);
         }else{
-            throw new ExcepcionPropietario("Ya tiene una bonificación asignada para ese puesto");
+            throw new ExcepcionPropietario("Ya tiene una bonificaciÃ³n asignada para ese puesto");
         }
     }
 
@@ -146,6 +148,10 @@ public class Propietario extends Usuario {
     @Override
     public boolean validarLogin(String ci, String password) {
         return false;
+    }
+    
+    public void agregarVehiculo(Vehiculo vehiculo){
+        vehiculos.add(vehiculo);
     }
     
 }

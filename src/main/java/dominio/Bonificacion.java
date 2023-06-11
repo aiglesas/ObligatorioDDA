@@ -6,6 +6,7 @@ public abstract class Bonificacion {
 
     private String nombre;
 
+
     private int descuento;
 
     public String getNombre() {
@@ -31,6 +32,14 @@ public abstract class Bonificacion {
 
     public abstract Float calcularMonto();
 
-    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getDescuento() {
+        return descuento;
+    }
+        
+        
 
 }

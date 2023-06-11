@@ -4,7 +4,6 @@ public class Exonerados extends Bonificacion {
 
     public Exonerados(String nombre, int descuento) {
         super(nombre, descuento);
-    }
 
     @Override
     public Float calcularMonto() {
