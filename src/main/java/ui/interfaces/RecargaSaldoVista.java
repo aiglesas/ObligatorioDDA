@@ -9,4 +9,6 @@ public interface RecargaSaldoVista {
     public abstract void recargarSaldo(String saldo);
 
     public abstract void mostrarMensajeDeError(String mensaje);
+    
+    public abstract void cerrarVista();
 }

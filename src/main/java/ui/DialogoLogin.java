@@ -6,7 +6,7 @@ package ui;
 
 import ui.interfaces.LoginVista;
 import javax.swing.JOptionPane;
-import ui.controladores.LoginControlador;
+import ui.controladores.ControladorLogin;
 
 /**
  *
@@ -14,7 +14,7 @@ import ui.controladores.LoginControlador;
  */
 public abstract class DialogoLogin extends javax.swing.JDialog implements LoginVista {
 
-    private LoginControlador controlador;
+    private ControladorLogin controlador;
     /**
      * Creates new form DialogoLogin
      */
@@ -40,6 +40,7 @@ public abstract class DialogoLogin extends javax.swing.JDialog implements LoginV
         txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
 
         lblUsuario.setText("Usuario");
 
@@ -112,7 +113,7 @@ public abstract class DialogoLogin extends javax.swing.JDialog implements LoginV
         controlador.login(nombreUsuario, password);
     }
 
-    protected abstract LoginControlador crearControlador();
+    protected abstract ControladorLogin crearControlador();
 
     @Override
     public void mostrarMensajeDeError(String mensaje) {

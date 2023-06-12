@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import ui.VentanaInicio;
+import ui.DialogoVentanaInicio;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Inicio {
 
     public static void main(String[] args) {
         crearDatosDePrueba();
-        new VentanaInicio().setVisible(true);
+        new DialogoVentanaInicio().setVisible(true);
     }
 
     public static void crearDatosDePrueba() {
@@ -40,12 +40,12 @@ public class Inicio {
         Fachada fachada = Fachada.getInstance();
         //propietarios 
         Propietario propietario1 = new Propietario("51980285", "1234", "Andres Iglesias", 1000, 500);
-        Propietario propietario2 = new Propietario("987654321", "1234", "Lucas Gonzales", 500, 200);
+        Propietario propietario2 = new Propietario("52401979", "1234", "Lucas Gonzalez", 500, 200);
         fachada.agregarPropietario(propietario1);
         fachada.agregarPropietario(propietario2);
 
         //administradores
-        Administrador administrador1 = new Administrador("52401979", "admin", "Luis Suarez");
+        Administrador administrador1 = new Administrador("52401979", "1234", "Luis Suarez");
         Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
 
         Fachada.getInstance().agregarAdministrador(administrador1);
@@ -65,7 +65,7 @@ public class Inicio {
         propietario1.agregarVehiculo(vehiculo1);
         propietario1.agregarVehiculo(vehiculo2);
 
-//tarifas
+        //tarifas
         Tarifa tarifa1 = new Tarifa(new BigDecimal("500.00"));
         Tarifa tarifa2 = new Tarifa(new BigDecimal("250.00"));
         Tarifa tarifa3 = new Tarifa(new BigDecimal("100.00"));
@@ -80,6 +80,9 @@ public class Inicio {
         Puesto puesto1 = new Puesto("peaje pando", "pando", tarifas);
         Puesto puesto2 = new Puesto("peaje solis", "solis", tarifas);
         Puesto puesto3 = new Puesto("peaje rocha", "rocha", tarifas);
+        fachada.agregarPuesto(puesto1);
+        fachada.agregarPuesto(puesto2);
+        fachada.agregarPuesto(puesto3);
 
         //transitos    
         Transito transito1 = new Transito(50, new Date(), vehiculo1, puesto1);

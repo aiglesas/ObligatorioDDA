@@ -1,11 +1,11 @@
 package ui.controladores;
 
-import ui.EmularTransito;
 import logica.Fachada;
+import ui.interfaces.EmularTransitoVista;
 
-public class EmularTransitoControlador {
+public class ControladorEmularTransito {
 
-    private EmularTransito emularTransito;
+    private EmularTransitoVista emularTransito;
 
     private Fachada fachada;
 

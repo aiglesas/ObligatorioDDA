@@ -6,7 +6,6 @@ public abstract class Bonificacion {
 
     private String nombre;
 
-
     private int descuento;
 
     public String getNombre() {

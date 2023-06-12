@@ -6,9 +6,9 @@ import dominio.exceptions.ExcepcionPropietario;
 import logica.Fachada;
 import ui.interfaces.LoginVista;
 
-public class LoginPropietarioControlador extends LoginControlador {
+public class ControladorLoginPropietario extends ControladorLogin {
 
-    public LoginPropietarioControlador(LoginVista vista) {
+    public ControladorLoginPropietario(LoginVista vista) {
         super(vista);
     }
 
@@ -21,8 +21,6 @@ public class LoginPropietarioControlador extends LoginControlador {
             }catch(ExcepcionPropietario exP){
                 
             }
-            
-        } else {
         }
         return null;
     }

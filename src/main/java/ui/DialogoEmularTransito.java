@@ -1,13 +1,14 @@
 package ui;
 
-import ui.controladores.EmularTransitoControlador;
+import ui.interfaces.EmularTransitoVista;
+import ui.controladores.ControladorEmularTransito;
 import dominio.Puesto;
 
-public class DialogoEmularTransito implements EmularTransito {
+public class DialogoEmularTransito implements EmularTransitoVista {
 
 
 	/**
-	 * @see ui.EmularTransito#mostrarEmuladorTransito()
+	 * @see ui.EmularTransitoVista#mostrarEmuladorTransito()
 	 */
 	public void mostrarEmuladorTransito() {
 
@@ -15,7 +16,7 @@ public class DialogoEmularTransito implements EmularTransito {
 
 
 	/**
-	 * @see ui.EmularTransito#mostrarPuestos()
+	 * @see ui.EmularTransitoVista#mostrarPuestos()
 	 */
 	public void mostrarPuestos() {
 
@@ -23,7 +24,7 @@ public class DialogoEmularTransito implements EmularTransito {
 
 
 	/**
-	 * @see ui.EmularTransito#mostrarTarifas(dominio.Puesto)
+	 * @see ui.EmularTransitoVista#mostrarTarifas(dominio.Puesto)
 	 */
 	public void mostrarTarifas(Puesto puesto) {
 
@@ -31,7 +32,7 @@ public class DialogoEmularTransito implements EmularTransito {
 
 
 	/**
-	 * @see ui.EmularTransito#registrarTransito()
+	 * @see ui.EmularTransitoVista#registrarTransito()
 	 */
 	public void registrarTransito() {
 
@@ -39,7 +40,7 @@ public class DialogoEmularTransito implements EmularTransito {
 
 
 	/**
-	 * @see ui.EmularTransito#cerrar()
+	 * @see ui.EmularTransitoVista#cerrar()
 	 */
 	public void cerrar() {
 
@@ -47,7 +48,7 @@ public class DialogoEmularTransito implements EmularTransito {
 
 
 	/**
-	 * @see ui.EmularTransito#mostrarMensajeDeError(java.lang.String)
+	 * @see ui.EmularTransitoVista#mostrarMensajeDeError(java.lang.String)
 	 */
 	public void mostrarMensajeDeError(String mensaje) {
 

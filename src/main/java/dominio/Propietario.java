@@ -87,8 +87,12 @@ public class Propietario extends Usuario {
         return transitos;
     }
     
-    public void asignarRecarga(RecargaSaldo recargaSaldo){
+    public void agregarRecarga(RecargaSaldo recargaSaldo){
         this.recargasSaldo.add(recargaSaldo);
+    }
+    
+    public void agregarAsignacion(Asignacion asignacion){
+        this.asignaciones.add(asignacion);
     }
 
     public void incrementarSaldo(float monto){
@@ -123,15 +127,6 @@ public class Propietario extends Usuario {
      */
     public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
         return null;
-    }
-
-    public void asignarBonificacion(Bonificacion bonificacion, Puesto puesto) throws ExcepcionPropietario{
-        Asignacion asignacion = new Asignacion(bonificacion, this, puesto);
-        if(buscarAsignacionPorPuesto(puesto) == null){
-            this.asignaciones.add(asignacion);
-        }else{
-            throw new ExcepcionPropietario("Ya tiene una bonificaciÃ³n asignada para ese puesto");
-        }
     }
 
     public Asignacion buscarAsignacionPorPuesto(Puesto puesto) {

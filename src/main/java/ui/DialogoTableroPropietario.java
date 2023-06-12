@@ -13,9 +13,10 @@ import dominio.RecargaSaldo;
 import dominio.Transito;
 import dominio.Usuario;
 import dominio.Vehiculo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import ui.controladores.TableroPropietarioControlador;
+import ui.controladores.ControladorTableroPropietario;
 
 /**
  *
@@ -23,14 +24,14 @@ import ui.controladores.TableroPropietarioControlador;
  */
 public class DialogoTableroPropietario extends javax.swing.JFrame implements TableroPropietarioVista {
 
-    private TableroPropietarioControlador controlador;
+    private ControladorTableroPropietario controlador;
 
     /**
      * Creates new form DialogoTableroPropietario
      */
     public DialogoTableroPropietario(Usuario usuario) {
         initComponents();
-        this.controlador = new TableroPropietarioControlador(this, usuario);
+        this.controlador = new ControladorTableroPropietario(this, usuario);
     }
 
     /**
@@ -413,11 +414,11 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
             lblRecargasCantidad.setText(String.valueOf(recargas.size()));
             DefaultTableModel model = tablaRecargas();
             tRecargas.setModel(model);
-
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             for (RecargaSaldo rs : recargas) {
                 String nombreAdmin = rs.getAdministrador() != null ? rs.getAdministrador().getNombreCompleto() : "No tiene administrador";
-                String aprobado = rs.getEstado() ? "Aprobado" : "Pendiente";
-                model.addRow(new Object[]{rs.getFechaInicio(), rs.getMonto(), aprobado, nombreAdmin});
+                String aprobado = rs.isEstado()? "Aprobado" : "Pendiente";
+                model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getMonto(), aprobado, nombreAdmin});
             }
 
         }
@@ -466,7 +467,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     public DefaultTableModel tablaRecargas() {
         return new DefaultTableModel(
                 new String[]{
-                    "Matricula", "Modelo", "Color", "#Transitos", "Monto total"
+                    "Fecha recarga", "Monto", "Estado", "Administrador"
                 }, 0
         );
     }

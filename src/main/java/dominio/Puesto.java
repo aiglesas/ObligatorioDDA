@@ -11,13 +11,20 @@ public class Puesto {
     private String direccion;
 
     private ArrayList<Tarifa> tarifas;
+    
+    private ArrayList<Asignacion> asignaciones;
 
     public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifas) {
         this.nombre = nombre;
         this.direccion = direccion;
-        this.tarifas = new ArrayList<Tarifa>();
+        this.tarifas = tarifas;
+        this.asignaciones = new ArrayList<Asignacion>();
     }
-
+    
+    public void agregarAsignacion(Asignacion asignacion){
+        this.asignaciones.add(asignacion);
+    }
+    
     public String getNombre() {
         return nombre;
     }

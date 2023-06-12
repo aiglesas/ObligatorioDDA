@@ -42,10 +42,10 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
 
         jLabel1 = new javax.swing.JLabel();
         cbBonificaciones = new javax.swing.JComboBox<>();
+        cbPuesto = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tfCedula = new java.awt.TextField();
-        cbPuesto = new javax.swing.JComboBox<>();
         btnBuscarCedula = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lblNombreCompleto = new javax.swing.JLabel();
@@ -55,10 +55,10 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         tAsignacionesPropietario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Asignar bonificacion");
 
         jLabel1.setText("Bonificaciones:");
 
-        cbBonificaciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbBonificaciones.setSelectedItem(null);
         cbBonificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,14 +66,11 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
             }
         });
 
+        cbPuesto.setSelectedItem(null);
+
         jLabel2.setText("Puesto:");
 
         jLabel3.setText("Cedula:");
-
-        tfCedula.setText("textField1");
-
-        cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbPuesto.setSelectedItem(null);
 
         btnBuscarCedula.setText("Buscar");
         btnBuscarCedula.addActionListener(new java.awt.event.ActionListener() {
@@ -94,13 +91,15 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         });
 
         btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         tAsignacionesPropietario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Bonificacion", "Puesto"
@@ -223,9 +222,10 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         asignarBonificacion(nombreBonificacion, nombrePuesto);
     }//GEN-LAST:event_btnAsignarBonificacionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        cerrar();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarBonificacion;
@@ -237,7 +237,6 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblNombreCompleto;
     private javax.swing.JTable tAsignacionesPropietario;
@@ -250,7 +249,7 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
 
     @Override
     public void asignarBonificacion(String nombreBonificacion, String nombrePuesto) {
-        controlador.asignarBonificacion(nombreBonificacion, nombrePuesto);
+        controlador.asignarBonificacion(nombreBonificacion, nombrePuesto); 
     }
 
     @Override
@@ -311,7 +310,11 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
             boolean[] canEdit = new boolean[]{
                 false, false
             };
-
         };
+    }
+
+    @Override
+    public void cerrar() {
+        dispose();
     }
 }
