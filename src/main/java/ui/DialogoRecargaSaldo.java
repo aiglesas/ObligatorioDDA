@@ -44,6 +44,7 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Recarga de saldo");
 
         jMonto.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas\\OneDrive - Facultad de Ingenieria - Universidad ORT Uruguay\\Escritorio\\DDA\\OBLIGATORIO\\Dinero.jpg")); // NOI18N
         jMonto.setText("monto");
@@ -53,7 +54,7 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
 
         jLabel1.setText("Monto a recargar:");
 
-        TFMontoRecargar.setText("textField1");
+        TFMontoRecargar.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,21 +68,21 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jMonto)
-                        .addGap(31, 31, 31)
-                        .addComponent(jNombreCompleto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TFMontoRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jMonto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jNombreCompleto)
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TFMontoRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,13 +91,13 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jMonto)
                     .addComponent(jNombreCompleto))
-                .addGap(90, 90, 90)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(TFMontoRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(41, 41, 41)
                 .addComponent(btnAceptar)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,7 +114,7 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     private javax.swing.JLabel jMonto;
     private javax.swing.JLabel jNombreCompleto;
     // End of variables declaration//GEN-END:variables
-        @Override
+    @Override
     public void recargarSaldo(String saldo) {
         controlador.recargarSaldo(saldo);
     }
@@ -131,4 +132,10 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     public void mostrarSueldoActual(String monto) {
         jMonto.setText(monto);
     }
+
+    @Override
+    public void cerrarVista() {
+        dispose();
+    }
+    
 }

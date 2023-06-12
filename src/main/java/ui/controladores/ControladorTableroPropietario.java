@@ -1,7 +1,6 @@
 package ui.controladores;
 
 import dominio.Propietario;
-import ui.TableroPropietario;
 import logica.Fachada;
 import common.Observable;
 import common.Evento;
@@ -9,7 +8,7 @@ import dominio.Usuario;
 import dominio.exceptions.ExcepcionPropietario;
 import ui.interfaces.TableroPropietarioVista;
 
-public class TableroPropietarioControlador {
+public class ControladorTableroPropietario {
 
     private Propietario propietario;
 
@@ -19,7 +18,7 @@ public class TableroPropietarioControlador {
 
     }
 
-    public TableroPropietarioControlador(TableroPropietarioVista vista, Usuario usuario) {
+    public ControladorTableroPropietario(TableroPropietarioVista vista, Usuario usuario) {
         try {
             this.propietario = Fachada.getInstance().buscarPropietario(usuario.getCi());
         } catch (ExcepcionPropietario exP) {
@@ -34,13 +33,6 @@ public class TableroPropietarioControlador {
 
     public void mostrarVehiculos() {
         vista.mostarVehiculos(propietario.getVehiculos());
-    }
-
-    /**
-     * @see common.Obervador#actualizar(common.Observable, common.Evento)
-     */
-    public void actualizar(Observable origen, Evento evento) {
-
     }
 
     public Propietario getPropietario() {

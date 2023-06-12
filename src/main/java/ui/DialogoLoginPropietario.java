@@ -8,8 +8,8 @@ import dominio.Propietario;
 import dominio.Usuario;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
-import ui.controladores.LoginControlador;
-import ui.controladores.LoginPropietarioControlador;
+import ui.controladores.ControladorLogin;
+import ui.controladores.ControladorLoginPropietario;
 
 public class DialogoLoginPropietario extends DialogoLogin {
 
@@ -18,9 +18,9 @@ public class DialogoLoginPropietario extends DialogoLogin {
     }
 
     @Override
-    protected LoginControlador crearControlador() {
+    protected ControladorLogin crearControlador() {
 
-    return new LoginPropietarioControlador(this);
+    return new ControladorLoginPropietario(this);
 
     }
 

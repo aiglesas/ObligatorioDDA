@@ -8,6 +8,7 @@ package ui;
 import ui.interfaces.EmularAprobacionRecargaVista;
 import dominio.Administrador;
 import dominio.RecargaSaldo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import ui.controladores.ControladorEmularAprobacionRecarga;
@@ -42,6 +43,9 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
         lblRecargasPendientes = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tRecargaSaldo = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Emular aprobacion de recarga");
 
         btnAprobar.setText("Aprobar");
         btnAprobar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +131,6 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAprobar;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblRecargasPendientes;
     private javax.swing.JTable tRecargaSaldo;
@@ -167,8 +170,9 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     public void mostrarRecargasPendientes(ArrayList<RecargaSaldo> recargasSaldo) {
         DefaultTableModel model = obtenerTablaPorDefecto();
         tRecargaSaldo.setModel(model);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         for (RecargaSaldo rs : recargasSaldo) {
-            model.addRow(new Object[]{rs.getFechaInicio().toString(), rs.getPropietario().getNombreCompleto(), rs.getMonto()});
+            model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getPropietario().getNombreCompleto(), rs.getMonto()});
         }
     }
 }

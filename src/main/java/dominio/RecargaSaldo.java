@@ -7,12 +7,12 @@ import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.Calendar;
 
-public class RecargaSaldo{
+public class RecargaSaldo {
 
     private Administrador administrador;
-    
+
     private Propietario propietario;
-    
+
     private Date fechaInicio;
 
     private Date fechaFin;
@@ -20,8 +20,8 @@ public class RecargaSaldo{
     private float monto;
 
     private boolean estado;
-    
-    public RecargaSaldo(float monto, Propietario propietario){
+
+    public RecargaSaldo(float monto, Propietario propietario) {
         this.propietario = propietario;
         this.fechaInicio = Calendar.getInstance().getTime();
         this.monto = monto;
@@ -47,9 +47,6 @@ public class RecargaSaldo{
     public float getMonto() {
         return monto;
     }
-        public boolean getEstado() {
-        return estado;
-    }
 
     public void setMonto(float monto) {
         this.monto = monto;
@@ -62,7 +59,7 @@ public class RecargaSaldo{
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
     public Administrador getAdministrador() {
         return this.administrador;
     }
@@ -78,10 +75,11 @@ public class RecargaSaldo{
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
-    
-    public void validar() throws ExcepcionRecargaSaldo{
-        if(!(getMonto() >= 1))
-        throw new ExcepcionRecargaSaldo("Monto invalido");
+
+    public void validar() throws ExcepcionRecargaSaldo {
+        if (!(getMonto() >= 1)) {
+            throw new ExcepcionRecargaSaldo("Monto invalido");
+        }
     }
 
     public void emularAprobacion(Administrador administrador) {

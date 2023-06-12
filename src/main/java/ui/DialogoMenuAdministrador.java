@@ -43,8 +43,9 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
         salir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menu del administrador");
 
-        EmularTransito.setText("File");
+        EmularTransito.setText("Menu");
 
         emularTransito.setText("Emular Transito");
         emularTransito.setName("emularTransito"); // NOI18N
@@ -130,6 +131,7 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
                 new DialogoAsignarBonificaciones().setVisible(true);
                 break;
             case "salir":
+                this.controlador.cerrarSesion();
                 dispose();
                 break;
         }

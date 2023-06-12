@@ -30,12 +30,12 @@ public class ServicioRecargaSaldo extends ObservableAbstracto {
     public void recargarSaldo(float recarga, Propietario propietario) throws ExcepcionRecargaSaldo {
         RecargaSaldo rs = new RecargaSaldo(recarga, propietario);
         rs.validar();
-        propietario.asignarRecarga(rs);
+        propietario.agregarRecarga(rs);
         this.recargasSaldo.add(rs);
         avisar(Evento.RecargaSaldo);
     }
     
-    public void emularAprobacion(Administrador administrador, RecargaSaldo recargaAprobada) {
+    public void emularAprobacionRecarga(Administrador administrador, RecargaSaldo recargaAprobada) {
         recargaAprobada.emularAprobacion(administrador);
         avisar(Evento.AprobarRecargaSaldo);
     }

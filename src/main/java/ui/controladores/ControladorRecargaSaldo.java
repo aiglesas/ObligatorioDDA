@@ -36,6 +36,7 @@ public class ControladorRecargaSaldo implements Observador {
         try {
             Float saldoFloat = Float.parseFloat(saldo);
             fachada.recargarSaldo(saldoFloat, this.propietario);
+            vista.cerrarVista();
         } catch (ExcepcionRecargaSaldo exRS) {
             this.vista.mostrarMensajeDeError(exRS.getMessage());
         }

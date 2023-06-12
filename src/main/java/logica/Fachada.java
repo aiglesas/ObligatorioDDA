@@ -13,8 +13,10 @@ import dominio.RecargaSaldo;
 import dominio.Transito;
 import dominio.Usuario;
 import dominio.Vehiculo;
+import dominio.exceptions.ExcepcionAsignacion;
 import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
+import dominio.exceptions.ExcepcionUsuario;
 import java.util.ArrayList;
 
 public class Fachada extends ObservableAbstracto implements Observador {
@@ -35,6 +37,8 @@ public class Fachada extends ObservableAbstracto implements Observador {
 
     private ServicioUsuario servicioUsuario;
 
+    private ServicioAsignacion servicioAsignacion;
+
     public Fachada() {
         this.servicioPropietario = new ServicioPropietario();
         this.servicioAdministrador = new ServicioAdministrador();
@@ -43,6 +47,8 @@ public class Fachada extends ObservableAbstracto implements Observador {
         this.servicioRecargaSaldo = new ServicioRecargaSaldo();
         this.servicioRecargaSaldo.agregar(this);
         this.servicioBonificacion = new ServicioBonificacion();
+        this.servicioAsignacion = new ServicioAsignacion();
+        this.servicioAsignacion.agregar(this);
     }
 
     public synchronized static Fachada getInstance() {
@@ -52,12 +58,20 @@ public class Fachada extends ObservableAbstracto implements Observador {
         return instacia;
     }
 
-    public Usuario LoginAdministrador(String ci, String password) {
+    public void cerrarSesion(Administrador administrador) {
+        servicioAdministrador.cerrarSesion(administrador);
+    }
+
+    public Administrador LoginAdministrador(String ci, String password) throws ExcepcionUsuario {
         return servicioAdministrador.login(ci, password);
     }
 
     public Usuario loginPropietario(String ci, String password) {
         return servicioPropietario.login(ci, password);
+    }
+
+    public void asignarBonificacion(Puesto puesto, Bonificacion bonificacion, Propietario propietario) throws ExcepcionAsignacion {
+        servicioAsignacion.asignarBonificacion(puesto, bonificacion, propietario);
     }
 
     public Asignacion obtenerAsignacion(Propietario propietario) {
@@ -108,10 +122,14 @@ public class Fachada extends ObservableAbstracto implements Observador {
         servicioRecargaSaldo.recargarSaldo(recarga, propietario);
     }
 
-    public void emularAprobacion(Administrador administrador, RecargaSaldo recargaAprobada){
-        servicioRecargaSaldo.emularAprobacion(administrador, recargaAprobada);
+    public void emularAprobacionRecarga(Administrador administrador, RecargaSaldo recargaAprobada) {
+        servicioRecargaSaldo.emularAprobacionRecarga(administrador, recargaAprobada);
     }
-    
+
+    public void agregarPuesto(Puesto puesto) {
+        servicioPuesto.agregarPuesto(puesto);
+    }
+
     @Override
     public void actualizar(Observable origen, Evento evento) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -119,7 +137,7 @@ public class Fachada extends ObservableAbstracto implements Observador {
 
     @Override
     public void actualizar(ObservableAbstracto origen, Evento evento) {
-        if (origen instanceof ServicioRecargaSaldo) {
+        if (origen instanceof ServicioRecargaSaldo || origen instanceof ServicioAsignacion) {
             avisar(evento);
         }
     }

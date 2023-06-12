@@ -8,12 +8,12 @@ package ui;
  *
  * @author usuario
  */
-public class VentanaInicio extends javax.swing.JFrame {
+public class DialogoVentanaInicio extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio() {
+    public DialogoVentanaInicio() {
         initComponents();
         this.setLocationRelativeTo(null);
     }

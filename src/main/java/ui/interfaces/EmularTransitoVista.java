@@ -1,8 +1,8 @@
-package ui;
+package ui.interfaces;
 
 import dominio.Puesto;
 
-public interface EmularTransito {
+public interface EmularTransitoVista {
 
 	public abstract void mostrarEmuladorTransito();
 

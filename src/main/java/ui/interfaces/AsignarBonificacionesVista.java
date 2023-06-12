@@ -25,4 +25,6 @@ public interface AsignarBonificacionesVista {
         public abstract void mostrarAsignaciones(ArrayList<Asignacion> asignaciones);
 
         public abstract void asignarBonificacion(String nombreBonificacion, String nombrePuesto);
+        
+        public abstract void cerrar();
 }

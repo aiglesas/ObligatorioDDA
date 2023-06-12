@@ -1,16 +1,19 @@
 package ui.controladores;
 
-import logica.Fachada;
-import common.Observable;
 import common.Evento;
+import common.Observable;
+import common.ObservableAbstracto;
+import logica.Fachada;
+import common.Observador;
 import dominio.Bonificacion;
 import dominio.Propietario;
 import dominio.Puesto;
+import dominio.exceptions.ExcepcionAsignacion;
 import dominio.exceptions.ExcepcionPropietario;
 import java.util.ArrayList;
 import ui.interfaces.AsignarBonificacionesVista;
 
-public class ControladorAsignarBonificacion {
+public class ControladorAsignarBonificacion implements Observador{
 
     private AsignarBonificacionesVista vista;
 
@@ -25,6 +28,7 @@ public class ControladorAsignarBonificacion {
     public ControladorAsignarBonificacion(AsignarBonificacionesVista vista) {
         this.vista = vista;
         this.fachada = Fachada.getInstance();
+        this.fachada.agregar(this);
         inicializar();
     }
 
@@ -38,22 +42,26 @@ public class ControladorAsignarBonificacion {
 
         if (!nombreBonificacion.equals("")) {
             if (!nombrePuesto.equals("")) {
-                Bonificacion bonificacion = null;
-                Puesto puesto = null;
-                for (Bonificacion b : this.bonificaciones) {
-                    if (b.getNombre().equals(nombreBonificacion)) {
-                        bonificacion = b;
+                if (propietario != null) {
+                    Bonificacion bonificacion = null;
+                    Puesto puesto = null;
+                    for (Bonificacion b : this.bonificaciones) {
+                        if (b.getNombre().equals(nombreBonificacion)) {
+                            bonificacion = b;
+                        }
                     }
-                }
-                for (Puesto p : this.puestos) {
-                    if (p.getNombre().equals(nombrePuesto)) {
-                        puesto = p;
+                    for (Puesto p : this.puestos) {
+                        if (p.getNombre().equals(nombrePuesto)) {
+                            puesto = p;
+                        }
                     }
-                }
-                try {
-                    propietario.asignarBonificacion(bonificacion, puesto);
-                } catch (ExcepcionPropietario exP) {
-                    vista.mostrarMensajeDeError(exP.getMessage());
+                    try {
+                        fachada.asignarBonificacion(puesto, bonificacion, propietario);
+                    } catch (ExcepcionAsignacion exP) {
+                        vista.mostrarMensajeDeError(exP.getMessage());
+                    }
+                } else {
+                    vista.mostrarMensajeDeError("Debe especificar un propietario");
                 }
             } else {
                 vista.mostrarMensajeDeError("Debe especificar un puesto");
@@ -71,5 +79,17 @@ public class ControladorAsignarBonificacion {
             vista.mostrarMensajeDeError(exP.getMessage());
         }
 
+    }
+
+    @Override
+    public void actualizar(Observable origen, Evento evento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void actualizar(ObservableAbstracto origen, Evento evento) {
+        if(evento.equals(Evento.AsignarBonificacion)){
+            vista.mostrarPropietario(propietario);
+        }
     }
 }

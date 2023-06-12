@@ -8,7 +8,7 @@ import dominio.Administrador;
 import dominio.Usuario;
 import java.awt.Frame;
 import ui.controladores.ControladorLoginAdministrador;
-import ui.controladores.LoginControlador;
+import ui.controladores.ControladorLogin;
 
 /**
  *
@@ -21,7 +21,7 @@ public class DialogoLoginAdministrador extends DialogoLogin {
     }    
 
     @Override
-    protected LoginControlador crearControlador() {
+    protected ControladorLogin crearControlador() {
         return new ControladorLoginAdministrador(this);
     }
 

@@ -8,6 +8,8 @@ import common.Observador;
 import dominio.Administrador;
 import dominio.RecargaSaldo;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import ui.interfaces.EmularAprobacionRecargaVista;
 
 public class ControladorEmularAprobacionRecarga implements Observador {
@@ -25,9 +27,6 @@ public class ControladorEmularAprobacionRecarga implements Observador {
         this.modelo = Fachada.getInstance();
         this.administrador = administrador;
         this.modelo.agregar(this);
-        // Se suscribe para saber cuando se asignó una nueva agenda. Ejemplo de ObservableConcreto wrapped by Usuario.
-        //Hay que ver como suscribirse, a quien ???
-        //this.propietario.agregar(this);
         inicializar();
     }
 
@@ -38,14 +37,15 @@ public class ControladorEmularAprobacionRecarga implements Observador {
 
     public void aprobarRecarga(int seleccionado) {
         RecargaSaldo recarga = this.recargasSaldo.get(seleccionado);
-        this.modelo.emularAprobacion(administrador, recarga);
+        this.modelo.emularAprobacionRecarga(administrador, recarga);
         recargasSaldo = this.modelo.getRecargasPendientes();
-        this.vista.mostrarRecargasPendientes(recargasSaldo);
+        Date fecha = Calendar.getInstance().getTime();
+        recarga.getPropietario().ingresarNotificacion(fecha, "Tu recarga de $" + recarga.getMonto() + " de la recarga fue aprobada");
     }
 
     @Override
     public void actualizar(ObservableAbstracto origen, Evento evento) {
-        if (evento.equals(Evento.RecargaSaldo)) {
+        if (evento.equals(Evento.RecargaSaldo) || evento.equals(Evento.AprobarRecargaSaldo)) {
             recargasSaldo = this.modelo.getRecargasPendientes();
             this.vista.mostrarRecargasPendientes(recargasSaldo);
         }

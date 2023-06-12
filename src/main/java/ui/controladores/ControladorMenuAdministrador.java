@@ -1,6 +1,7 @@
 package ui.controladores;
 
 import dominio.Administrador;
+import logica.Fachada;
 import ui.interfaces.MenuAdministradorVista;
 
 public class ControladorMenuAdministrador {
@@ -16,5 +17,9 @@ public class ControladorMenuAdministrador {
 
     public Administrador getAdministrador() {
         return this.administrador;
+    }
+    
+    public void cerrarSesion(){
+        Fachada.getInstance().cerrarSesion(administrador);
     }
 }

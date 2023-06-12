@@ -2,8 +2,6 @@ package dominio;
 
 public class Administrador extends Usuario {
 
-    private Sesion sesion;
-
     public Administrador(String ci, String contraseña, String nombreCompleto) {
         super(ci, contraseña, nombreCompleto);
     }
@@ -13,13 +11,8 @@ public class Administrador extends Usuario {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public Sesion getSesion() {
-        return sesion;
-    }
-    
-        public String getNombre() {
+    public String getNombre() {
         return super.getNombreCompleto();
     }
-    
 
 }
