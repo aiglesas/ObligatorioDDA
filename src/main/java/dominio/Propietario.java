@@ -29,8 +29,8 @@ public class Propietario extends Usuario implements Observable {
 
     private final ObservableConcreto observableWrapped = new ObservableConcreto();
 
-    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contraseña, nombreCompleto);
+    public Propietario(String ci, String contrasenia, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contrasenia, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.vehiculos = new ArrayList<Vehiculo>();
@@ -154,6 +154,8 @@ public class Propietario extends Usuario implements Observable {
         this.validarSaldo(montoTransito);
         this.setSaldo(this.saldo - montoTransito);
         this.validarSaldoMinimo();
+        observableWrapped.avisar(Evento.CrearTransito);
+
     }
 
     public void asignarBonificacion(Puesto puesto, Bonificacion bonificacion) throws ExcepcionAsignacion {
@@ -167,12 +169,13 @@ public class Propietario extends Usuario implements Observable {
     }
 
     public Asignacion buscarAsignacion(Puesto puesto) {
+        Asignacion asignacion = null;
         for (Asignacion a : this.asignaciones) {
             if (a.getPuesto().equals(puesto)) {
-                asignacion = a;
+                 asignacion = a;
             }
         }
-        return null;
+        return asignacion;
     }   
     public Vehiculo getVehiculo(String matricula) {
         Vehiculo vehiculo = null;

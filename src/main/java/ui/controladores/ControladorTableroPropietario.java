@@ -93,6 +93,9 @@ public class ControladorTableroPropietario implements Observador {
             case eliminarNotificaciones:
                 mostrarNotificaciones();
                 break;
+            case CrearTransito:
+                mostrarTransitos();
+                break;
         }
     }
 }

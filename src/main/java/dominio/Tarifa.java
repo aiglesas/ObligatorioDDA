@@ -12,9 +12,7 @@ public class Tarifa {
     }
     
     public Tarifa (){
-        
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -26,10 +24,4 @@ public class Tarifa {
     public CategoriaVehiculo getCategoriaVehiculo() {
         return categoria;
     }
-
-
-
-    
-    
-
 }

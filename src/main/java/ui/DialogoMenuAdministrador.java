@@ -152,7 +152,7 @@ public class DialogoMenuAdministrador extends javax.swing.JFrame implements Menu
 
     @Override
     public void mostrarDialogoEmularTransito() {
-        //new DialogoEmularTransito().setVisible(true);
+        new DialogoEmularTransito().setVisible(true);
     }
 
     @Override

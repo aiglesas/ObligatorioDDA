@@ -1,10 +1,6 @@
 package dominio;
 
-import common.Evento;
-import static common.Evento.RecargaSaldo;
-import common.ObservableAbstracto;
 import java.util.Date;
-import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.Calendar;
 

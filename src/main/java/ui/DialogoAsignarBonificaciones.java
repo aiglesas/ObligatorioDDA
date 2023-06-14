@@ -67,11 +67,6 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         cbBonificaciones.setSelectedItem(null);
 
         cbPuesto.setSelectedItem(null);
-        cbPuesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPuestoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Puesto:");
 

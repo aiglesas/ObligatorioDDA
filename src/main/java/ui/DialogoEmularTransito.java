@@ -17,7 +17,7 @@ import ui.interfaces.EmularTransitoVista;
  *
  * @author usuario
  */
-public class DialogoEmularTransito extends javax.swing.JDialog implements EmularTransitoVista {
+public class DialogoEmularTransito extends javax.swing.JFrame implements EmularTransitoVista {
 
     private ControladorEmularTransito controlador;
     private DefaultTableModel modelTablaTarifas = tablaTarifas();
@@ -30,7 +30,6 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
         initComponents();
         this.inicializar();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,7 +184,7 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-      this.registrarTransito();
+        this.registrarTransito();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void cbPuestosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbPuestosKeyPressed
@@ -193,11 +192,11 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
     }//GEN-LAST:event_cbPuestosKeyPressed
 
     private void cbPuestosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPuestosItemStateChanged
-          int stateChange = evt.getStateChange();
-            if (stateChange == ItemEvent.SELECTED) {
-                    String nombrePuesto =  cbPuestos.getSelectedItem().toString();;
-                    controlador.mostrarTarifas(nombrePuesto);
-            }
+        int stateChange = evt.getStateChange();
+        if (stateChange == ItemEvent.SELECTED) {
+            String nombrePuesto = cbPuestos.getSelectedItem().toString();
+            controlador.mostrarTarifas(nombrePuesto);
+        }
     }//GEN-LAST:event_cbPuestosItemStateChanged
 
     private void cbPuestosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbPuestosPropertyChange
@@ -221,34 +220,39 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
     private javax.swing.JTextField txtMatricula;
     // End of variables declaration//GEN-END:variables
 
-    public void inicializar(){
+    public void inicializar() {
         this.controlador.mostrarPuestos();
         tTarifa.setModel(modelTablaTarifas);
     }
-    
+
     @Override
     public void mostrarEmuladorTransito() {
     }
 
     @Override
     public void mostrarTarifas(Puesto puesto) {
-       ArrayList<Tarifa> tarifas = puesto.getTarifas();
+        ArrayList<Tarifa> tarifas = puesto.getTarifas();
         if (tarifas != null) {
+            // Eliminar todas las filas existentes
+            int rowCount = modelTablaTarifas.getRowCount();
+            for (int i = rowCount - 1; i >= 0; i--) {
+                modelTablaTarifas.removeRow(i);
+            }
 
             for (Tarifa t : tarifas) {
-                modelTablaTarifas.addRow(new Object[]{t.getCategoriaVehiculo().getNombre() , t.getMonto()});
+                modelTablaTarifas.addRow(new Object[]{t.getCategoriaVehiculo().getNombre(), t.getMonto()});
             }
-        } 
+        }
     }
 
     @Override
-    public void registrarTransito()  {
-        controlador.registrarTransito(txtMatricula.getText());         
+    public void registrarTransito() {
+        controlador.registrarTransito(txtMatricula.getText());
     }
 
     @Override
     public void cerrar() {
-    dispose();
+        dispose();
     }
 
     @Override
@@ -258,13 +262,12 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
 
     @Override
     public void mostrarPuestos(ArrayList<Puesto> puestos) {
-              for (Puesto p : puestos) {
+        for (Puesto p : puestos) {
             cbPuestos.addItem(p.getNombre());
         }
     }
- 
-    
-        public DefaultTableModel tablaTarifas() {
+
+    public DefaultTableModel tablaTarifas() {
         return new DefaultTableModel(
                 new String[]{
                     "Categoria", "Monto"

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import logica.Fachada;
 import ui.interfaces.EmularTransitoVista;
 
-public class ControladorEmularTransito {
+public class ControladorEmularTransito  {
 
     private EmularTransitoVista vista;
 

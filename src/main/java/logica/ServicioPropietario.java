@@ -62,7 +62,10 @@ public class ServicioPropietario extends ServicioUsuario {
     public Vehiculo getVehiculo(String matricula) throws ExcepcionVehiculo {
         Vehiculo vehiculo = null;
         for (Propietario p : propietarios) {
-            vehiculo = p.getVehiculo(matricula);
+            Vehiculo vehiculoAux = p.getVehiculo(matricula);
+            if(vehiculoAux != null){
+                vehiculo = vehiculoAux;
+            }
         }
         if (vehiculo == null) {
             throw new ExcepcionVehiculo("No existe el vehículo");

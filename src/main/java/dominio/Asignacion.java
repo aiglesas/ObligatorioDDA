@@ -53,22 +53,4 @@ public class Asignacion {
         this.puesto = puesto;
     }
     
-    public void tieneBonificacion(Puesto puesto, Propietario propietario){
-//        for(Asignacion a : asignaciones){
-//            if(puesto)
-//        }
-        
-    }
-    
-    /**
-     * return this.getBonificacion().getDescuento();
-     */
-    public int getDescuentoBonificacion(Transito transito) {return 0;
-            
-    }
-
-    public String getNombreBonificacion() {
-        return null;
-    }
-
 }

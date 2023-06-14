@@ -16,9 +16,6 @@ public class Transito implements Comparable<Transito>{
     private float total;
     private float montoBonificacion;
 
-    /**
-     * return puesto.getTarifa(this.getVehiculo().getCategoria());
-     */
     public Transito(Date fecha, Vehiculo vehiculo, Puesto puesto, Tarifa tarifa, Bonificacion bonificacion) {
         this.fecha = fecha;
         this.vehiculo = vehiculo;

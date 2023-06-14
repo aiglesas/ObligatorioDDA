@@ -1,6 +1,4 @@
 package dominio;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public abstract class Bonificacion {
