@@ -54,17 +54,17 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         jScrollPane2 = new javax.swing.JScrollPane();
         tAsignacionesPropietario = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Asignar bonificacion");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Bonificaciones:");
 
         cbBonificaciones.setSelectedItem(null);
-        cbBonificaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbBonificacionesActionPerformed(evt);
-            }
-        });
 
         cbPuesto.setSelectedItem(null);
         cbPuesto.addActionListener(new java.awt.event.ActionListener() {
@@ -207,10 +207,6 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbBonificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBonificacionesActionPerformed
-
-    }//GEN-LAST:event_cbBonificacionesActionPerformed
-
     private void btnBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCedulaActionPerformed
         buscarCedula(tfCedula.getText());
     }//GEN-LAST:event_btnBuscarCedulaActionPerformed
@@ -228,13 +224,12 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
     }//GEN-LAST:event_btnAsignarBonificacionActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        cerrar();
+        this.controlador.cerrar();
     }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void cbPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPuestoActionPerformed
-
+  
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.controlador.cerrar();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarBonificacion;
@@ -272,6 +267,7 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         for (Bonificacion b : bonificaciones) {
             cbBonificaciones.addItem(b.getNombre());
         }
+        cbBonificaciones.setSelectedItem(null);
     }
 
     @Override
@@ -279,6 +275,7 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         for (Puesto p : puestos) {
             cbPuesto.addItem(p.getNombre());
         }
+        cbPuesto.setSelectedItem(null);
     }
 
     @Override
@@ -312,10 +309,6 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
                     "Bonificacion", "Puesto"
                 }, 0
         ) {
-            Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class
-            };
-
             boolean[] canEdit = new boolean[]{
                 false, false
             };

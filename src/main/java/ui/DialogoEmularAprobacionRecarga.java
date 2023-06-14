@@ -10,6 +10,7 @@ import dominio.Administrador;
 import dominio.RecargaSaldo;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ui.controladores.ControladorEmularAprobacionRecarga;
 
@@ -46,6 +47,11 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Emular aprobacion de recarga");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         btnAprobar.setText("Aprobar");
         btnAprobar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,8 +131,12 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     }//GEN-LAST:event_btnAprobarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        cerrar();
+        this.controlador.salirYDesubscribir();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.controlador.salirYDesubscribir();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAprobar;
@@ -135,25 +145,6 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
     private javax.swing.JLabel lblRecargasPendientes;
     private javax.swing.JTable tRecargaSaldo;
     // End of variables declaration//GEN-END:variables
-
-    public DefaultTableModel obtenerTablaPorDefecto() {
-        return new DefaultTableModel(
-                new String[]{
-                    "Fecha", "Propietario", "Monto"
-                }, 0
-        ) {
-            Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean[]{
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-        };
-    }
 
     @Override
     public void aprobarRecarga() {
@@ -174,5 +165,22 @@ public class DialogoEmularAprobacionRecarga extends javax.swing.JFrame implement
         for (RecargaSaldo rs : recargasSaldo) {
             model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getPropietario().getNombreCompleto(), rs.getMonto()});
         }
+    }
+
+    @Override
+    public void mostrarMensajeDeError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error de datos", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public DefaultTableModel obtenerTablaPorDefecto() {
+        return new DefaultTableModel(
+                new String[]{
+                    "Fecha", "Propietario", "Monto"
+                }, 0
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false
+            };
+        };
     }
 }

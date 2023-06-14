@@ -14,7 +14,7 @@ import ui.controladores.ControladorMenuAdministrador;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class DialogoMenuAdministrador extends javax.swing.JDialog implements MenuAdministradorVista {
+public class DialogoMenuAdministrador extends javax.swing.JFrame implements MenuAdministradorVista {
 
     /**
      * Creates new form DialogoMenuAdministrador
@@ -35,6 +35,7 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         EmularTransito = new javax.swing.JMenu();
         emularTransito = new javax.swing.JMenuItem();
@@ -42,8 +43,24 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
         asignarBonificacion = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenuItem();
 
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu del administrador");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         EmularTransito.setText("Menu");
 
@@ -98,51 +115,60 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
             .addGap(0, 277, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void emularTransitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emularTransitoActionPerformed
-        navegar(emularTransito.getName());
+        this.controlador.navegar(emularTransito.getName());
     }//GEN-LAST:event_emularTransitoActionPerformed
 
     private void emularAprobacionRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emularAprobacionRecargaActionPerformed
-        navegar(emularAprobacionRecarga.getName());
+        this.controlador.navegar(emularAprobacionRecarga.getName());
     }//GEN-LAST:event_emularAprobacionRecargaActionPerformed
 
     private void asignarBonificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarBonificacionActionPerformed
-        navegar(asignarBonificacion.getName());
+        this.controlador.navegar(asignarBonificacion.getName());
     }//GEN-LAST:event_asignarBonificacionActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        navegar(salir.getName());
+        this.controlador.navegar(salir.getName());
     }//GEN-LAST:event_salirActionPerformed
 
-    @Override
-    public void navegar(String opcion) {
-        Administrador admin = this.controlador.getAdministrador();
-        switch (opcion) {
-            case "emularTransito":
-                new DialogoEmularTransito().setVisible(true);
-                break;
-            case "emularAprobacionRecarga":
-                new DialogoEmularAprobacionRecarga(admin).setVisible(true);
-                break;
-            case "asignarBonificacion":
-                new DialogoAsignarBonificaciones().setVisible(true);
-                break;
-            case "salir":
-                this.controlador.cerrarSesion();
-                dispose();
-                break;
-        }
-    }
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.controlador.navegar(salir.getName());
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu EmularTransito;
     private javax.swing.JMenuItem asignarBonificacion;
     private javax.swing.JMenuItem emularAprobacionRecarga;
     private javax.swing.JMenuItem emularTransito;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem salir;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mostrarDialogoEmularTransito() {
+        //new DialogoEmularTransito().setVisible(true);
+    }
+
+    @Override
+    public void mostrarDialogoEmularAprobacionRecarga(Administrador administrador) {
+        new DialogoEmularAprobacionRecarga(administrador).setVisible(true);
+    }
+
+    @Override
+    public void mostrarDialogoAsignarBonificaciones() {
+        new DialogoAsignarBonificaciones().setVisible(true);
+    }
+
+    @Override
+    public void salir() {
+        dispose();
+    }
+    
+    
 }

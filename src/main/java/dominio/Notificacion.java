@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.Date;
 
-public class Notificacion {
+public class Notificacion implements Comparable<Notificacion> {
 
     private Date fecha;
 
@@ -27,6 +27,11 @@ public class Notificacion {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    @Override
+    public int compareTo(Notificacion n) {
+        return this.fecha.compareTo(n.fecha);
     }
 
 }

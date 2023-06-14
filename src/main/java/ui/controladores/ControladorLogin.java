@@ -18,6 +18,7 @@ public abstract class ControladorLogin {
         try {
             Usuario usuario = loginGenerico(userName, password);
             vista.ejecutarCasoDeUsoInicial(usuario);
+            vista.cerrarVista();
         } catch (ExcepcionUsuario exU) {
             vista.mostrarMensajeDeError(exU.getMessage());
         }

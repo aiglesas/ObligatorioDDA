@@ -18,6 +18,7 @@ public class Asignacion {
         this.propietario = propietario;
         this.puesto = puesto;
         this.fecha = Calendar.getInstance().getTime();
+        this.puesto.agregarAsignacion(this);
     }
     
     public Date getFecha() {

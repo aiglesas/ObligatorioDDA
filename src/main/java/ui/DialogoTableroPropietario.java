@@ -29,9 +29,9 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     /**
      * Creates new form DialogoTableroPropietario
      */
-    public DialogoTableroPropietario(Propietario usuario) {
+    public DialogoTableroPropietario(Propietario propietario) {
         initComponents();
-        this.controlador = new ControladorTableroPropietario(this, usuario);
+        this.controlador = new ControladorTableroPropietario(this, propietario);
     }
 
     /**
@@ -74,8 +74,14 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
         jLabel8 = new javax.swing.JLabel();
         btnRecargar = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         lblPropietario.setText("varPropietario");
 
@@ -85,15 +91,20 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         tablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Matricula", "Modelo", "Color", "#Transitos", "Monto total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaVehiculos);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -108,13 +119,13 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         tTransitos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Puesto", "Matricula", "Tarifa", "Tarifa(Monot)", "Bonificacion", "Bonific.(Monot)", "Monto pagado", "Fecha"
             }
         ));
         jScrollPane4.setViewportView(tTransitos);
@@ -123,15 +134,20 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         tBonificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre Bonificacion", "Puesto", "Fecha Asignada"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(tBonificaciones);
 
         jScrollPane11.setViewportView(jScrollPane6);
@@ -144,7 +160,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha recarga", "Monto", "Estado", "Administrador"
             }
         ));
         jScrollPane7.setViewportView(tRecargas);
@@ -153,13 +169,13 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         tNotificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha", "Mensaje"
             }
         ));
         jScrollPane5.setViewportView(tNotificaciones);
@@ -170,15 +186,16 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         jLabel3.setText("Transitos");
 
-        jLabel4.setText("Recargas");
+        jLabel4.setText("Recargas de saldo");
 
         jLabel5.setText("Notificaciones");
+        jLabel5.setToolTipText("");
 
         jLabel6.setText("Vehiculos");
 
-        jLabel7.setText("Propietario");
+        jLabel7.setText("Propietario:");
 
-        jLabel8.setText("Saldo");
+        jLabel8.setText("Dinero");
 
         btnRecargar.setText("Recargar");
         btnRecargar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,59 +211,61 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
             }
         });
 
+        btnCerrar.setText("cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(lblSaldo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(lblPropietario)
+                .addGap(193, 193, 193))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addComponent(lblSaldo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(34, 34, 34)
-                        .addComponent(lblPropietario)
-                        .addGap(83, 83, 83))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(71, 71, 71)
-                                    .addComponent(lblTransitosCantidad))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblRecargasCantidad))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnRecargar)
-                                        .addGap(137, 137, 137))))
+                            .addComponent(lblVehiculosCantidad)
+                            .addComponent(lblBonificacionesCantidad)
+                            .addComponent(lblTransitosCantidad)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblNotificacionesCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(lblRecargasCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblVehiculosCantidad)
-                                    .addComponent(lblBonificacionesCantidad)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(btnBorrar))
-                                .addGap(42, 42, 42)
-                                .addComponent(lblNotificacionesCantidad)))
-                        .addGap(54, 54, 54)
+                                    .addComponent(btnRecargar)
+                                    .addComponent(btnBorrar))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane8)
                             .addComponent(jScrollPane11)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE))
-                        .addContainerGap(41, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(513, 513, 513)
+                        .addComponent(btnCerrar)))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,43 +280,43 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblVehiculosCantidad)
-                            .addComponent(jLabel6))))
+                            .addComponent(jLabel6))
+                        .addGap(36, 36, 36)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblBonificacionesCantidad)
+                            .addComponent(jLabel2))
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTransitosCantidad)
+                            .addComponent(jLabel3))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRecargasCantidad)
+                            .addComponent(jLabel4)
+                            .addComponent(btnRecargar))
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNotificacionesCantidad)
+                            .addComponent(jLabel5)
+                            .addComponent(btnBorrar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblBonificacionesCantidad)
-                            .addComponent(jLabel2))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTransitosCantidad)
-                            .addComponent(jLabel3))
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblRecargasCantidad)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRecargar)
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNotificacionesCantidad)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBorrar)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
+                .addComponent(btnCerrar)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,11 +329,20 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
         controlador.recargaSaldo();
     }//GEN-LAST:event_btnRecargarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        controlador.cerrar();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        controlador.cerrar();
+    }//GEN-LAST:event_formWindowClosed
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnRecargar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -349,24 +377,26 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
     @Override
     public void mostrarTablero(Propietario propietario) {
-        lblPropietario.setText(propietario.getNombreCompleto());        
-        lblSaldo.setText(Float.toString(propietario.getSaldo()));
-        this.mostarVehiculos(propietario.getVehiculos());
+        this.mostrarNombreCompleto(propietario.getNombreCompleto());
+        this.mostrarSaldo(Float.toString(propietario.getSaldo()));
+        this.mostrarVehiculos(propietario.getVehiculos());
         this.mostrarBonificaciones(propietario.getAsignaciones());
-        this.mostrarRecargas(propietario.getRecargasSaldo());
-        this.mostrarNotificacion(propietario.getNotificaciones());
-        this.mostarVehiculos(propietario.getVehiculos());
-        this.mostrarTransitos(propietario.getTransitos());
-
     }
 
     @Override
-    public void mostarVehiculos(ArrayList<Vehiculo> vehiculos) {
-        if (vehiculos == null) {
-            lblVehiculosCantidad.setText("0");
+    public void mostrarNombreCompleto(String nombreCompleto) {
+        lblPropietario.setText(nombreCompleto);
+    }
 
-        } else {
-            lblVehiculosCantidad.setText(String.valueOf(vehiculos.size()));
+    @Override
+    public void mostrarSaldo(String monto) {
+        lblSaldo.setText(monto);
+    }
+
+    @Override
+    public void mostrarVehiculos(ArrayList<Vehiculo> vehiculos) {
+        lblVehiculosCantidad.setText(Integer.toString(vehiculos.size()));
+        if (vehiculos.size() != 0) {
             DefaultTableModel model = tablaVehiculos();
             tablaVehiculos.setModel(model);
             for (Vehiculo v : vehiculos) {
@@ -377,47 +407,40 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
     @Override
     public void mostrarBonificaciones(ArrayList<Asignacion> asignaciones) {
-        if (asignaciones == null) {
-            lblBonificacionesCantidad.setText("0");
-        } else {
-            lblBonificacionesCantidad.setText(String.valueOf(asignaciones.size()));
-            lblBonificacionesCantidad.setText(String.valueOf(asignaciones.size()));
+        lblBonificacionesCantidad.setText(Integer.toString(asignaciones.size()));
+        if (asignaciones.size() != 0) {
             DefaultTableModel model = tablaBonificaciones();
             tBonificaciones.setModel(model);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             for (Asignacion a : asignaciones) {
-                model.addRow(new Object[]{a.getBonificacion().getNombre(), a.getPuesto().getNombre(), a.getFecha()});
+                model.addRow(new Object[]{a.getBonificacion().getNombre(), a.getPuesto().getNombre(), formato.format(a.getFecha())});
             }
         }
-
     }
 
     @Override
     public void mostrarTransitos(ArrayList<Transito> transitos) {
-        if (transitos == null) {
-            lblTransitosCantidad.setText("0");
-        } else {
-            lblTransitosCantidad.setText(String.valueOf(transitos.size()));
+        lblTransitosCantidad.setText(Integer.toString(transitos.size()));
+        if (transitos.size() != 0) {
             DefaultTableModel model = tablaTransitos();
             tTransitos.setModel(model);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             for (Transito t : transitos) {
-                model.addRow(new Object[]{t.getPuesto().getNombre(), t.getVehiculo().getMatricula(), t.getTarifa().getNombre(), t.getTarifa().getMonto(), t.getTotal(), t.getFecha()});
+                model.addRow(new Object[]{t.getPuesto().getNombre(), t.getVehiculo().getMatricula(), t.getTarifa().getNombre(), t.getTarifa().getMonto(), t.getTotal(), formato.format(t.getFecha())});
             }
         }
-
     }
 
     @Override
     public void mostrarRecargas(ArrayList<RecargaSaldo> recargas) {
-        if (recargas == null) {
-            lblRecargasCantidad.setText("0");
-        } else {
-            lblRecargasCantidad.setText(String.valueOf(recargas.size()));
+        lblRecargasCantidad.setText(Integer.toString(recargas.size()));
+        if (recargas.size() != 0) {
             DefaultTableModel model = tablaRecargas();
             tRecargas.setModel(model);
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             for (RecargaSaldo rs : recargas) {
                 String nombreAdmin = rs.getAdministrador() != null ? rs.getAdministrador().getNombreCompleto() : "No tiene administrador";
-                String aprobado = rs.isEstado()? "Aprobado" : "Pendiente";
+                String aprobado = rs.isEstado() ? "Aprobado" : "Pendiente";
                 model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getMonto(), aprobado, nombreAdmin});
             }
         }
@@ -425,17 +448,32 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
     @Override
     public void mostrarNotificacion(ArrayList<Notificacion> notificaciones) {
-        if (notificaciones == null) {
-            lblNotificacionesCantidad.setText("0");
-        } else {
-            lblNotificacionesCantidad.setText(String.valueOf(notificaciones.size()));
-            DefaultTableModel model = tablaNotificaciones();
-            tNotificaciones.setModel(model);
-            for (Notificacion n : notificaciones) {
-                model.addRow(new Object[]{n.getFecha(), n.getMensaje()});
+        lblNotificacionesCantidad.setText(Integer.toString(notificaciones.size()));
+        if (notificaciones.size() != 0) {
+            {
+                DefaultTableModel model = tablaNotificaciones();
+                tNotificaciones.setModel(model);
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                for (Notificacion n : notificaciones) {
+                    model.addRow(new Object[]{formato.format(n.getFecha()), n.getMensaje()});
+                }
             }
-        }
 
+        }
+    }
+
+    @Override
+    public void borrarNotificaciones(Propietario propietario) {
+    }
+
+    @Override
+    public void recargaSaldo(Propietario propietario) {
+        new DialogoRecargaSaldo(this, false, propietario).setVisible(true);
+    }
+
+    @Override
+    public void cerrar() {
+        dispose();
     }
 
     public DefaultTableModel tablaVehiculos() {
@@ -449,7 +487,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     public DefaultTableModel tablaBonificaciones() {
         return new DefaultTableModel(
                 new String[]{
-                    "Nombre bonificación", "Puesto", "Fecha asignada"
+                    "Nombre bonificaciÃ³n", "Puesto", "Fecha asignada"
                 }, 0
         );
     }
@@ -476,14 +514,5 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                     "Fecha", "Mensaje"
                 }, 0
         );
-    }
-
-    @Override
-    public void borrarNotificaciones(Propietario propietario) {
-    }
-
-    @Override
-    public void recargaSaldo(Propietario propietario) {
-        new DialogoRecargaSaldo(propietario).setVisible(true);
     }
 }

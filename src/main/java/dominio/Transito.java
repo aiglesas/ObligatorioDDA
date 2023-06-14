@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.time.ZoneId;
 
-public class Transito {
+public class Transito implements Comparable<Transito>{
 
     private Date fecha;
     private Vehiculo vehiculo;
@@ -65,8 +65,12 @@ public class Transito {
         return puesto;
     }
 
+    @Override
+    public int compareTo(Transito t) {
+        return this.fecha.compareTo(t.fecha);
+    }
+
     public void setTotal(float total) {
         this.total = total;
     }
-
 }
