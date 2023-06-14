@@ -34,7 +34,8 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     @Override
     public void ejecutarCasoDeUsoInicial(Usuario usuario) {
-        new DialogoTableroPropietario((Usuario) usuario).setVisible(true);
+        Propietario p = (Propietario) usuario;
+        new DialogoTableroPropietario( p).setVisible(true);
     }
 
 }

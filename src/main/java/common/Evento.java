@@ -1,5 +1,5 @@
 package common;
 
 public enum Evento {
-    RecargaSaldo, AprobarRecargaSaldo, AsignarBonificacion
+    RecargaSaldo, AprobarRecargaSaldo, AsignarBonificacion, CrearTransito
 }

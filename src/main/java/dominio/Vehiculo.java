@@ -1,6 +1,5 @@
 package dominio;
-
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Vehiculo {
@@ -56,8 +55,8 @@ public class Vehiculo {
     }
 
 
-	public BigDecimal calcularMontoTotalEnTransitos() {
-		return null;
+	public int calcularMontoTotalEnTransitos() {
+	 return 0;
 	}
 
 
@@ -75,10 +74,19 @@ public class Vehiculo {
         public float getMontoTotal(){
             long montoTotal = 0;        
             for (Transito t : transitos) {
-                montoTotal += t.calcularMontoTotal();
+                montoTotal += t.getTotal();
             }
             return montoTotal;
         }
 
+        public boolean tieneTransitoDelDia(Puesto puesto){
+            boolean tieneTransitoDelDia = false;
+            for(Transito t :this.transitos){
+                if(t.getFechaParseada().compareTo(LocalDate.now()) == 0 && t.getPuesto().equals(puesto)){
+                    tieneTransitoDelDia = true;
+                }
+            }
+            return tieneTransitoDelDia;
+        }
 
 }

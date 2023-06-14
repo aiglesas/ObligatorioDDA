@@ -122,7 +122,7 @@ public class DialogoMenuAdministrador extends javax.swing.JDialog implements Men
         Administrador admin = this.controlador.getAdministrador();
         switch (opcion) {
             case "emularTransito":
-                new DialogoEmularTransito();
+                new DialogoEmularTransito().setVisible(true);
                 break;
             case "emularAprobacionRecarga":
                 new DialogoEmularAprobacionRecarga(admin).setVisible(true);
