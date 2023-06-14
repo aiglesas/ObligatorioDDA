@@ -1,5 +1,6 @@
 package dominio;
 
+import common.Evento;
 import static common.Evento.RecargaSaldo;
 import common.ObservableAbstracto;
 import java.util.Date;
@@ -7,7 +8,7 @@ import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.util.Calendar;
 
-public class RecargaSaldo {
+public class RecargaSaldo implements Comparable<RecargaSaldo>{
 
     private Administrador administrador;
 
@@ -21,11 +22,12 @@ public class RecargaSaldo {
 
     private boolean estado;
 
-    public RecargaSaldo(float monto, Propietario propietario) {
+    public RecargaSaldo(float monto, Propietario propietario) throws ExcepcionRecargaSaldo{
         this.propietario = propietario;
         this.fechaInicio = Calendar.getInstance().getTime();
         this.monto = monto;
         this.estado = false;
+        this.validar();
     }
 
     public Date getFechaInicio() {
@@ -82,12 +84,17 @@ public class RecargaSaldo {
         }
     }
 
-    public void emularAprobacion(Administrador administrador) {
+    public void aprobacionRecarga(Administrador administrador) {
         setEstado(true);
         getPropietario().incrementarSaldo(getMonto());
         setAdministrador(administrador);
         Date fechaActual = Calendar.getInstance().getTime();
         setFechaFin(fechaActual);
-        getPropietario().ingresarNotificacion(fechaActual, fechaActual + " Tu recarga de $" + getMonto() + " fue aprobada");
+        getPropietario().ingresarNotificacion(fechaActual, "Tu recarga de $" + getMonto() + " fue aprobada");
+    }
+
+    @Override
+    public int compareTo(RecargaSaldo rs) {
+        return this.fechaInicio.compareTo(rs.fechaInicio);
     }
 }

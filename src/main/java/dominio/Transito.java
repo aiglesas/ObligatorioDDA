@@ -3,7 +3,7 @@ package dominio;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Transito {
+public class Transito implements Comparable<Transito>{
 
 	private float total;
 	private Date fecha;
@@ -53,6 +53,8 @@ public class Transito {
         return puesto;
     }
 
-    
-
+    @Override
+    public int compareTo(Transito t) {
+        return this.fecha.compareTo(t.fecha);
+    }
 }

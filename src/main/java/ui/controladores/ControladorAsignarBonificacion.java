@@ -13,7 +13,7 @@ import dominio.exceptions.ExcepcionPropietario;
 import java.util.ArrayList;
 import ui.interfaces.AsignarBonificacionesVista;
 
-public class ControladorAsignarBonificacion implements Observador{
+public class ControladorAsignarBonificacion {
 
     private AsignarBonificacionesVista vista;
 
@@ -28,7 +28,6 @@ public class ControladorAsignarBonificacion implements Observador{
     public ControladorAsignarBonificacion(AsignarBonificacionesVista vista) {
         this.vista = vista;
         this.fachada = Fachada.getInstance();
-        this.fachada.agregar(this);
         inicializar();
     }
 
@@ -56,9 +55,10 @@ public class ControladorAsignarBonificacion implements Observador{
                         }
                     }
                     try {
-                        fachada.asignarBonificacion(puesto, bonificacion, propietario);
-                    } catch (ExcepcionAsignacion exP) {
-                        vista.mostrarMensajeDeError(exP.getMessage());
+                        propietario.asignarBonificacion(puesto, bonificacion);
+                        vista.mostrarPropietario(propietario);
+                    } catch (ExcepcionAsignacion exA) {
+                        vista.mostrarMensajeDeError(exA.getMessage());
                     }
                 } else {
                     vista.mostrarMensajeDeError("Debe especificar un propietario");
@@ -81,15 +81,7 @@ public class ControladorAsignarBonificacion implements Observador{
 
     }
 
-    @Override
-    public void actualizar(Observable origen, Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void actualizar(ObservableAbstracto origen, Evento evento) {
-        if(evento.equals(Evento.AsignarBonificacion)){
-            vista.mostrarPropietario(propietario);
-        }
+    public void cerrar() {
+        vista.cerrar();
     }
 }

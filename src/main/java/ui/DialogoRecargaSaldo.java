@@ -23,7 +23,8 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     /**
      * Creates new form DialogoRecargaSaldo
      */
-    public DialogoRecargaSaldo(Propietario propietario) {
+    public DialogoRecargaSaldo(javax.swing.JFrame parent, boolean modal, Propietario propietario) {
+        super(parent, modal);
         initComponents();
         this.controlador = new ControladorRecargaSaldo(this, propietario);
     }
@@ -45,6 +46,11 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Recarga de saldo");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jMonto.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lucas\\OneDrive - Facultad de Ingenieria - Universidad ORT Uruguay\\Escritorio\\DDA\\OBLIGATORIO\\Dinero.jpg")); // NOI18N
         jMonto.setText("monto");
@@ -107,6 +113,10 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
         recargarSaldo(TFMontoRecargar.getText());
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        this.controlador.desuscribirYSalir();
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField TFMontoRecargar;
     private javax.swing.JButton btnAceptar;
@@ -132,7 +142,7 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     public void mostrarSueldoActual(String monto) {
         jMonto.setText(monto);
     }
-
+ 
     @Override
     public void cerrarVista() {
         dispose();

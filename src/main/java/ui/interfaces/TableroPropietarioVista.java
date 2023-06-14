@@ -19,8 +19,12 @@ import java.util.ArrayList;
  * @author usuario
  */
 public interface TableroPropietarioVista {
+    
+    void mostrarNombreCompleto(String nombreCompleto);
+    
+    void mostrarSaldo(String monto);
 
-    void mostarVehiculos(ArrayList<Vehiculo> vehiculos);
+    void mostrarVehiculos(ArrayList<Vehiculo> vehiculos);
 
     void mostrarBonificaciones(ArrayList<Asignacion> asignaciones);
 
@@ -35,5 +39,7 @@ public interface TableroPropietarioVista {
     void borrarNotificaciones(Propietario propietario);
     
     void recargaSaldo(Propietario propietario);
+    
+    void cerrar();
 
 }

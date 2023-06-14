@@ -41,14 +41,40 @@ public class Inicio {
         //propietarios 
         Propietario propietario1 = new Propietario("51980285", "1234", "Andres Iglesias", 1000, 500);
         Propietario propietario2 = new Propietario("52401979", "1234", "Lucas Gonzalez", 500, 200);
+        Propietario propietario3 = new Propietario("123456789", "1234", "Pepito Lays", 500, 200);
         fachada.agregarPropietario(propietario1);
         fachada.agregarPropietario(propietario2);
-
+        fachada.agregarPropietario(propietario3);
+        
+        //RecargaSaldo
+        try{
+            propietario1.recargarSaldo(200);
+            propietario1.recargarSaldo(250);
+            propietario1.recargarSaldo(432);
+            propietario1.recargarSaldo(678);
+            propietario1.recargarSaldo(222.43f);
+            propietario2.recargarSaldo(350);
+            propietario2.recargarSaldo(457);
+            propietario2.recargarSaldo(876);
+            propietario2.recargarSaldo(987);
+            propietario2.recargarSaldo(123);
+            propietario2.recargarSaldo(245.45f);
+            propietario3.recargarSaldo(123);
+            propietario3.recargarSaldo(456);
+            propietario3.recargarSaldo(800);
+            propietario3.recargarSaldo(190.23f);
+            propietario3.recargarSaldo(123.13f);
+        }catch(ExcepcionRecargaSaldo exrs){
+            
+        }
         //administradores
         Administrador administrador1 = new Administrador("52401979", "1234", "Luis Suarez");
-        Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
+        Administrador administrador2 = new Administrador("52401979", "1234", "Gonzalo Bergesio");
+        Administrador administrador3 = new Administrador("12345678", "1234", "Gonzalo Farolini");
 
         Fachada.getInstance().agregarAdministrador(administrador1);
+        Fachada.getInstance().agregarAdministrador(administrador2);
+        Fachada.getInstance().agregarAdministrador(administrador3);
 
         //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
@@ -96,22 +122,17 @@ public class Inicio {
 
         //bonificaciones    
         ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
-        Frecuentes bonificacionFrecuente = new Frecuentes("Frecuente", 20);
-        Exonerados bonificacionExonerado = new Exonerados("Exonerado", 20);
-        Trabajadores bonificacionTrabajador = new Trabajadores("Trabajador", 20);
+        Frecuentes bonificacionFrecuente = new Frecuentes("Frecuente", 50);
+        Exonerados bonificacionExonerado = new Exonerados("Exonerado", 100);
+        Trabajadores bonificacionTrabajador = new Trabajadores("Trabajador", 80);
 
         bonificaciones.add(bonificacionFrecuente);
         bonificaciones.add(bonificacionExonerado);
         bonificaciones.add(bonificacionTrabajador);
         Fachada.getInstance().setBonificaciones(bonificaciones);
 
-        //RecargasSaldo
-        try {
-            Fachada.getInstance().recargarSaldo(200, propietario1);
-            Fachada.getInstance().recargarSaldo(350, propietario2);
-        } catch (ExcepcionRecargaSaldo exRS) {
 
-        }
+
 
     }
 }

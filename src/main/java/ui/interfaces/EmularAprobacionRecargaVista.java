@@ -9,5 +9,7 @@ public interface EmularAprobacionRecargaVista {
 
 	public abstract void aprobarRecarga();
 
+        public abstract void mostrarMensajeDeError(String mensaje);
+        
 	public abstract void cerrar();
 }

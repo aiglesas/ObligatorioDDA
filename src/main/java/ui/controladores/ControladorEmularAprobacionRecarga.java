@@ -6,6 +6,7 @@ import common.Evento;
 import common.ObservableAbstracto;
 import common.Observador;
 import dominio.Administrador;
+import dominio.Propietario;
 import dominio.RecargaSaldo;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,45 +17,70 @@ public class ControladorEmularAprobacionRecarga implements Observador {
 
     private final EmularAprobacionRecargaVista vista;
 
-    private Fachada modelo;
+    private Fachada fachada;
 
     private final Administrador administrador;
 
     private ArrayList<RecargaSaldo> recargasSaldo;
 
+    private ArrayList<Propietario> propietarios;
+
     public ControladorEmularAprobacionRecarga(EmularAprobacionRecargaVista vista, Administrador administrador /*,Propietario propietario*/) {
         this.vista = vista;
-        this.modelo = Fachada.getInstance();
+        this.fachada = Fachada.getInstance();
         this.administrador = administrador;
-        this.modelo.agregar(this);
+        propietarios = fachada.getPropietarios();
+        recargasSaldo = new ArrayList<RecargaSaldo>();
         inicializar();
     }
 
     private void inicializar() {
-        recargasSaldo = this.modelo.getRecargasPendientes();
+        subscribirAPropietarios();
+        actualizarRecargasPendientes();
+    }
+
+    public void mostrarRecargasPendientes() {
         this.vista.mostrarRecargasPendientes(recargasSaldo);
     }
 
     public void aprobarRecarga(int seleccionado) {
-        RecargaSaldo recarga = this.recargasSaldo.get(seleccionado);
-        this.modelo.emularAprobacionRecarga(administrador, recarga);
-        recargasSaldo = this.modelo.getRecargasPendientes();
-        Date fecha = Calendar.getInstance().getTime();
-        recarga.getPropietario().ingresarNotificacion(fecha, "Tu recarga de $" + recarga.getMonto() + " de la recarga fue aprobada");
+        if (seleccionado != -1) {
+            RecargaSaldo recarga = this.recargasSaldo.get(seleccionado);
+            recarga.aprobacionRecarga(administrador);
+        } else {
+            vista.mostrarMensajeDeError("Debe seleccionar una recarga");
+        }
+    }
+
+    public void salirYDesubscribir() {
+        desSubscribirAPropietarios();
+        this.vista.cerrar();
+    }
+
+    public void actualizarRecargasPendientes() {
+        recargasSaldo.clear();
+        for (Propietario p : propietarios) {
+            recargasSaldo.addAll(p.getRecargasPendientes());
+        }
+        mostrarRecargasPendientes();
+    }
+
+    public void subscribirAPropietarios() {
+        for (Propietario p : propietarios) {
+            p.agregar(this);
+        }
+    }
+
+    public void desSubscribirAPropietarios() {
+        for (Propietario p : propietarios) {
+            p.quitar(this);
+        }
     }
 
     @Override
     public void actualizar(ObservableAbstracto origen, Evento evento) {
         if (evento.equals(Evento.RecargaSaldo) || evento.equals(Evento.AprobarRecargaSaldo)) {
-            recargasSaldo = this.modelo.getRecargasPendientes();
-            this.vista.mostrarRecargasPendientes(recargasSaldo);
+            actualizarRecargasPendientes();
         }
-
     }
-
-    @Override
-    public void actualizar(Observable origen, Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

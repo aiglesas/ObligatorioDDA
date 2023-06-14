@@ -15,10 +15,23 @@ public class ControladorMenuAdministrador {
         this.vista = menuAdministrador;
     }
 
-    public Administrador getAdministrador() {
-        return this.administrador;
+    public void navegar(String opcion) {
+        switch (opcion) {
+            case "emularTransito":
+                vista.mostrarDialogoEmularTransito();
+                break;
+            case "emularAprobacionRecarga":
+                vista.mostrarDialogoEmularAprobacionRecarga(administrador);
+                break;
+            case "asignarBonificacion":
+                vista.mostrarDialogoAsignarBonificaciones();
+                break;
+            case "salir":
+                cerrarSesion();
+                vista.salir();
+                break;
+        }
     }
-    
     public void cerrarSesion(){
         Fachada.getInstance().cerrarSesion(administrador);
     }

@@ -19,22 +19,12 @@ public class DialogoLoginPropietario extends DialogoLogin {
 
     @Override
     protected ControladorLogin crearControlador() {
-
-    return new ControladorLoginPropietario(this);
-
+        return new ControladorLoginPropietario(this);
     }
-
-    public void ejecutarCasoDeUsoInicial(Propietario propietario) {
-        new DialogoTableroPropietario(propietario).setVisible(true);
-    }
-
-    @Override
-    public void cerrarVista() {
-     }
 
     @Override
     public void ejecutarCasoDeUsoInicial(Usuario usuario) {
-        new DialogoTableroPropietario((Usuario) usuario).setVisible(true);
+        new DialogoTableroPropietario((Propietario) usuario).setVisible(true);
     }
 
 }

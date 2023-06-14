@@ -1,12 +1,17 @@
 package dominio;
 
+import common.Evento;
 import common.Observable;
+import common.ObservableConcreto;
+import common.Observador;
+import dominio.exceptions.ExcepcionAsignacion;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionRecargaSaldo;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.ArrayList;
 
-public class Propietario extends Usuario {
+public class Propietario extends Usuario implements Observable {
 
     private float saldo;
 
@@ -20,8 +25,9 @@ public class Propietario extends Usuario {
 
     private ArrayList<Notificacion> notificaciones;
 
+    private final ObservableConcreto observableWrapped = new ObservableConcreto();
 
-    public Propietario( String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
+    public Propietario(String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
         super(ci, contrase�a, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
@@ -30,7 +36,7 @@ public class Propietario extends Usuario {
         this.recargasSaldo = new ArrayList<RecargaSaldo>();
         this.notificaciones = new ArrayList<Notificacion>();
     }
-    
+
     public float getSaldo() {
         return this.saldo;
     }
@@ -86,24 +92,46 @@ public class Propietario extends Usuario {
         }
         return transitos;
     }
-    
-    public void agregarRecarga(RecargaSaldo recargaSaldo){
+
+    public ArrayList<RecargaSaldo> getRecargasPendientes() {
+        ArrayList<RecargaSaldo> rs = new ArrayList<>();
+        for (RecargaSaldo reSal : this.recargasSaldo) {
+            if (!reSal.isEstado()) {
+                rs.add(reSal);
+            }
+        }
+        return rs;
+    }
+
+    public void recargarSaldo(float recarga) throws ExcepcionRecargaSaldo {
+        RecargaSaldo rs = new RecargaSaldo(recarga, this);
+        agregarRecarga(rs);
+        observableWrapped.avisar(Evento.RecargaSaldo);
+    }
+
+    public void agregarRecarga(RecargaSaldo recargaSaldo) {
         this.recargasSaldo.add(recargaSaldo);
     }
-    
-    public void agregarAsignacion(Asignacion asignacion){
+
+    public void agregarAsignacion(Asignacion asignacion) {
         this.asignaciones.add(asignacion);
     }
 
-    public void incrementarSaldo(float monto){
+    public void incrementarSaldo(float monto) {
         this.saldo += monto;
+        observableWrapped.avisar(Evento.AprobarRecargaSaldo);
     }
-    
+
     public void ingresarNotificacion(Date fecha, String mensaje) {
         Notificacion n = new Notificacion(fecha, mensaje);
         notificaciones.add(n);
+        observableWrapped.avisar(Evento.ingresoNotifiacion);
     }
-
+    
+    public void eliminarNotificaciones(){
+        this.notificaciones.clear();
+        observableWrapped.avisar(Evento.eliminarNotificaciones);
+    } 
     /**
      * return saldo<saldoMinimo
      */
@@ -122,30 +150,49 @@ public class Propietario extends Usuario {
     /**
      * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
      * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
-     * â€œTu saldo actual es de $ â€œ + this.saldo + â€œ Te recomendamos hacer una
-     * recargaâ€?) } return saldo } return null
+     * â€œTu saldo actual es de $ â€œ + this.saldo + â€œ Te
+     * recomendamos hacer una recargaâ€?) } return saldo } return null
      */
     public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
         return null;
     }
 
-    public Asignacion buscarAsignacionPorPuesto(Puesto puesto) {
-        Asignacion asignacion = null;
+    public void asignarBonificacion(Puesto puesto, Bonificacion bonificacion) throws ExcepcionAsignacion {
+        if (buscarAsignacion(puesto) == null) {
+            Asignacion asignacion = new Asignacion(bonificacion, this, puesto);
+            this.agregarAsignacion(asignacion);
+            observableWrapped.avisar(Evento.AsignarBonificacion);
+        } else {
+            throw new ExcepcionAsignacion("Ya tiene una bonificacionn asignada para ese puesto");
+        }
+    }
+
+    public Asignacion buscarAsignacion(Puesto puesto) {
         for (Asignacion a : this.asignaciones) {
-            if(a.getPuesto().equals(puesto)){
-               asignacion = a;
+            if (a.getPuesto().equals(puesto)) {
+                return a;
             }
         }
         return null;
-    }
+    }   
 
     @Override
     public boolean validarLogin(String ci, String password) {
         return false;
     }
-    
-    public void agregarVehiculo(Vehiculo vehiculo){
+
+    public void agregarVehiculo(Vehiculo vehiculo) {
         vehiculos.add(vehiculo);
     }
-    
+
+    @Override
+    public void agregar(Observador o) {
+        this.observableWrapped.agregar(o);
+    }
+
+    @Override
+    public boolean quitar(Observador o) {
+        return this.observableWrapped.quitar(o);
+    }
+
 }
