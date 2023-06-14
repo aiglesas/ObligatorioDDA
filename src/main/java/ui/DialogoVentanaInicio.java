@@ -33,6 +33,7 @@ public class DialogoVentanaInicio extends javax.swing.JFrame {
         mAdministrador = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ventana de inicio");
 
         jMenu1.setText("Login");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {

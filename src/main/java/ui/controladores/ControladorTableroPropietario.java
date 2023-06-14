@@ -5,10 +5,12 @@ import common.ObservableAbstracto;
 import dominio.Propietario;
 import common.Observador;
 import dominio.Notificacion;
+import dominio.Puesto;
 import dominio.RecargaSaldo;
 import dominio.Transito;
 import java.util.ArrayList;
 import java.util.Collections;
+import logica.Fachada;
 import ui.interfaces.TableroPropietarioVista;
 
 public class ControladorTableroPropietario implements Observador {
@@ -17,11 +19,15 @@ public class ControladorTableroPropietario implements Observador {
 
     private TableroPropietarioVista vista;
 
+    private Fachada fachada;
+
     public ControladorTableroPropietario(TableroPropietarioVista vista, Propietario propietario) {
         this.propietario = propietario;
         this.vista = vista;
+        this.fachada = Fachada.getInstance();
         this.inicializador();
         this.propietario.agregar(this);
+        this.subscribir();
     }
 
     public void inicializador() {
@@ -43,17 +49,17 @@ public class ControladorTableroPropietario implements Observador {
         vista.mostrarRecargas(rss);
     }
 
-    public void mostrarNotificaciones() { 
+    public void mostrarNotificaciones() {
         ArrayList<Notificacion> notificaciones = propietario.getNotificaciones();
         Collections.sort(notificaciones);
         vista.mostrarNotificacion(notificaciones);
     }
-    
-    public void mostrarBonificaciones(){
+
+    public void mostrarBonificaciones() {
         vista.mostrarBonificaciones(propietario.getAsignaciones());
     }
-    
-    public void mostrarSaldo(){
+
+    public void mostrarSaldo() {
         vista.mostrarSaldo(Float.toString(propietario.getSaldo()));
     }
 
@@ -68,10 +74,23 @@ public class ControladorTableroPropietario implements Observador {
     public void borrarNotificaiones() {
         vista.borrarNotificaciones(propietario);
     }
-    
-    public void cerrar(){
+
+    public void cerrar() {
         propietario.quitar(this);
+        desSubscribir();
         vista.cerrar();
+    }
+
+    public void subscribir() {
+        for (Puesto p : fachada.getPuestos()) {
+            p.agregar(this);
+        }
+    }
+
+    public void desSubscribir() {
+        for (Puesto p : fachada.getPuestos()) {
+            p.quitar(this);
+        }
     }
 
     @Override
@@ -87,11 +106,15 @@ public class ControladorTableroPropietario implements Observador {
             case AsignarBonificacion:
                 mostrarBonificaciones();
                 break;
-            case ingresoNotifiacion:
+            case IngresoNotifiacion:
                 mostrarNotificaciones();
                 break;
-            case eliminarNotificaciones:
+            case EliminarNotificaciones:
                 mostrarNotificaciones();
+                break;
+            case CrearTransito:
+                mostrarSaldo();
+                mostrarTransitos();
                 break;
         }
     }

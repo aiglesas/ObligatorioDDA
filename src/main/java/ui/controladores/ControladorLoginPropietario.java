@@ -1,8 +1,7 @@
 package ui.controladores;
 
-import dominio.Propietario;
 import dominio.Usuario;
-import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionUsuario;
 import logica.Fachada;
 import ui.interfaces.LoginVista;
 
@@ -13,7 +12,7 @@ public class ControladorLoginPropietario extends ControladorLogin {
     }
 
     @Override
-    protected Usuario loginGenerico(String userName, String password) {
+    protected Usuario loginGenerico(String userName, String password) throws ExcepcionUsuario{
         return Fachada.getInstance().loginPropietario(userName, password);
     }
 

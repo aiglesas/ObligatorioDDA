@@ -47,7 +47,7 @@ public class ServicioAdministrador extends ServicioUsuario {
 
     public Administrador login(String cedula, String password) throws ExcepcionUsuario {
         for (Administrador a : administradores) {
-            if (a.getCi().equals(cedula) && a.getContraseña().equals(password)) {
+            if (a.validarLogin(cedula, password)) {
                 if (buscarSesion(a) != null) {
                     throw new ExcepcionUsuario("Ud. Ya está logueado");
                 }

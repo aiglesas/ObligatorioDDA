@@ -10,16 +10,13 @@ import ui.interfaces.LoginVista;
 
 public class ControladorLoginAdministrador extends ControladorLogin {
 
-    private Fachada fachada;
-
     public ControladorLoginAdministrador(LoginVista vista) {
         super(vista);
-        this.fachada = Fachada.getInstance();
     }
 
     @Override
     protected Usuario loginGenerico(String ci, String password) throws ExcepcionUsuario {
-        return fachada.LoginAdministrador(ci, password);
+        return Fachada.getInstance().LoginAdministrador(ci, password);
     }
 
 }

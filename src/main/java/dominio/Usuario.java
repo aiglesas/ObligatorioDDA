@@ -4,7 +4,7 @@ public abstract class Usuario {
 
     private String ci;
 
-    private String contraseña;
+    private String contrasenia;
 
     private String nombreCompleto;
 
@@ -16,12 +16,12 @@ public abstract class Usuario {
         this.ci = ci;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombreCompleto() {
@@ -32,12 +32,13 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Usuario(String ci, String contraseña, String nombreCompleto) {
+    public Usuario(String ci, String contrasenia, String nombreCompleto) {
         this.ci = ci;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
         this.nombreCompleto = nombreCompleto;
     }
 
-    public abstract boolean validarLogin(String ci, String password);
-
+    public boolean validarLogin(String ci, String password){
+        return this.ci.equals(ci) && this.contrasenia.equals(password);
+    }
 }

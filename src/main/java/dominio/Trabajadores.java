@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Trabajadores extends Bonificacion {
     
-    public Trabajadores(String nombre, int descuento) {
+    public Trabajadores(String nombre, float descuento) {
         super(nombre, descuento);
         
     }
@@ -18,7 +18,7 @@ public class Trabajadores extends Bonificacion {
         float montoBonificacion = 0;
         Calendar calendar = Calendar.getInstance();
         if(calendar.get(Calendar.DAY_OF_WEEK)>1 && calendar.get(Calendar.DAY_OF_WEEK) < 7){
-           montoBonificacion = transito.getTarifa().getMonto() * (this.getDescuento()/100 );
+           montoBonificacion = transito.getTarifa().getMonto() * (this.getDescuento()/100);
         }
         
         return montoBonificacion;

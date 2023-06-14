@@ -29,8 +29,8 @@ public class Propietario extends Usuario implements Observable {
 
     private final ObservableConcreto observableWrapped = new ObservableConcreto();
 
-    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contraseña, nombreCompleto);
+    public Propietario(String ci, String contrasenia, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contrasenia, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.vehiculos = new ArrayList<Vehiculo>();
@@ -127,17 +127,16 @@ public class Propietario extends Usuario implements Observable {
     public void ingresarNotificacion(Date fecha, String mensaje) {
         Notificacion n = new Notificacion(fecha, mensaje);
         notificaciones.add(n);
-        observableWrapped.avisar(Evento.ingresoNotifiacion);
+        observableWrapped.avisar(Evento.IngresoNotifiacion);
     }
 
-    public void eliminarNotificaciones(){
+    public void eliminarNotificaciones() {
         this.notificaciones.clear();
-        observableWrapped.avisar(Evento.eliminarNotificaciones);
-    } 
+        observableWrapped.avisar(Evento.EliminarNotificaciones);
+    }
 
     public void validarSaldo(Float montoTransito) throws ExcepcionPropietario {
-        if (this.saldo > montoTransito) {
-        } else {
+        if (this.saldo < montoTransito) {
             throw new ExcepcionPropietario("Saldo insuficiente:  " + this.getSaldo());
         }
     }
@@ -145,8 +144,6 @@ public class Propietario extends Usuario implements Observable {
     public void validarSaldoMinimo() {
         if (this.saldo < this.saldoMinimo) {
             this.ingresarNotificacion(Calendar.getInstance().getTime(), "Tu saldo actual es de $" + this.getSaldo() + ". Te recomendamos hacer una recarga");
-
-            //TODO OBSERVER, SE TIENE QUE ACTUALIZAR LA NOTIFICAION EN EL TABLERO
         }
     }
 
@@ -167,13 +164,15 @@ public class Propietario extends Usuario implements Observable {
     }
 
     public Asignacion buscarAsignacion(Puesto puesto) {
+        Asignacion asignacion = null;
         for (Asignacion a : this.asignaciones) {
             if (a.getPuesto().equals(puesto)) {
                 asignacion = a;
             }
         }
-        return null;
-    }   
+        return asignacion;
+    }
+
     public Vehiculo getVehiculo(String matricula) {
         Vehiculo vehiculo = null;
         for (Vehiculo v : vehiculos) {
@@ -183,15 +182,11 @@ public class Propietario extends Usuario implements Observable {
         }
         return vehiculo;
     }
-  
-    @Override
-    public boolean validarLogin(String ci, String password) {
-        return false;
-    }
 
     public void agregarVehiculo(Vehiculo vehiculo) {
         vehiculos.add(vehiculo);
     }
+
     @Override
     public void agregar(Observador o) {
         this.observableWrapped.agregar(o);

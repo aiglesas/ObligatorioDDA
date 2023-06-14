@@ -4,6 +4,7 @@ import dominio.Propietario;
 import dominio.Usuario;
 import dominio.Vehiculo;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionUsuario;
 import dominio.exceptions.ExcepcionVehiculo;
 import java.util.ArrayList;
 
@@ -46,29 +47,35 @@ public class ServicioPropietario extends ServicioUsuario {
         return propietario;
     }
 
-    public Propietario login(String cedula, String password) {
+    public Propietario login(String cedula, String password) throws ExcepcionUsuario {
         for (Propietario p : propietarios) {
-            if (p.getCi().equals(cedula) && p.getContraseña().equals(password)) {
+            if (p.validarLogin(cedula, password)) {
                 return p;
             }
         }
-        return null;
+        throw new ExcepcionUsuario("Acceso denegado");
     }
 
     public void agregarPropietario(Propietario propietario) {
+        if (propietario.getSaldoMinimo() == 0) {
+            propietario.setSaldoMinimo(saldoMinimoDefault);
+        }
         propietarios.add(propietario);
     }
 
     public Vehiculo getVehiculo(String matricula) throws ExcepcionVehiculo {
         Vehiculo vehiculo = null;
         for (Propietario p : propietarios) {
-            vehiculo = p.getVehiculo(matricula);
+            Vehiculo v = p.getVehiculo(matricula);
+            if (v != null) {
+                vehiculo = v;
+            }
+
         }
         if (vehiculo == null) {
             throw new ExcepcionVehiculo("No existe el vehículo");
         }
         return vehiculo;
     }
-    
 
 }

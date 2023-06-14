@@ -14,7 +14,7 @@ public class ServicioPuesto {
     public ServicioPuesto() {
         this.puestos = new ArrayList<Puesto>();
     }
-    
+
     public ArrayList<Puesto> getPuestos() {
         return this.puestos;
     }
@@ -22,14 +22,8 @@ public class ServicioPuesto {
     public void setPuestos(ArrayList<Puesto> puestos) {
         this.puestos = puestos;
     }
-    public void agregarPuesto(Puesto puesto){
+
+    public void agregarPuesto(Puesto puesto) {
         this.puestos.add(puesto);
     }
-
-    public Asignacion obtenerAsignacion(Propietario propietario) {
-        return null;
-    }
-    
-
-
 }

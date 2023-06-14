@@ -2,7 +2,7 @@ package dominio;
 
 public class Exonerados extends Bonificacion {
 
-    public Exonerados(String nombre, int descuento) {
+    public Exonerados(String nombre, float descuento) {
         super(nombre, descuento);
     }
 

@@ -31,17 +31,12 @@ public class Fachada {
 
     private ServicioPuesto servicioPuesto;
 
-    private ServicioVehiculo servicioVehiculo;
-
     private ServicioBonificacion servicioBonificacion;
-
-    private ServicioUsuario servicioUsuario;
 
     public Fachada() {
         this.servicioPropietario = new ServicioPropietario();
         this.servicioAdministrador = new ServicioAdministrador();
         this.servicioPuesto = new ServicioPuesto();
-        this.servicioVehiculo = new ServicioVehiculo();
         this.servicioBonificacion = new ServicioBonificacion();
     }
 
@@ -64,12 +59,8 @@ public class Fachada {
         return servicioAdministrador.login(ci, password);
     }
 
-    public Propietario loginPropietario(String ci, String password) {
+    public Propietario loginPropietario(String ci, String password) throws ExcepcionUsuario{
         return servicioPropietario.login(ci, password);
-    }
-
-    public Asignacion obtenerAsignacion(Propietario propietario) {
-        return null;
     }
 
     public ArrayList<Puesto> getPuestos() {
@@ -78,10 +69,6 @@ public class Fachada {
 
     public ArrayList<Bonificacion> getBonificaciones() {
         return servicioBonificacion.getBonificaciones();
-    }
-
-    public Vehiculo obtenerVehiculo(String matricula) {
-        return null;
     }
 
     public Propietario buscarPropietario(String cedula) throws ExcepcionPropietario {

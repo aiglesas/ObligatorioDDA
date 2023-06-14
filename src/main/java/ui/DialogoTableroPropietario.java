@@ -77,6 +77,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
         btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tablero del propietario");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -169,16 +170,26 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         tNotificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Fecha", "Mensaje"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tNotificaciones.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(tNotificaciones);
+        if (tNotificaciones.getColumnModel().getColumnCount() > 0) {
+            tNotificaciones.getColumnModel().getColumn(0).setMinWidth(120);
+            tNotificaciones.getColumnModel().getColumn(0).setMaxWidth(150);
+        }
 
         jScrollPane12.setViewportView(jScrollPane5);
 
@@ -233,39 +244,39 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 .addComponent(lblPropietario)
                 .addGap(193, 193, 193))
             .addGroup(layout.createSequentialGroup()
+                .addGap(513, 513, 513)
+                .addComponent(btnCerrar)
+                .addContainerGap(647, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblVehiculosCantidad)
+                    .addComponent(lblBonificacionesCantidad)
+                    .addComponent(lblTransitosCantidad)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblNotificacionesCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(lblRecargasCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblVehiculosCantidad)
-                            .addComponent(lblBonificacionesCantidad)
-                            .addComponent(lblTransitosCantidad)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblNotificacionesCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(lblRecargasCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnRecargar)
-                                    .addComponent(btnBorrar))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane8)
-                            .addComponent(jScrollPane11)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)))
+                            .addComponent(btnRecargar)
+                            .addComponent(btnBorrar))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane8)
+                    .addComponent(jScrollPane11)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(513, 513, 513)
-                        .addComponent(btnCerrar)))
-                .addContainerGap(205, Short.MAX_VALUE))
+                        .addComponent(jScrollPane12)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,69 +407,59 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     @Override
     public void mostrarVehiculos(ArrayList<Vehiculo> vehiculos) {
         lblVehiculosCantidad.setText(Integer.toString(vehiculos.size()));
-        if (vehiculos.size() != 0) {
-            DefaultTableModel model = tablaVehiculos();
-            tablaVehiculos.setModel(model);
-            for (Vehiculo v : vehiculos) {
-                model.addRow(new Object[]{v.getMatricula(), v.getModelo(), v.getColor(), v.getTransitos().size(), v.getMontoTotal()});
-            }
+        DefaultTableModel model = tablaVehiculos();
+        tablaVehiculos.setModel(model);
+        for (Vehiculo v : vehiculos) {
+            model.addRow(new Object[]{v.getMatricula(), v.getModelo(), v.getColor(), v.getTransitos().size(), v.getMontoTotal()});
         }
     }
 
     @Override
     public void mostrarBonificaciones(ArrayList<Asignacion> asignaciones) {
         lblBonificacionesCantidad.setText(Integer.toString(asignaciones.size()));
-        if (asignaciones.size() != 0) {
-            DefaultTableModel model = tablaBonificaciones();
-            tBonificaciones.setModel(model);
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            for (Asignacion a : asignaciones) {
-                model.addRow(new Object[]{a.getBonificacion().getNombre(), a.getPuesto().getNombre(), formato.format(a.getFecha())});
-            }
+        DefaultTableModel model = tablaBonificaciones();
+        tBonificaciones.setModel(model);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        for (Asignacion a : asignaciones) {
+            model.addRow(new Object[]{a.getBonificacion().getNombre(), a.getPuesto().getNombre(), formato.format(a.getFecha())});
         }
     }
 
     @Override
     public void mostrarTransitos(ArrayList<Transito> transitos) {
         lblTransitosCantidad.setText(Integer.toString(transitos.size()));
-        if (transitos.size() != 0) {
-            DefaultTableModel model = tablaTransitos();
-            tTransitos.setModel(model);
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            for (Transito t : transitos) {
-                model.addRow(new Object[]{t.getPuesto().getNombre(), t.getVehiculo().getMatricula(), t.getTarifa().getNombre(), t.getTarifa().getMonto(), t.getTotal(), formato.format(t.getFecha())});
-            }
+        DefaultTableModel model = tablaTransitos();
+        tTransitos.setModel(model);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        for (Transito t : transitos) {
+            String nombreBonificacion = t.getBonificacion() == null ? "No tiene bonificacion" : t.getBonificacion().getNombre();
+            model.addRow(new Object[]{t.getPuesto().getNombre(), t.getVehiculo().getMatricula(), t.getTarifa().getNombre(), t.getTarifa().getMonto(), nombreBonificacion, t.getMontoBonificacion(), t.getTotal(), formato.format(t.getFecha())});
         }
     }
 
     @Override
     public void mostrarRecargas(ArrayList<RecargaSaldo> recargas) {
         lblRecargasCantidad.setText(Integer.toString(recargas.size()));
-        if (recargas.size() != 0) {
-            DefaultTableModel model = tablaRecargas();
-            tRecargas.setModel(model);
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            for (RecargaSaldo rs : recargas) {
-                String nombreAdmin = rs.getAdministrador() != null ? rs.getAdministrador().getNombreCompleto() : "No tiene administrador";
-                String aprobado = rs.isEstado() ? "Aprobado" : "Pendiente";
-                model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getMonto(), aprobado, nombreAdmin});
-            }
+        DefaultTableModel model = tablaRecargas();
+        tRecargas.setModel(model);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        for (RecargaSaldo rs : recargas) {
+            String nombreAdmin = rs.getAdministrador() != null ? rs.getAdministrador().getNombreCompleto() : "No tiene administrador";
+            String aprobado = rs.isEstado() ? "Aprobado" : "Pendiente";
+            model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getMonto(), aprobado, nombreAdmin});
         }
     }
 
     @Override
     public void mostrarNotificacion(ArrayList<Notificacion> notificaciones) {
         lblNotificacionesCantidad.setText(Integer.toString(notificaciones.size()));
-        if (notificaciones.size() != 0) {
-            {
-                DefaultTableModel model = tablaNotificaciones();
-                tNotificaciones.setModel(model);
-                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                for (Notificacion n : notificaciones) {
-                    model.addRow(new Object[]{formato.format(n.getFecha()), n.getMensaje()});
-                }
-            }
-
+        DefaultTableModel model = tablaNotificaciones();
+        tNotificaciones.getColumnModel().getColumn(0).setMinWidth(120);
+        tNotificaciones.getColumnModel().getColumn(0).setMaxWidth(150);
+        tNotificaciones.setModel(model);
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        for (Notificacion n : notificaciones) {
+            model.addRow(new Object[]{formato.format(n.getFecha()), n.getMensaje()});
         }
     }
 
@@ -487,7 +488,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     public DefaultTableModel tablaBonificaciones() {
         return new DefaultTableModel(
                 new String[]{
-                    "Nombre bonificación", "Puesto", "Fecha asignada"
+                    "Nombre bonificacion", "Puesto", "Fecha asignada"
                 }, 0
         );
     }
@@ -495,7 +496,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     public DefaultTableModel tablaTransitos() {
         return new DefaultTableModel(
                 new String[]{
-                    "Puesto", "Matricula", "Tarifa", "Tarifa(monto)", "Bonific,", "Bonific.(monto)", "Monto pagado", "Fecha"
+                    "Puesto", "Matricula", "Tarifa", "Tarifa(Monto)", "Bonificacion", "Bonific.(Monto)", "Monto pagado", "Fecha"
                 }, 0
         );
     }

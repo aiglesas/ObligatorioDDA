@@ -21,10 +21,11 @@ public class ControladorEmularTransito {
     public ControladorEmularTransito(EmularTransitoVista vista) {
         this.vista = vista;
         this.modelo = Fachada.getInstance();
+        inicializar();
     }
 
-    public void mostrarEmuladorTransito(String matricula) {
-
+    public void inicializar() {
+        mostrarPuestos();
     }
 
     public void mostrarPuestos() {
@@ -34,7 +35,7 @@ public class ControladorEmularTransito {
 
     public void mostrarTarifas(String nombrePuesto) {
         for (Puesto p : puestos) {
-            if (p.getNombre() == nombrePuesto) {
+            if (p.getNombre().equals(nombrePuesto)) {
                 vista.mostrarTarifas(p);
                 puestoSeleccionado = p;
             }
@@ -44,14 +45,15 @@ public class ControladorEmularTransito {
     public void registrarTransito(String matricula) {
         try {
             Vehiculo vehiculo = modelo.getVehiculo(matricula);
-            puestoSeleccionado.crearTransito(vehiculo);
+            if (puestoSeleccionado != null) {
+                puestoSeleccionado.crearTransito(vehiculo);
+                vista.mostrarMensajeDeExito("Transito creado correctamente");
+            }else{
+                vista.mostrarMensajeDeError("Debe seleccionar un puesto");
+            }
+
         } catch (ExcepcionVehiculo | ExcepcionPropietario ex) {
-            vista.mostrarMensajeDeError(ex.getMessage());    
+            vista.mostrarMensajeDeError(ex.getMessage());
         }
     }
-
-    public void cerrar() {
-
-    }
-
 }

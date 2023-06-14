@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Frecuentes extends Bonificacion {
 
-    public Frecuentes(String nombre, int descuento) {
+    public Frecuentes(String nombre, float descuento) {
         super(nombre, descuento);
     }
     

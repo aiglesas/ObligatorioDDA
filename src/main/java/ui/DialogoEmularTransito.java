@@ -17,20 +17,17 @@ import ui.interfaces.EmularTransitoVista;
  *
  * @author usuario
  */
-public class DialogoEmularTransito extends javax.swing.JDialog implements EmularTransitoVista {
+public class DialogoEmularTransito extends javax.swing.JFrame implements EmularTransitoVista {
 
     private ControladorEmularTransito controlador;
-    private DefaultTableModel modelTablaTarifas = tablaTarifas();
 
     /**
      * Creates new form DialogoEmularTransito
      */
     public DialogoEmularTransito() {
-        this.controlador = new ControladorEmularTransito(this);
         initComponents();
-        this.inicializar();
+        this.controlador = new ControladorEmularTransito(this);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,28 +47,16 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
         jLabel3 = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Emular transitos");
 
-        cbPuestos.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbPuestosItemStateChanged(evt);
-            }
-        });
+        cbPuestos.setSelectedItem(cbPuestos);
+        cbPuestos.setToolTipText("");
         cbPuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPuestosActionPerformed(evt);
-            }
-        });
-        cbPuestos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbPuestosPropertyChange(evt);
-            }
-        });
-        cbPuestos.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cbPuestosKeyPressed(evt);
             }
         });
 
@@ -81,26 +66,26 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
 
         tTarifa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Tarifa", "Monto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tTarifa.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tTarifa);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
         jLabel3.setText("Ingrese matricula:");
-
-        txtMatricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatriculaActionPerformed(evt);
-            }
-        });
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,10 +94,10 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
             }
         });
 
-        jButton2.setText("Cerrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCerrarActionPerformed(evt);
             }
         });
 
@@ -121,33 +106,28 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(453, 453, 453))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtMatricula)
-                            .addGap(578, 578, 578))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(500, 500, 500)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(174, 174, 174))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,62 +136,42 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(jLabel3)
                     .addComponent(txtMatricula))
-                .addGap(56, 56, 56)
-                .addComponent(jButton2)
-                .addGap(54, 54, 54))
+                .addGap(40, 40, 40)
+                .addComponent(btnCerrar)
+                .addGap(73, 73, 73))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestosActionPerformed
-
-    }//GEN-LAST:event_cbPuestosActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.cerrar();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-      this.registrarTransito();
+        this.registrarTransito();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void cbPuestosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbPuestosKeyPressed
-
-    }//GEN-LAST:event_cbPuestosKeyPressed
-
-    private void cbPuestosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPuestosItemStateChanged
-          int stateChange = evt.getStateChange();
-            if (stateChange == ItemEvent.SELECTED) {
-                    String nombrePuesto =  cbPuestos.getSelectedItem().toString();;
-                    controlador.mostrarTarifas(nombrePuesto);
-            }
-    }//GEN-LAST:event_cbPuestosItemStateChanged
-
-    private void cbPuestosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbPuestosPropertyChange
-
-    }//GEN-LAST:event_cbPuestosPropertyChange
-
-    private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
-
-    }//GEN-LAST:event_txtMatriculaActionPerformed
+    private void cbPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestosActionPerformed
+        if (cbPuestos != null && cbPuestos.getSelectedItem() != null && controlador != null) {
+            String nombrePuesto = cbPuestos.getSelectedItem().toString();
+            controlador.mostrarTarifas(nombrePuesto);
+        }
+    }//GEN-LAST:event_cbPuestosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbPuestos;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -221,36 +181,31 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
     private javax.swing.JTextField txtMatricula;
     // End of variables declaration//GEN-END:variables
 
-    public void inicializar(){
-        this.controlador.mostrarPuestos();
-        tTarifa.setModel(modelTablaTarifas);
-    }
-    
-    @Override
-    public void mostrarEmuladorTransito() {
-    }
-
     @Override
     public void mostrarTarifas(Puesto puesto) {
-       ArrayList<Tarifa> tarifas = puesto.getTarifas();
+        DefaultTableModel modelo = tablaTarifas();
+        tTarifa.setModel(modelo);
+        ArrayList<Tarifa> tarifas = puesto.getTarifas();
         if (tarifas != null) {
-
             for (Tarifa t : tarifas) {
-                modelTablaTarifas.addRow(new Object[]{t.getCategoriaVehiculo().getNombre() , t.getMonto()});
+                modelo.addRow(new Object[]{t.getCategoriaVehiculo().getNombre(), t.getMonto()});
             }
-        } 
+        }
     }
 
     @Override
-    public void registrarTransito()  {
-        controlador.registrarTransito(txtMatricula.getText());         
+    public void registrarTransito() {
+        controlador.registrarTransito(txtMatricula.getText());
     }
 
     @Override
     public void cerrar() {
-    dispose();
+        dispose();
     }
-
+    @Override
+    public void mostrarMensajeDeExito(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Transito creado", JOptionPane.INFORMATION_MESSAGE);
+    }
     @Override
     public void mostrarMensajeDeError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
@@ -258,18 +213,23 @@ public class DialogoEmularTransito extends javax.swing.JDialog implements Emular
 
     @Override
     public void mostrarPuestos(ArrayList<Puesto> puestos) {
-              for (Puesto p : puestos) {
-            cbPuestos.addItem(p.getNombre());
+        if (cbPuestos != null) {
+            for (Puesto p : puestos) {
+                cbPuestos.addItem(p.getNombre());
+            }
         }
     }
- 
-    
-        public DefaultTableModel tablaTarifas() {
+
+    public DefaultTableModel tablaTarifas() {
         return new DefaultTableModel(
                 new String[]{
                     "Categoria", "Monto"
                 }, 0
-        );
+        ) {
+            boolean[] canEdit = new boolean[]{
+                false, false
+            };
+        };
     }
 
 }

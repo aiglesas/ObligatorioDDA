@@ -14,12 +14,13 @@ import ui.interfaces.RecargaSaldoVista;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaSaldoVista{
+public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaSaldoVista {
 
     /**
      * Creates new form DialogoRecargaSaldo
      */
     private final ControladorRecargaSaldo controlador;
+
     /**
      * Creates new form DialogoRecargaSaldo
      */
@@ -126,13 +127,16 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     // End of variables declaration//GEN-END:variables
     @Override
     public void recargarSaldo(String saldo) {
-        controlador.recargarSaldo(saldo);
+        if (saldo != "") {
+            controlador.recargarSaldo(saldo);
+        }
     }
+
     @Override
     public void mostrarMensajeDeError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error de datos", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     @Override
     public void mostrarNombreCompleto(String nombreCompleto) {
         jNombreCompleto.setText(nombreCompleto);
@@ -142,10 +146,10 @@ public class DialogoRecargaSaldo extends javax.swing.JDialog implements RecargaS
     public void mostrarSueldoActual(String monto) {
         jMonto.setText(monto);
     }
- 
+
     @Override
     public void cerrarVista() {
         dispose();
     }
-    
+
 }

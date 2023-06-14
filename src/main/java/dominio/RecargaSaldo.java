@@ -86,10 +86,10 @@ public class RecargaSaldo implements Comparable<RecargaSaldo>{
 
     public void aprobacionRecarga(Administrador administrador) {
         setEstado(true);
-        getPropietario().incrementarSaldo(getMonto());
         setAdministrador(administrador);
         Date fechaActual = Calendar.getInstance().getTime();
         setFechaFin(fechaActual);
+        getPropietario().incrementarSaldo(getMonto());
         getPropietario().ingresarNotificacion(fechaActual, "Tu recarga de $" + getMonto() + " fue aprobada");
     }
 

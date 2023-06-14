@@ -4,8 +4,10 @@ import common.Evento;
 import common.ObservableAbstracto;
 import common.Observador;
 import dominio.Propietario;
+import dominio.Puesto;
 import dominio.RecargaSaldo;
 import dominio.exceptions.ExcepcionRecargaSaldo;
+import logica.Fachada;
 import ui.interfaces.RecargaSaldoVista;
 
 public class ControladorRecargaSaldo implements Observador {
@@ -17,6 +19,8 @@ public class ControladorRecargaSaldo implements Observador {
     public ControladorRecargaSaldo(RecargaSaldoVista vista, Propietario propietario) {
         this.propietario = propietario;
         this.vista = vista;
+        this.propietario.agregar(this);
+        subscribir();
         inicializar();
     }
 
@@ -35,14 +39,26 @@ public class ControladorRecargaSaldo implements Observador {
             this.vista.mostrarMensajeDeError(exRS.getMessage());
         }
     }
-    
+        public void subscribir() {
+        for (Puesto p : Fachada.getInstance().getPuestos()) {
+            p.agregar(this);
+        }
+    }
+
+    public void desSubscribir() {
+        for (Puesto p : Fachada.getInstance().getPuestos()) {
+            p.quitar(this);
+        }
+    }
     public void desuscribirYSalir(){
+        desSubscribir();
+        this.propietario.quitar(this);
         this.vista.cerrarVista();
     }    
 
     @Override
     public void actualizar(ObservableAbstracto origen, Evento evento) {
-        if (evento.equals(Evento.AprobarRecargaSaldo)) {
+        if (evento.equals(Evento.AprobarRecargaSaldo) || evento.equals(Evento.CrearTransito)) {
             Float monto = this.propietario.getSaldo();
             this.vista.mostrarSueldoActual(monto.toString());
         }

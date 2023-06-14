@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.time.ZoneId;
 
-public class Transito implements Comparable<Transito>{
+public class Transito implements Comparable<Transito> {
 
     private Date fecha;
     private Vehiculo vehiculo;
@@ -26,19 +26,19 @@ public class Transito implements Comparable<Transito>{
         this.tarifa = tarifa;
         this.bonificacion = bonificacion;
         this.montoBonificacion = this.calcularMontoBonificacion();
+        this.total = calcularMontoTotal();
     }
 
     public Tarifa getTarifa() {
         return tarifa;
     }
 
-    public float calcularMontoTotal(int descuento) {
-        total = (tarifa.getMonto() * ((100 - descuento) / 100));
-        return total;
+    public float calcularMontoTotal() {
+        return (tarifa.getMonto() - this.montoBonificacion);
     }
 
     public float calcularMontoBonificacion() {
-        float montoBonificacion= 0;
+        float montoBonificacion = 0;
         if (this.bonificacion != null) {
             montoBonificacion = bonificacion.calcularMonto(this);
         }
@@ -51,6 +51,22 @@ public class Transito implements Comparable<Transito>{
 
     public Date getFecha() {
         return fecha;
+    }
+
+    public Bonificacion getBonificacion() {
+        return bonificacion;
+    }
+
+    public void setBonificacion(Bonificacion bonificacion) {
+        this.bonificacion = bonificacion;
+    }
+
+    public float getMontoBonificacion() {
+        return montoBonificacion;
+    }
+
+    public void setMontoBonificacion(float montoBonificacion) {
+        this.montoBonificacion = montoBonificacion;
     }
 
     public LocalDate getFechaParseada() {

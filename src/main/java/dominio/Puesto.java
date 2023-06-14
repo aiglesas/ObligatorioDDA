@@ -1,5 +1,6 @@
 package dominio;
 
+import common.Evento;
 import static common.Evento.CrearTransito;
 import common.ObservableAbstracto;
 import dominio.exceptions.ExcepcionPropietario;
@@ -23,8 +24,13 @@ public class Puesto extends ObservableAbstracto {
         this.direccion = direccion;
         this.tarifas = tarifas;
         this.asignaciones = new ArrayList<Asignacion>();
+        this.transitos = new ArrayList<Transito>();
     }
-
+    
+    public void agregarTransito(Transito transito){
+        transitos.add(transito);
+    }
+    
     public void agregarAsignacion(Asignacion asignacion) {
         this.asignaciones.add(asignacion);
     }
@@ -62,14 +68,6 @@ public class Puesto extends ObservableAbstracto {
         return null;
     }
 
-    public Asignacion getAsignacion(Propietario propietario) {
-        return null;
-    }
-
-    public float calcularMontoBonificacion(Vehiculo vehiculo) {
-        return 0;
-    }
-
     public Bonificacion getBonificacion(Propietario p) {
         Bonificacion b = null;
         for (Asignacion a : asignaciones) {
@@ -88,9 +86,10 @@ public class Puesto extends ObservableAbstracto {
         Transito transito = new Transito(Calendar.getInstance().getTime(), vehiculo, this, tarifa, bonificacion);
 
         p.cobrarTransito(transito.getTotal());
-
+        p.ingresarNotificacion(Calendar.getInstance().getTime(),"Pasaste por el puesto " + this.nombre + " con el vehículo " + vehiculo.getMatricula());
         this.transitos.add(transito);
-        avisar(CrearTransito);
+        vehiculo.agregarTransito(transito);
+        avisar(Evento.CrearTransito);
     }
 
 }
