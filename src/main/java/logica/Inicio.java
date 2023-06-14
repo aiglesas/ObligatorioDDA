@@ -46,9 +46,13 @@ public class Inicio {
 
         //administradores
         Administrador administrador1 = new Administrador("52401979", "1234", "Luis Suarez");
-        Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");
+        Administrador administrador2 = new Administrador("54654654", "contraseña2", "Gonzalo Bergesio");       
+        Administrador administrador3 = new Administrador("51980285", "1234", "Andres Iglesias");
 
-        Fachada.getInstance().agregarAdministrador(administrador1);
+
+        fachada.agregarAdministrador(administrador1);    
+        fachada.agregarAdministrador(administrador3);
+
 
         //categoria vehiculo
         CategoriaVehiculo categoria1 = new CategoriaVehiculo("Sedán");
@@ -59,23 +63,23 @@ public class Inicio {
         Vehiculo vehiculo2 = new Vehiculo("DEF456", "Honda CR-V", "Azul", propietario2, categoria2);
         Vehiculo vehiculo3 = new Vehiculo("GHI789", "Ford Mustang", "Negro", propietario1, categoria1);
 
-        fachada.agregarVehiculo(vehiculo1);
-        fachada.agregarVehiculo(vehiculo2);
-
         propietario1.agregarVehiculo(vehiculo1);
         propietario1.agregarVehiculo(vehiculo2);
 
+
+
         //tarifas
-        Tarifa tarifa1 = new Tarifa(new BigDecimal("500.00"));
-        Tarifa tarifa2 = new Tarifa(new BigDecimal("250.00"));
-        Tarifa tarifa3 = new Tarifa(new BigDecimal("100.00"));
-        Tarifa tarifa4 = new Tarifa(new BigDecimal("50.00"));
+        Tarifa tarifa1 = new Tarifa("Tarifa auto",500, categoria2);
+        Tarifa tarifa2 = new Tarifa("Tarifa camioneta",750, categoria2);
+        Tarifa tarifa3 = new Tarifa("Tarifa omnibus",1000, categoria2);
+        Tarifa tarifa4 = new Tarifa("Tarifa moto",100, categoria2);
         ArrayList<Tarifa> tarifas = new ArrayList<Tarifa>();
         tarifas.add(tarifa1);
         tarifas.add(tarifa2);
         tarifas.add(tarifa3);
         tarifas.add(tarifa4);
 
+        
         //puestos
         Puesto puesto1 = new Puesto("peaje pando", "pando", tarifas);
         Puesto puesto2 = new Puesto("peaje solis", "solis", tarifas);
@@ -83,16 +87,6 @@ public class Inicio {
         fachada.agregarPuesto(puesto1);
         fachada.agregarPuesto(puesto2);
         fachada.agregarPuesto(puesto3);
-
-        //transitos    
-        Transito transito1 = new Transito(50, new Date(), vehiculo1, puesto1);
-        Transito transito2 = new Transito(30, new Date(), vehiculo2, puesto2);
-        Transito transito3 = new Transito(30, new Date(), vehiculo2, puesto2);
-        Transito transito4 = new Transito(30, new Date(), vehiculo2, puesto3);
-        ArrayList<Transito> transitosVehiculo2 = new ArrayList<Transito>();
-        transitosVehiculo2.add(transito2);
-        transitosVehiculo2.add(transito3);
-        transitosVehiculo2.add(transito4);
 
         //bonificaciones    
         ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();

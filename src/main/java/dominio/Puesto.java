@@ -1,18 +1,22 @@
 package dominio;
 
-import common.Observable;
-import java.math.BigDecimal;
+import static common.Evento.CrearTransito;
+import common.ObservableAbstracto;
+import dominio.exceptions.ExcepcionPropietario;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class Puesto {
+public class Puesto extends ObservableAbstracto {
 
     private String nombre;
 
     private String direccion;
 
     private ArrayList<Tarifa> tarifas;
-    
+
     private ArrayList<Asignacion> asignaciones;
+
+    private ArrayList<Transito> transitos;
 
     public Puesto(String nombre, String direccion, ArrayList<Tarifa> tarifas) {
         this.nombre = nombre;
@@ -20,11 +24,11 @@ public class Puesto {
         this.tarifas = tarifas;
         this.asignaciones = new ArrayList<Asignacion>();
     }
-    
-    public void agregarAsignacion(Asignacion asignacion){
+
+    public void agregarAsignacion(Asignacion asignacion) {
         this.asignaciones.add(asignacion);
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -50,6 +54,11 @@ public class Puesto {
     }
 
     public Tarifa getTarifa(CategoriaVehiculo categoria) {
+        for (Tarifa t : tarifas) {
+            if (t.getCategoriaVehiculo().equals(categoria)) {
+                return t;
+            }
+        }
         return null;
     }
 
@@ -57,16 +66,31 @@ public class Puesto {
         return null;
     }
 
-    public BigDecimal calcularMontoBonificacion(Vehiculo vehiculo) {
-        return null;
+    public float calcularMontoBonificacion(Vehiculo vehiculo) {
+        return 0;
     }
 
-    public BigDecimal calcularMontoTotal(Vehiculo vehiculo) {
-        return null;
+    public Bonificacion getBonificacion(Propietario p) {
+        Bonificacion b = null;
+        for (Asignacion a : asignaciones) {
+            if (a.getPropietario().equals(p)) {
+                b = a.getBonificacion();
+            }
+        }
+        return b;
     }
 
-    public Transito emularTransito(Vehiculo vehiculo) {
-        return null;
+    public void crearTransito(Vehiculo vehiculo) throws ExcepcionPropietario {
+        Propietario p = vehiculo.getPropietario();
+        Bonificacion bonificacion = getBonificacion(p);
+        
+        Tarifa tarifa = this.getTarifa(vehiculo.getCategoriaVehiculo());
+        Transito transito = new Transito(Calendar.getInstance().getTime(), vehiculo, this, tarifa, bonificacion);
+
+        p.cobrarTransito(transito.getTotal());
+
+        this.transitos.add(transito);
+        avisar(CrearTransito);
     }
 
 }

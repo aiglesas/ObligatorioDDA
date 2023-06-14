@@ -29,7 +29,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     /**
      * Creates new form DialogoTableroPropietario
      */
-    public DialogoTableroPropietario(Usuario usuario) {
+    public DialogoTableroPropietario(Propietario usuario) {
         initComponents();
         this.controlador = new ControladorTableroPropietario(this, usuario);
     }
@@ -44,7 +44,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     private void initComponents() {
 
         lblPropietario = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
         lblVehiculosCantidad = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -79,7 +79,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
         lblPropietario.setText("varPropietario");
 
-        jLabel1.setText("varSaldo");
+        lblSaldo.setText("varSaldo");
 
         lblVehiculosCantidad.setText("CantidadVehiculos");
 
@@ -204,7 +204,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
+                        .addComponent(lblSaldo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(34, 34, 34)
@@ -254,7 +254,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPropietario)
-                    .addComponent(jLabel1)
+                    .addComponent(lblSaldo)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +316,6 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnRecargar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -338,6 +337,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     private javax.swing.JLabel lblNotificacionesCantidad;
     private javax.swing.JLabel lblPropietario;
     private javax.swing.JLabel lblRecargasCantidad;
+    private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblTransitosCantidad;
     private javax.swing.JLabel lblVehiculosCantidad;
     private javax.swing.JTable tBonificaciones;
@@ -349,7 +349,8 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
 
     @Override
     public void mostrarTablero(Propietario propietario) {
-        lblPropietario.setText(String.format(propietario.getNombreCompleto()));
+        lblPropietario.setText(propietario.getNombreCompleto());        
+        lblSaldo.setText(Float.toString(propietario.getSaldo()));
         this.mostarVehiculos(propietario.getVehiculos());
         this.mostrarBonificaciones(propietario.getAsignaciones());
         this.mostrarRecargas(propietario.getRecargasSaldo());
@@ -372,7 +373,6 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 model.addRow(new Object[]{v.getMatricula(), v.getModelo(), v.getColor(), v.getTransitos().size(), v.getMontoTotal()});
             }
         }
-
     }
 
     @Override
@@ -420,9 +420,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
                 String aprobado = rs.isEstado()? "Aprobado" : "Pendiente";
                 model.addRow(new Object[]{formato.format(rs.getFechaInicio()), rs.getMonto(), aprobado, nombreAdmin});
             }
-
         }
-
     }
 
     @Override

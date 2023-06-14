@@ -67,6 +67,11 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         });
 
         cbPuesto.setSelectedItem(null);
+        cbPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPuestoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Puesto:");
 
@@ -225,6 +230,10 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         cerrar();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void cbPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPuestoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
