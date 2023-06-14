@@ -7,8 +7,8 @@ public class Exonerados extends Bonificacion {
     }
 
     @Override
-    public Float calcularMonto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public float calcularMonto(Transito transito) {
+        return transito.getTarifa().getMonto() * (this.getDescuento() /100);
     }
     
 }

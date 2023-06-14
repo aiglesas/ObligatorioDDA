@@ -487,7 +487,7 @@ public class DialogoTableroPropietario extends javax.swing.JFrame implements Tab
     public DefaultTableModel tablaBonificaciones() {
         return new DefaultTableModel(
                 new String[]{
-                    "Nombre bonificación", "Puesto", "Fecha asignada"
+                    "Nombre bonificaciÃ³n", "Puesto", "Fecha asignada"
                 }, 0
         );
     }

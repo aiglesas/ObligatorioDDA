@@ -10,6 +10,7 @@ import dominio.Bonificacion;
 import dominio.Propietario;
 import dominio.Puesto;
 import dominio.RecargaSaldo;
+import dominio.Tarifa;
 import dominio.Transito;
 import dominio.Usuario;
 import dominio.Vehiculo;
@@ -17,6 +18,7 @@ import dominio.exceptions.ExcepcionAsignacion;
 import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
 import dominio.exceptions.ExcepcionUsuario;
+import dominio.exceptions.ExcepcionVehiculo;
 import java.util.ArrayList;
 
 public class Fachada {
@@ -62,15 +64,11 @@ public class Fachada {
         return servicioAdministrador.login(ci, password);
     }
 
-    public Usuario loginPropietario(String ci, String password) {
+    public Propietario loginPropietario(String ci, String password) {
         return servicioPropietario.login(ci, password);
     }
 
     public Asignacion obtenerAsignacion(Propietario propietario) {
-        return null;
-    }
-
-    public Transito emularTransito(Vehiculo vehiculo) {
         return null;
     }
 
@@ -101,11 +99,11 @@ public class Fachada {
     public void setBonificaciones(ArrayList<Bonificacion> bonificaciones) {
         servicioBonificacion.setBonificaciones(bonificaciones);
     }
-
-    public void agregarVehiculo(Vehiculo vehiculo) {
-        servicioVehiculo.agregarVehiculo(vehiculo);
+  
+    public Vehiculo getVehiculo(String matricula) throws ExcepcionVehiculo{
+       return servicioPropietario.getVehiculo(matricula);
     }
-
+  
     public void agregarPuesto(Puesto puesto) {
         servicioPuesto.agregarPuesto(puesto);
     }

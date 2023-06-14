@@ -67,6 +67,11 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
         cbBonificaciones.setSelectedItem(null);
 
         cbPuesto.setSelectedItem(null);
+        cbPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPuestoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Puesto:");
 
@@ -221,11 +226,10 @@ public class DialogoAsignarBonificaciones extends javax.swing.JFrame implements 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.controlador.cerrar();
     }//GEN-LAST:event_btnCerrarActionPerformed
-
+  
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         this.controlador.cerrar();
     }//GEN-LAST:event_formWindowClosed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarBonificacion;

@@ -14,15 +14,7 @@ public class ControladorLoginPropietario extends ControladorLogin {
 
     @Override
     protected Usuario loginGenerico(String userName, String password) {
-        Usuario usuario = Fachada.getInstance().loginPropietario(userName, password);
-        if (usuario != null) {
-            try{
-                return Fachada.getInstance().buscarPropietario(usuario.getCi());
-            }catch(ExcepcionPropietario exP){
-                
-            }
-        }
-        return null;
+        return Fachada.getInstance().loginPropietario(userName, password);
     }
 
 }

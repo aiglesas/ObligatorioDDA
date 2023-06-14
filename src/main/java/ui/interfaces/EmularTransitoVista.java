@@ -1,12 +1,13 @@
 package ui.interfaces;
 
 import dominio.Puesto;
+import java.util.ArrayList;
 
 public interface EmularTransitoVista {
 
 	public abstract void mostrarEmuladorTransito();
 
-	public abstract void mostrarPuestos();
+	public abstract void mostrarPuestos(ArrayList<Puesto> puestos);
 
 	public abstract void mostrarTarifas(Puesto puesto);
 

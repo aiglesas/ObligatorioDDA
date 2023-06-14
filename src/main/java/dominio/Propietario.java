@@ -7,9 +7,11 @@ import common.Observador;
 import dominio.exceptions.ExcepcionAsignacion;
 import dominio.exceptions.ExcepcionPropietario;
 import dominio.exceptions.ExcepcionRecargaSaldo;
+import dominio.exceptions.ExcepcionVehiculo;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Propietario extends Usuario implements Observable {
 
@@ -27,8 +29,8 @@ public class Propietario extends Usuario implements Observable {
 
     private final ObservableConcreto observableWrapped = new ObservableConcreto();
 
-    public Propietario(String ci, String contrase�a, String nombreCompleto, float saldo, float saldoMinimo) {
-        super(ci, contrase�a, nombreCompleto);
+    public Propietario(String ci, String contraseña, String nombreCompleto, float saldo, float saldoMinimo) {
+        super(ci, contraseña, nombreCompleto);
         this.saldo = saldo;
         this.saldoMinimo = saldoMinimo;
         this.vehiculos = new ArrayList<Vehiculo>();
@@ -127,34 +129,31 @@ public class Propietario extends Usuario implements Observable {
         notificaciones.add(n);
         observableWrapped.avisar(Evento.ingresoNotifiacion);
     }
-    
+
     public void eliminarNotificaciones(){
         this.notificaciones.clear();
         observableWrapped.avisar(Evento.eliminarNotificaciones);
     } 
-    /**
-     * return saldo<saldoMinimo
-     */
-    public boolean validarSaldoMinimo() {
-        return false;
+
+    public void validarSaldo(Float montoTransito) throws ExcepcionPropietario {
+        if (this.saldo > montoTransito) {
+        } else {
+            throw new ExcepcionPropietario("Saldo insuficiente:  " + this.getSaldo());
+        }
     }
 
-    /**
-     * if(this.saldo >= montoTotal){ this.cobrarSaldo(montoTotal); return true
-     * }else{ return false }
-     */
-    public boolean validarSaldo(BigDecimal montoTotal) {
-        return false;
+    public void validarSaldoMinimo() {
+        if (this.saldo < this.saldoMinimo) {
+            this.ingresarNotificacion(Calendar.getInstance().getTime(), "Tu saldo actual es de $" + this.getSaldo() + ". Te recomendamos hacer una recarga");
+
+            //TODO OBSERVER, SE TIENE QUE ACTUALIZAR LA NOTIFICAION EN EL TABLERO
+        }
     }
 
-    /**
-     * if(this.validarSaldo(montoTotal){ saldo = saldo - montoTotal
-     * if(this.validarSaldoMinimo){ this.ingresarNotificacion(DateTime.Now(),
-     * â€œTu saldo actual es de $ â€œ + this.saldo + â€œ Te
-     * recomendamos hacer una recargaâ€?) } return saldo } return null
-     */
-    public BigDecimal cobrarSaldo(BigDecimal montoTotal) {
-        return null;
+    public void cobrarTransito(float montoTransito) throws ExcepcionPropietario {
+        this.validarSaldo(montoTransito);
+        this.setSaldo(this.saldo - montoTransito);
+        this.validarSaldoMinimo();
     }
 
     public void asignarBonificacion(Puesto puesto, Bonificacion bonificacion) throws ExcepcionAsignacion {
@@ -170,12 +169,21 @@ public class Propietario extends Usuario implements Observable {
     public Asignacion buscarAsignacion(Puesto puesto) {
         for (Asignacion a : this.asignaciones) {
             if (a.getPuesto().equals(puesto)) {
-                return a;
+                asignacion = a;
             }
         }
         return null;
     }   
-
+    public Vehiculo getVehiculo(String matricula) {
+        Vehiculo vehiculo = null;
+        for (Vehiculo v : vehiculos) {
+            if (v.getMatricula().equalsIgnoreCase(matricula)) {
+                vehiculo = v;
+            }
+        }
+        return vehiculo;
+    }
+  
     @Override
     public boolean validarLogin(String ci, String password) {
         return false;
@@ -184,7 +192,6 @@ public class Propietario extends Usuario implements Observable {
     public void agregarVehiculo(Vehiculo vehiculo) {
         vehiculos.add(vehiculo);
     }
-
     @Override
     public void agregar(Observador o) {
         this.observableWrapped.agregar(o);

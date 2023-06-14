@@ -26,12 +26,10 @@ public class ServicioPuesto {
         this.puestos.add(puesto);
     }
 
-    public Transito emularTransito(Vehiculo vehiculo) {
-        return null;
-    }
-
     public Asignacion obtenerAsignacion(Propietario propietario) {
         return null;
     }
+    
+
 
 }

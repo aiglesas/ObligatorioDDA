@@ -1,10 +1,12 @@
 package dominio;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public abstract class Bonificacion {
 
     private String nombre;
+    private ArrayList<Asignacion> asignaciones;
 
     private int descuento;
 
@@ -19,6 +21,10 @@ public abstract class Bonificacion {
     public int getDescuento() {
         return descuento;
     }
+    
+        public ArrayList<Asignacion> getAsignaciones() {
+        return asignaciones;
+    }
 
     public void setDescuento(int descuento) {
         this.descuento = descuento;
@@ -27,8 +33,9 @@ public abstract class Bonificacion {
     public Bonificacion(String nombre, int descuento) {
         this.nombre = nombre;
         this.descuento = descuento;
+        this.asignaciones = new ArrayList<Asignacion>();
     }
 
-    public abstract Float calcularMonto();
+    public abstract float calcularMonto(Transito transito);
 
 }

@@ -140,8 +140,6 @@ public class DialogoMenuAdministrador extends javax.swing.JFrame implements Menu
         this.controlador.navegar(salir.getName());
     }//GEN-LAST:event_formWindowClosed
 
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu EmularTransito;
     private javax.swing.JMenuItem asignarBonificacion;

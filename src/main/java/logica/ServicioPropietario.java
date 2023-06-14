@@ -2,7 +2,9 @@ package logica;
 
 import dominio.Propietario;
 import dominio.Usuario;
+import dominio.Vehiculo;
 import dominio.exceptions.ExcepcionPropietario;
+import dominio.exceptions.ExcepcionVehiculo;
 import java.util.ArrayList;
 
 public class ServicioPropietario extends ServicioUsuario {
@@ -44,8 +46,8 @@ public class ServicioPropietario extends ServicioUsuario {
         return propietario;
     }
 
-    public Usuario login(String cedula, String password) {
-        for (Usuario p : propietarios) {
+    public Propietario login(String cedula, String password) {
+        for (Propietario p : propietarios) {
             if (p.getCi().equals(cedula) && p.getContraseña().equals(password)) {
                 return p;
             }
@@ -56,5 +58,17 @@ public class ServicioPropietario extends ServicioUsuario {
     public void agregarPropietario(Propietario propietario) {
         propietarios.add(propietario);
     }
+
+    public Vehiculo getVehiculo(String matricula) throws ExcepcionVehiculo {
+        Vehiculo vehiculo = null;
+        for (Propietario p : propietarios) {
+            vehiculo = p.getVehiculo(matricula);
+        }
+        if (vehiculo == null) {
+            throw new ExcepcionVehiculo("No existe el vehículo");
+        }
+        return vehiculo;
+    }
+    
 
 }
